@@ -27,6 +27,7 @@
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <fastjson2.version>2.0.22</fastjson2.version>
         <redisson.version>3.19.1</redisson.version>
+        <tlog.version>1.5.0</tlog.version>
     </properties>
 
     <dependencies>
@@ -75,6 +76,12 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>${redisson.version}</version>
+        </dependency>
+        <!--Tlog-->
+        <dependency>
+            <groupId>com.yomahub</groupId>
+            <artifactId>tlog-all-spring-boot-starter</artifactId>
+            <version>${tlog.version}</version>
         </dependency>
     </dependencies>
 

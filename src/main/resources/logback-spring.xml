@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <property name="my-pattern"
-              value="%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(${PID:- }) --- [%15.15thread] %cyan(%-40.40logger{39})  %msg%n"/>
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(${PID:- }) --- [%15.15thread] %X{tl} %cyan(%-40.40logger{39})  %msg%n"/>
+    <!-- 增加如下的TLog MDC Listener -->
+    <contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>
 
     <!--文件-->
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>app.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <encoder class="com.yomahub.tlog.core.enhance.logback.AspectLogbackEncoder">
             <pattern>${my-pattern}</pattern>
         </encoder>
     </appender>
     <!--控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <encoder class="com.yomahub.tlog.core.enhance.logback.AspectLogbackEncoder">
             <pattern>${my-pattern}</pattern>
         </encoder>
     </appender>
     <!---->
-    <logger name="com.ndz.wheatmall.controller.index" level="DEBUG" additivity="false">
+    <logger name="com.ndz.wheatmall.controller.index" level="DEBUG">
         <!--additivity="false" 只将wheatmall包日志只输出到文件，不输出控制台-->
         <appender-ref ref="FILE"/>
     </logger>
