@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
-    <property name="my-pattern"
+    <property name="console-pattern"
               value="%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(${PID:- }) --- [%15.15thread] %X{tl} %cyan(%-40.40logger{39})  %msg%n"/>
+    <property name="file-pattern"
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level ${PID:- } --- [%15.15thread] %X{tl} %-40.40logger{39}  %msg%n"/>
+
+
     <!-- 增加如下的TLog MDC Listener -->
     <contextListener class="com.yomahub.tlog.core.enhance.logback.TLogLogbackTTLMdcListener"/>
 
     <!--文件-->
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>app.log</file>
-        <encoder class="com.yomahub.tlog.core.enhance.logback.AspectLogbackEncoder">
-            <pattern>${my-pattern}</pattern>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${file-pattern}</pattern>
         </encoder>
     </appender>
     <!--控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="com.yomahub.tlog.core.enhance.logback.AspectLogbackEncoder">
-            <pattern>${my-pattern}</pattern>
+            <pattern>${console-pattern}</pattern>
         </encoder>
     </appender>
     <!---->
