@@ -35,7 +35,6 @@ public class HomeController {
         greetVO.setMsg("Hello World");
         greetVO.setTime(LocalDateTime.now());
         greetVO.setDate(LocalDate.now());
-        System.out.println(Integer.valueOf("AAAAAFFFFFFF"));
         return greetVO;
     }
 

@@ -21,12 +21,14 @@ import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * <p>
  * 实现jackson对于LocalDate、LocalDateTime、LocalTime类型数据的格式化
  * 此类为全局默认配置，如类还想自定义则用@JsonFormat注解
  *
  * 实现：
  *   1、无论前端传时间戳，yyyy-MM-dd 还是 yyyy-MM-dd HH:mm:ss都转换后端为LocalDateTime对象接受，并且后端格式化为yyyy-MM-dd HH:mm:ss
  *   2、后端返回统一时间戳LocalDateTime对象给前端，并统一格式化为yyyy-MM-dd HH:mm:ss
+ * </p>
  */
 @Slf4j
 @Configuration
