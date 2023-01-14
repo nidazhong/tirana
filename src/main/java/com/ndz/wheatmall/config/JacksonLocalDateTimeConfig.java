@@ -84,6 +84,7 @@ public class JacksonLocalDateTimeConfig {
                 // 只有年月日 YYYY-MM-dd
                 return LocalDateTime.parse(valueStr +" 00:00:00", DateTimeFormatter.ofPattern(DATETIME_PATTERN));
             } else  {
+
                 return null;
             }
         }
