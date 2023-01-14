@@ -1,24 +1,16 @@
-/**
- * Copyright (c) 2018 人人开源 All rights reserved.
- *
- * https://www.renren.io
- *
- * 版权所有，侵权必究！
- */
-
 package com.ndz.wheatmall.exception;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * IP地址
  */
+@Slf4j
 public class IpUtils {
-	private static Logger logger = LoggerFactory.getLogger(IpUtils.class);
 
 	/**
 	 * 获取IP地址
@@ -46,8 +38,8 @@ public class IpUtils {
             if (StringUtils.isEmpty(ip) || unknown.equalsIgnoreCase(ip)) {
                 ip = request.getRemoteAddr();
             }
-        } catch (Exception e) {
-        	logger.error("IPUtils ERROR ", e);
+        } catch (Exception ex) {
+        	log.error("IPUtils ERROR ", ex);
         }
         
         return ip;

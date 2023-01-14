@@ -14,7 +14,7 @@ public class ApiResult<T> implements Serializable {
     /**
      * 编码：0表示成功，其他值表示失败
      */
-    private int code = 0;
+    private Integer code = 0;
     /**
      * 消息内容
      */
@@ -39,13 +39,13 @@ public class ApiResult<T> implements Serializable {
         return this;
     }
 
-    public ApiResult<T> error(int code) {
+    public ApiResult<T> error(Integer code) {
         this.code = code;
         this.msg = MessageUtils.getMessage(this.code);
         return this;
     }
 
-    public ApiResult<T> error(int code, String msg) {
+    public ApiResult<T> error(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
         return this;
@@ -57,11 +57,11 @@ public class ApiResult<T> implements Serializable {
         return this;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
