@@ -1,4 +1,4 @@
-CREATE TABLE t_update_history
+CREATE TABLE base_update_history
 (
     id            BIGINT       not null auto_increment COMMENT '标志ID',
     table_name    VARCHAR(100) not null COMMENT '表名',

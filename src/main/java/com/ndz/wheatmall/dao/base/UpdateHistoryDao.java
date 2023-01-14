@@ -1,7 +1,6 @@
 package com.ndz.wheatmall.dao.base;
 
-import com.ndz.wheatmall.entity.org.EmployeeEntity;
-import com.ndz.wheatmall.entity.sys.UpdateHistoryEntity;
+import com.ndz.wheatmall.entity.base.UpdateHistoryEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.entity.sys;
+package com.ndz.wheatmall.entity.base;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
-@TableName("t_update_history")
+@TableName("base_update_history")
 @NoArgsConstructor
 public class UpdateHistoryEntity implements Serializable {
 

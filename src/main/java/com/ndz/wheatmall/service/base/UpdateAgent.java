@@ -13,7 +13,7 @@ import com.ndz.wheatmall.annotation.History;
 import com.ndz.wheatmall.annotation.HistoryRecord;
 import com.ndz.wheatmall.dao.base.BaseDao;
 import com.ndz.wheatmall.dao.base.UpdateHistoryDao;
-import com.ndz.wheatmall.entity.sys.UpdateHistoryEntity;
+import com.ndz.wheatmall.entity.base.UpdateHistoryEntity;
 import com.ndz.wheatmall.service.base.impl.BaseServiceImpl;
 
 import cn.hutool.core.date.DatePattern;
