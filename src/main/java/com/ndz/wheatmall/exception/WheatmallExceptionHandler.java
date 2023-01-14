@@ -2,7 +2,7 @@ package com.ndz.wheatmall.exception;
 
 import java.util.Map;
 
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson2.JSON;
 import com.ndz.wheatmall.common.utils.ApiResult;

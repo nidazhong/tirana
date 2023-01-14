@@ -9,7 +9,7 @@ import com.ndz.wheatmall.service.base.UpdateAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 
 /**
  * 员工业务
