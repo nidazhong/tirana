@@ -28,6 +28,10 @@ import io.reactivex.rxjava3.annotations.Nullable;
 /**
  * 实现jackson对于LocalDate、LocalDateTime、LocalTime类型数据的格式化
  * 此类为全局默认配置，如类还想自定义则用@JsonFormat注解
+ *
+ * 实现：
+ *   1、无论前端传时间戳，yyyy-MM-dd 还是 yyyy-MM-dd HH:mm:ss都转换后端为LocalDateTime对象接受，并且后端格式化为yyyy-MM-dd HH:mm:ss
+ *   2、后端返回统一时间戳LocalDateTime对象给前端，并统一格式化为yyyy-MM-dd HH:mm:ss
  */
 @Slf4j
 @Configuration
@@ -90,77 +94,7 @@ public class JacksonLocalDateTimeConfig {
         }
     }
 
-    /**
-     * 自定义配置类方式可以对日期进行统一的格式化处理，（前端）13位时间戳 -> （后端）自定义格式化
-     * 目前只配对了LocalDateTime， 其他继续写注入Formatter
-     */
-//    @Bean
-//    public Formatter<LocalDateTime> localDateTimeFormatter() {
-//        return new Formatter<>() {
-//            @Nullable
-//            @Override
-//            public LocalDateTime parse(@Nullable String text, @Nullable Locale locale) {
-//                if (!StringUtils.hasText(text)) return null;
-//                return LocalDateTime.parse(text, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
-//            }
-//
-//            @Nullable
-//            @Override
-//            public String print(@Nullable LocalDateTime localDateTime, @Nullable Locale locale) {
-//                if (Objects.isNull(localDateTime)) return null;
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
-//                return formatter.format(localDateTime);
-//            }
-//
-//        };
-//    }
 
-    @Bean
-    public Converter<String, LocalDateTime> localDateTimeConverter(){
-        return new Converter<String, LocalDateTime>() {
-            @Override
-            public LocalDateTime convert(String s) {
-                if (StringUtils.isEmpty(s)){
-                    return null ;
-                } else {
-                    return LocalDateTime.parse(s, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
-                }
-            }
-        };
-    }
-
-
-//    @Bean
-//    public Converter<String, LocalDateTime> localDateTimeConvert() {
-//        return new Converter<String, LocalDateTime>() {
-//            @Override
-//            public LocalDateTime convert(String source) {
-//                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//                LocalDateTime dateTime = null;
-//                try {
-//                    //2020-01-01 00:00:00
-//                    switch (source.length()){
-//                        case 10:
-//                            log.debug("传过来的是日期格式：{}",source);
-//                            source=source+" 00:00:00";
-//                            break;
-//                        case 13:
-//                            log.debug("传过来的是日期 小时格式：{}",source);
-//                            source=source+":00:00";
-//                            break;
-//                        case 16:
-//                            log.debug("传过来的是日期 小时:分钟格式：{}",source);
-//                            source=source+":00";
-//                            break;
-//                    }
-//                    dateTime = LocalDateTime.parse(source, df);
-//                } catch (Exception e) {
-//                    log.error(e.getMessage(),e);
-//                }
-//                return dateTime;
-//            }
-//        };
-//    }
 
 
 }
