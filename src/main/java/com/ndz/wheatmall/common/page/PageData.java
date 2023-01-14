@@ -8,6 +8,7 @@
 
 package com.ndz.wheatmall.common.page;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import lombok.Data;
  */
 @Data
 public class PageData<T> implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private int total;

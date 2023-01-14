@@ -41,7 +41,7 @@ public class UpdateAgent extends BaseServiceImpl<UpdateHistoryDao, UpdateHistory
         List<UpdateHistoryEntity> updateHistoryEntities = this.reflectChangFields(old, newObj, bizId);
         // 保存变更的字段内容
         updateHistoryEntities.forEach(it-> {
-            // TODO 操作人从上下文获取
+            // TODO 操作人从上下文获取 || 反射获取
             it.setOperatorId("admin");
             it.setOperatorName("admin");
         });
