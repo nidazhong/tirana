@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.annotation;
+package com.ndz.wheatmall.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;

@@ -9,8 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ndz.wheatmall.annotation.History;
-import com.ndz.wheatmall.annotation.HistoryRecord;
+import com.ndz.wheatmall.common.annotation.History;
+import com.ndz.wheatmall.common.annotation.HistoryRecord;
 import com.ndz.wheatmall.dao.base.BaseDao;
 import com.ndz.wheatmall.dao.base.UpdateHistoryDao;
 import com.ndz.wheatmall.entity.base.UpdateHistoryEntity;

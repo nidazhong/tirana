@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.annotation;
+package com.ndz.wheatmall.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface History {
+@Target(ElementType.FIELD)
+public @interface HistoryRecord {
+
     /**
-     * 定义实体对应的表名
+     * 定义字段对应的表字段名
      * @return
      */
-    String table();
+    String field();
 }

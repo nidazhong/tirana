@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.constant;
+package com.ndz.wheatmall.common.constant;
 
 public interface WareConstant {
      enum PurchaseStatusEnum {

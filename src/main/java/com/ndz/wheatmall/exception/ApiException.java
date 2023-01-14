@@ -1,5 +1,7 @@
 package com.ndz.wheatmall.exception;
 
+import com.ndz.wheatmall.common.enums.BizCodeEnum;
+
 import java.io.Serial;
 
 /**

@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.exception;
+package com.ndz.wheatmall.common.utils;
 
 import javax.servlet.http.HttpServletRequest;
 

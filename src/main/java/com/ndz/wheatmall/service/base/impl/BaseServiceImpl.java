@@ -9,7 +9,7 @@ import java.util.function.BiConsumer;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.ndz.wheatmall.common.page.PageData;
-import com.ndz.wheatmall.constant.MybatisPlusConstant;
+import com.ndz.wheatmall.common.constant.MybatisPlusConstant;
 import com.ndz.wheatmall.service.base.BaseService;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.logging.Log;

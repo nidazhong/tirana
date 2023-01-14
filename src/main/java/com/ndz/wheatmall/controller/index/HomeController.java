@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.ndz.wheatmall.exception.ApiException;
-import com.ndz.wheatmall.exception.BizCodeEnum;
+import com.ndz.wheatmall.common.enums.BizCodeEnum;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

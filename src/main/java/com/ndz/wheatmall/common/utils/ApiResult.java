@@ -1,6 +1,6 @@
 package com.ndz.wheatmall.common.utils;
 
-import com.ndz.wheatmall.exception.BizCodeEnum;
+import com.ndz.wheatmall.common.enums.BizCodeEnum;
 import lombok.Data;
 
 import java.io.Serial;

@@ -2,10 +2,10 @@ package com.ndz.wheatmall.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ndz.wheatmall.annotation.NoApiResponse;
+import com.ndz.wheatmall.common.annotation.NoApiResponse;
 import com.ndz.wheatmall.common.utils.ApiResult;
 import com.ndz.wheatmall.exception.ApiException;
-import com.ndz.wheatmall.exception.BizCodeEnum;
+import com.ndz.wheatmall.common.enums.BizCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;

@@ -1,7 +1,7 @@
 package com.ndz.wheatmall.dto.org;
 
-import com.ndz.wheatmall.annotation.History;
-import com.ndz.wheatmall.annotation.HistoryRecord;
+import com.ndz.wheatmall.common.annotation.History;
+import com.ndz.wheatmall.common.annotation.HistoryRecord;
 
 import lombok.Data;
 

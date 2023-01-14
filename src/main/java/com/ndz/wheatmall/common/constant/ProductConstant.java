@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.constant;
+package com.ndz.wheatmall.common.constant;
 
 /**
  * @Description: 商品常量属性
