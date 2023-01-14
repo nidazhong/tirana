@@ -1,6 +1,6 @@
 package com.ndz.wheatmall.common.utils;
 
-import com.ndz.wheatmall.exception.ResultCode;
+import com.ndz.wheatmall.exception.BizCodeEnum;
 import lombok.Data;
 
 import java.io.Serial;
@@ -27,15 +27,15 @@ public class ApiResult<T> implements Serializable {
     private T data;
 
     public ApiResult<T> ok(T data) {
-        this.code = ResultCode.SUCCESS.getCode();
-        this.msg = ResultCode.SUCCESS.getMsg();
+        this.code = BizCodeEnum.SUCCESS.getCode();
+        this.msg = BizCodeEnum.SUCCESS.getMsg();
         this.setData(data);
         return this;
     }
 
     public ApiResult<T> ok() {
-        this.code = ResultCode.SUCCESS.getCode();
-        this.msg = ResultCode.SUCCESS.getMsg();
+        this.code = BizCodeEnum.SUCCESS.getCode();
+        this.msg = BizCodeEnum.SUCCESS.getMsg();
         return this;
     }
 
@@ -44,8 +44,8 @@ public class ApiResult<T> implements Serializable {
     }
 
     public ApiResult<T> error() {
-        this.code = ResultCode.FAILED.getCode();
-        this.msg = ResultCode.FAILED.getMsg();
+        this.code = BizCodeEnum.FAILED.getCode();
+        this.msg = BizCodeEnum.FAILED.getMsg();
         return this;
     }
 
@@ -57,7 +57,7 @@ public class ApiResult<T> implements Serializable {
     }
 
     public ApiResult<T> error(String msg) {
-        this.code = ResultCode.FAILED.getCode();
+        this.code = BizCodeEnum.FAILED.getCode();
         this.msg = msg;
         return this;
     }

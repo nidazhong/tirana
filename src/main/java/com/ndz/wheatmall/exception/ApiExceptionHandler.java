@@ -50,7 +50,7 @@ public class ApiExceptionHandler {
 	@ExceptionHandler(DuplicateKeyException.class)
 	public ApiResult<String> handleDuplicateKeyException(DuplicateKeyException ex){
 		ApiResult<String> ApiResult = new ApiResult<>();
-		ApiResult.error(AppBizCode.DB_RECORD_EXISTS.getMsg());
+		ApiResult.error(BizCodeEnum.DB_RECORD_EXISTS.getMsg());
 		return ApiResult;
 	}
 

@@ -15,7 +15,7 @@ public class ApiException extends RuntimeException {
 
 
 	// 手动设置异常
-	public ApiException(StatusCode statusCode, String msg) {
+	public ApiException(BizCodeEnum statusCode, String msg) {
 		// message 用于用户设置抛出错误详情，例如：当前价格-5，小于0
 		super(msg);
 		// 状态码
@@ -29,13 +29,13 @@ public class ApiException extends RuntimeException {
 	 */
 	public ApiException(String msg) {
 		super(msg);
-		this.code = AppBizCode.APP_ERROR.getCode();
+		this.code = BizCodeEnum.APP_ERROR.getCode();
 		this.msg = msg;
 	}
 
 	public ApiException(String msg, Throwable e) {
 		super(msg, e);
-		this.code = AppBizCode.APP_ERROR.getCode();
+		this.code = BizCodeEnum.APP_ERROR.getCode();
 		this.msg = msg;
 	}
 

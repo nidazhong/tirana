@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.ndz.wheatmall.exception.ApiException;
-import com.ndz.wheatmall.exception.AppBizCode;
+import com.ndz.wheatmall.exception.BizCodeEnum;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,7 +52,7 @@ public class HomeController {
         try {
             Integer.valueOf("fdqfqq");
         } catch (Exception ex) {
-          throw new ApiException(AppBizCode.APP_ERROR, "JSON字符串不合法"+"fdqfqq");
+          throw new ApiException(BizCodeEnum.APP_ERROR, "JSON字符串不合法"+"fdqfqq");
         }
 
 

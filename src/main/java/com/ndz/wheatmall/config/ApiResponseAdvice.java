@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ndz.wheatmall.annotation.NoApiResponse;
 import com.ndz.wheatmall.common.utils.ApiResult;
 import com.ndz.wheatmall.exception.ApiException;
-import com.ndz.wheatmall.exception.ResultCode;
+import com.ndz.wheatmall.exception.BizCodeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -42,7 +42,7 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
                 // 将数据包装在ResultVo里后转换为json串进行返回
                 return objectMapper.writeValueAsString(new ApiResult<>().ok(body));
             } catch (JsonProcessingException e) {
-                throw new ApiException(ResultCode.RESPONSE_PACK_ERROR, e.getMessage());
+                throw new ApiException(BizCodeEnum.RESPONSE_PACK_ERROR, e.getMessage());
             }
         }
 
