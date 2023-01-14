@@ -8,18 +8,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Objects;
 
+import cn.hutool.core.util.StrUtil;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RegExUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.util.StringUtils;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
 import io.reactivex.rxjava3.annotations.Nullable;
 
@@ -27,6 +29,7 @@ import io.reactivex.rxjava3.annotations.Nullable;
  * 实现jackson对于LocalDate、LocalDateTime、LocalTime类型数据的格式化
  * 此类为全局默认配置，如类还想自定义则用@JsonFormat注解
  */
+@Slf4j
 @Configuration
 public class JacksonLocalDateTimeConfig {
     
@@ -70,11 +73,18 @@ public class JacksonLocalDateTimeConfig {
         @Override
         public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
                 throws IOException {
-            long timestamp = jsonParser.getValueAsLong();
-            if (timestamp > 0) {
+            String valueStr = jsonParser.getValueAsString();
+            if (StrUtil.isEmpty(valueStr)) return null;
+            if (valueStr.matches("\\d{13}")) {
                 // 毫秒级，13位时间戳
-                return LocalDateTime.ofEpochSecond(timestamp / 1000, 0, ZoneOffset.ofHours(8));
-            } else {
+                return LocalDateTime.ofEpochSecond(Long.parseLong(valueStr) / 1000, 0, ZoneOffset.ofHours(8));
+            } else if (valueStr.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}")){
+                // 标准年月日 时分秒 YYYY-MM-dd HH:mm:ss
+                return LocalDateTime.parse(valueStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+            } else if(valueStr.matches("^\\d{4}-\\d{2}-\\d{2}")){
+                // 只有年月日 YYYY-MM-dd
+                return LocalDateTime.parse(valueStr +" 00:00:00", DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+            } else  {
                 return null;
             }
         }
@@ -84,26 +94,73 @@ public class JacksonLocalDateTimeConfig {
      * 自定义配置类方式可以对日期进行统一的格式化处理，（前端）13位时间戳 -> （后端）自定义格式化
      * 目前只配对了LocalDateTime， 其他继续写注入Formatter
      */
+//    @Bean
+//    public Formatter<LocalDateTime> localDateTimeFormatter() {
+//        return new Formatter<>() {
+//            @Nullable
+//            @Override
+//            public LocalDateTime parse(@Nullable String text, @Nullable Locale locale) {
+//                if (!StringUtils.hasText(text)) return null;
+//                return LocalDateTime.parse(text, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+//            }
+//
+//            @Nullable
+//            @Override
+//            public String print(@Nullable LocalDateTime localDateTime, @Nullable Locale locale) {
+//                if (Objects.isNull(localDateTime)) return null;
+//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
+//                return formatter.format(localDateTime);
+//            }
+//
+//        };
+//    }
+
     @Bean
-    public Formatter<LocalDateTime> localDateTimeFormatter() {
-        return new Formatter<>() {
-            @Nullable
+    public Converter<String, LocalDateTime> localDateTimeConverter(){
+        return new Converter<String, LocalDateTime>() {
             @Override
-            public LocalDateTime parse(@Nullable String text, @Nullable Locale locale) {
-                if (!StringUtils.hasText(text)) return null;
-                return LocalDateTime.parse(text, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+            public LocalDateTime convert(String s) {
+                if (StringUtils.isEmpty(s)){
+                    return null ;
+                } else {
+                    return LocalDateTime.parse(s, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+                }
             }
-
-            @Nullable
-            @Override
-            public String print(@Nullable LocalDateTime localDateTime, @Nullable Locale locale) {
-                if (Objects.isNull(localDateTime)) return null;
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_PATTERN);
-                return formatter.format(localDateTime);
-            }
-
         };
     }
+
+
+//    @Bean
+//    public Converter<String, LocalDateTime> localDateTimeConvert() {
+//        return new Converter<String, LocalDateTime>() {
+//            @Override
+//            public LocalDateTime convert(String source) {
+//                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//                LocalDateTime dateTime = null;
+//                try {
+//                    //2020-01-01 00:00:00
+//                    switch (source.length()){
+//                        case 10:
+//                            log.debug("传过来的是日期格式：{}",source);
+//                            source=source+" 00:00:00";
+//                            break;
+//                        case 13:
+//                            log.debug("传过来的是日期 小时格式：{}",source);
+//                            source=source+":00:00";
+//                            break;
+//                        case 16:
+//                            log.debug("传过来的是日期 小时:分钟格式：{}",source);
+//                            source=source+":00";
+//                            break;
+//                    }
+//                    dateTime = LocalDateTime.parse(source, df);
+//                } catch (Exception e) {
+//                    log.error(e.getMessage(),e);
+//                }
+//                return dateTime;
+//            }
+//        };
+//    }
 
 
 }
