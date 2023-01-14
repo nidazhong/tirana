@@ -28,7 +28,7 @@ import cn.hutool.core.map.MapUtil;
  */
 @Slf4j
 @RestControllerAdvice
-public class WheatmallExceptionHandler {
+public class ApiExceptionHandler {
 
 	@Autowired
 	private LogErrorService logErrorService;
@@ -36,10 +36,11 @@ public class WheatmallExceptionHandler {
 	/**
 	 * 处理自定义异常
 	 */
-	@ExceptionHandler(WheatmallException.class)
-	public ApiResult<String> handleRenException(WheatmallException ex){
+	@ExceptionHandler(ApiException.class)
+	public ApiResult<String> handleRenException(ApiException ex){
+		log.error(ex.getMsg(), ex);
 		ApiResult<String> ApiResult = new ApiResult<>();
-		ApiResult.error(ex.getCode(), ex.getMsg());
+		ApiResult.error(ex.getCode(), ex.getMsg(), ex.getMessage());
 		return ApiResult;
 	}
 
@@ -49,7 +50,7 @@ public class WheatmallExceptionHandler {
 	@ExceptionHandler(DuplicateKeyException.class)
 	public ApiResult<String> handleDuplicateKeyException(DuplicateKeyException ex){
 		ApiResult<String> ApiResult = new ApiResult<>();
-		ApiResult.error(ErrorCode.DB_RECORD_EXISTS);
+		ApiResult.error(AppBizCode.DB_RECORD_EXISTS.getMsg());
 		return ApiResult;
 	}
 

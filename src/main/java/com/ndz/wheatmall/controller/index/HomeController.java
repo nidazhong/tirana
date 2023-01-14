@@ -3,7 +3,8 @@ package com.ndz.wheatmall.controller.index;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.ndz.wheatmall.annotation.NoApiResponse;
+import com.ndz.wheatmall.exception.ApiException;
+import com.ndz.wheatmall.exception.AppBizCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,7 @@ public class HomeController {
      * NoApiResponse 注解表示不自动包装
      */
     @GetMapping("/hello")
-    @NoApiResponse
+//    @NoApiResponse
     public String hello() {
         log.debug("debug");
         log.info("info");
@@ -42,8 +43,20 @@ public class HomeController {
         greetVO.setMsg("Hello World");
         greetVO.setTime(LocalDateTime.now());
         greetVO.setDate(LocalDate.now());
-        // 模拟异常
-        Integer.valueOf("qwqweqw");
+
+
+        // 模拟业务异常
+//        if (!JSONUtil.isTypeJSONObject("11111")) {
+//            throw  new ApiException("业务json不合法");
+//        }
+        try {
+            Integer.valueOf("fdqfqq");
+        } catch (Exception ex) {
+          throw new ApiException(AppBizCode.APP_ERROR, "JSON字符串不合法"+"fdqfqq");
+        }
+
+
+
         return greetVO;
     }
 

@@ -1,7 +1,11 @@
 package com.ndz.wheatmall.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ndz.wheatmall.annotation.NoApiResponse;
 import com.ndz.wheatmall.common.utils.ApiResult;
+import com.ndz.wheatmall.exception.ApiException;
+import com.ndz.wheatmall.exception.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -28,7 +32,20 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
     }
 
     @Override
-    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+    public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType,
+                                  Class<? extends HttpMessageConverter<?>> selectedConverterType,
+                                  ServerHttpRequest request, ServerHttpResponse response) {
+        // String类型不能直接包装
+        if (returnType.getGenericParameterType().equals(String.class)) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            try {
+                // 将数据包装在ResultVo里后转换为json串进行返回
+                return objectMapper.writeValueAsString(new ApiResult<>().ok(body));
+            } catch (JsonProcessingException e) {
+                throw new ApiException(ResultCode.RESPONSE_PACK_ERROR, e.getMessage());
+            }
+        }
+
         ApiResult<Object> apiResponse = new ApiResult<>();
         apiResponse.setData(body);
         return apiResponse;

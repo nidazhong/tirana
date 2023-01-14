@@ -1,6 +1,7 @@
 package com.ndz.wheatmall.common.utils;
 
-import com.ndz.wheatmall.exception.ErrorCode;
+import com.ndz.wheatmall.exception.ResultCode;
+import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -8,24 +9,33 @@ import java.io.Serializable;
 /**
  * Controller统一结果返回
  */
+@Data
 public class ApiResult<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
     /**
      * 编码：0表示成功，其他值表示失败
      */
-    private Integer code = 0;
+    private Integer code;
     /**
      * 消息内容
      */
-    private String msg = "success";
+    private String msg;
     /**
      * 响应数据
      */
     private T data;
 
     public ApiResult<T> ok(T data) {
+        this.code = ResultCode.SUCCESS.getCode();
+        this.msg = ResultCode.SUCCESS.getMsg();
         this.setData(data);
+        return this;
+    }
+
+    public ApiResult<T> ok() {
+        this.code = ResultCode.SUCCESS.getCode();
+        this.msg = ResultCode.SUCCESS.getMsg();
         return this;
     }
 
@@ -34,16 +44,11 @@ public class ApiResult<T> implements Serializable {
     }
 
     public ApiResult<T> error() {
-        this.code = ErrorCode.INTERNAL_SERVER_ERROR;
-        this.msg = MessageUtils.getMessage(this.code);
+        this.code = ResultCode.FAILED.getCode();
+        this.msg = ResultCode.FAILED.getMsg();
         return this;
     }
 
-    public ApiResult<T> error(Integer code) {
-        this.code = code;
-        this.msg = MessageUtils.getMessage(this.code);
-        return this;
-    }
 
     public ApiResult<T> error(Integer code, String msg) {
         this.code = code;
@@ -52,32 +57,16 @@ public class ApiResult<T> implements Serializable {
     }
 
     public ApiResult<T> error(String msg) {
-        this.code = ErrorCode.INTERNAL_SERVER_ERROR;
+        this.code = ResultCode.FAILED.getCode();
         this.msg = msg;
         return this;
     }
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
+    public void error(Integer code, String msg, T data) {
         this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
         this.data = data;
     }
+
+
 }
