@@ -8,8 +8,9 @@ spring:
     password: 123456
     url: jdbc:mysql://192.168.31.237:3308/wheatmall_pms?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss # 向前端返回指定反序列化日期格式
+#  jackson:
+#    date-format: yyyy-MM-dd HH:mm:ss # 向前端返回指定反序列化日期格式
+#    time-zone: GMT+8 # 东八区
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml # 不写该配置默认也是这个位置
