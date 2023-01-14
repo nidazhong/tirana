@@ -1,17 +1,13 @@
 package com.ndz.wheatmall;
 
-import com.alibaba.fastjson.JSON;
 import com.ndz.wheatmall.dto.org.EmployeeDTO;
-import com.ndz.wheatmall.entity.org.EmployeeEntity;
-import com.ndz.wheatmall.entity.sys.UpdateHistoryEntity;
-import com.ndz.wheatmall.service.sys.UpdateAgent;
-import org.apache.commons.lang3.RegExUtils;
+import com.ndz.wheatmall.service.org.EmployeeService;
+import com.ndz.wheatmall.service.base.UpdateAgent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * springboot 2.7 使用了junit5
@@ -21,6 +17,9 @@ public class WheatmallMiniApplicationTests {
 
     @Autowired
     UpdateAgent updateAgent;
+
+    @Autowired
+    EmployeeService employeeService;
 
     @Test
     public void test01 () {
@@ -37,7 +36,19 @@ public class WheatmallMiniApplicationTests {
         newDTO.setName("基努里维斯");
         newDTO.setJob("演员");
         newDTO.setEntryDateTime(LocalDateTime.now());
-        updateAgent.update(null, newDTO, "12314321fsdf");
+        updateAgent.update(null, newDTO, "1");
+    }
+
+    @Test
+    public void test04(){
+        EmployeeDTO newDTO = new EmployeeDTO();
+        newDTO.setEmpId("1");
+        newDTO.setName("基努里维斯");
+        newDTO.setJob("演员");
+        newDTO.setEntryDateTime(LocalDateTime.now());
+
+        employeeService.update(newDTO);
+
     }
 
 

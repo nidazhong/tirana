@@ -21,14 +21,6 @@ public class UpdateHistoryEntity implements Serializable {
         this.recordId = recordId;
     }
 
-    public void setUpdateFieldVal(String fieldName, String valueBefore, String valueAfter) {
-        this.fieldName = fieldName;
-        this.valueBefore = valueBefore;
-        this.valueAfter = valueAfter;
-    }
-
-
-
     /**
      * 标志ID
      */
@@ -73,4 +65,11 @@ public class UpdateHistoryEntity implements Serializable {
      * 修改时间
      */
     private LocalDateTime modifyTime;
+
+    public void setUpdateFieldVal(String fieldName, String valueBefore, String valueAfter) {
+        this.fieldName = fieldName;
+        this.valueBefore = valueBefore;
+        this.valueAfter = valueAfter;
+        this.modifyTime = LocalDateTime.now();
+    }
 }

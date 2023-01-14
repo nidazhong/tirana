@@ -1,7 +1,7 @@
 package com.ndz.wheatmall.constant;
 
-public class WareConstant {
-    public enum PurchaseStatusEnum {
+public interface WareConstant {
+     enum PurchaseStatusEnum {
         CREATED(0,"新建"),
         ASSIGNED(1,"已分配"),
         RECEIVE(2,"已领取"),
@@ -30,7 +30,7 @@ public class WareConstant {
     }
 
 
-    public enum PurchaseDetailStatusEnum {
+     enum PurchaseDetailStatusEnum {
         CREATED(0,"新建"),
         ASSIGNED(1,"已分配"),
         BUYING(2,"正在采购"),

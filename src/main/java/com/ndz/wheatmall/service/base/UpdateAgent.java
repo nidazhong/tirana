@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.service.sys;
+package com.ndz.wheatmall.service.base;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DatePattern;
@@ -7,6 +7,8 @@ import cn.hutool.extra.cglib.CglibUtil;
 import com.alibaba.fastjson.JSON;
 import com.ndz.wheatmall.annotation.History;
 import com.ndz.wheatmall.annotation.HistoryRecord;
+import com.ndz.wheatmall.dao.base.BaseDao;
+import com.ndz.wheatmall.dao.base.UpdateHistoryDao;
 import com.ndz.wheatmall.dto.org.EmployeeDTO;
 import com.ndz.wheatmall.entity.org.EmployeeEntity;
 import com.ndz.wheatmall.entity.sys.UpdateHistoryEntity;
@@ -16,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,20 +31,30 @@ import java.util.List;
 @Slf4j
 @Component
 public class UpdateAgent {
+
+    @Resource
+    UpdateHistoryDao updateHistoryDao;
+
     @Transactional
     public void update(BaseDao dao, Object newObj, String bizId){
         // 保存历史变更记录
         compareAndRecordHistory(dao, newObj, bizId);
-        // todo 执行业务数据更新
-//        dao.update(newObj);
+        // 更新业务表
+        dao.updateById(newObj);
     }
 
     private void compareAndRecordHistory(BaseDao dao, Object newObj, String bizId) {
-        // 模拟数据库取出旧值
-        EmployeeEntity old = new EmployeeEntity();
-        old.setName("斯科塞斯");
+        // 数据库取出旧值
+        Object old = dao.selectById(bizId);
         List<UpdateHistoryEntity> updateHistoryEntities = this.reflectChangFields(old, newObj, bizId);
-        System.out.println(JSON.toJSONString(updateHistoryEntities, true));
+        // 保存变更的字段内容
+        // TODO 实现批量插入，提高效率
+        updateHistoryEntities.forEach(it-> {
+            // TODO 操作人从上下文获取
+            it.setOperatorId("admin");
+            it.setOperatorName("admin");
+            updateHistoryDao.insert(it);
+        });
     }
 
     /**
