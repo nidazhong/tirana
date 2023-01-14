@@ -6,7 +6,7 @@
 |-------------|---------|
 | Java        | 17      |
 | Maven       | 3.6.3   |
-| Spring Boot | 2.7.7   |
+| Spring Boot | 3.0.1   |
 | Mysql       | 8       |
 
 
