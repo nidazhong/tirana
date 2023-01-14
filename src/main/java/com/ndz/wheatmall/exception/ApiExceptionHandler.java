@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson2.JSON;
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
-import com.ndz.wheatmall.common.utils.ApiResult;
-import com.ndz.wheatmall.common.utils.ExceptionUtils;
-import com.ndz.wheatmall.common.utils.HttpContextUtils;
-import com.ndz.wheatmall.common.utils.IpUtils;
+import com.ndz.wheatmall.utils.ApiResult;
+import com.ndz.wheatmall.utils.ExceptionUtils;
+import com.ndz.wheatmall.utils.HttpContextUtils;
+import com.ndz.wheatmall.utils.IpUtils;
 import com.ndz.wheatmall.entity.base.LogErrorEntity;
 import com.ndz.wheatmall.service.base.LogErrorService;
 import lombok.extern.slf4j.Slf4j;

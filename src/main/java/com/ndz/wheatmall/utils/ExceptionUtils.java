@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.common.utils;
+package com.ndz.wheatmall.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;

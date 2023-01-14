@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.common.utils;
+package com.ndz.wheatmall.utils;
 
 import java.util.Enumeration;
 import java.util.HashMap;

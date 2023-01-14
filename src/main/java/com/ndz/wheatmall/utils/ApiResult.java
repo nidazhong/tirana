@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.common.utils;
+package com.ndz.wheatmall.utils;
 
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
 import lombok.Data;

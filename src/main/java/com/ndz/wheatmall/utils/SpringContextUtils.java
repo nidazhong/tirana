@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.common.utils;
+package com.ndz.wheatmall.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
