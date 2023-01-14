@@ -40,6 +40,7 @@ public class HomeController {
 
     @PostMapping("/say")
     public void say(@RequestBody GreetDTO dto) {
+        // 1673677631531 --- 13位毫秒级时间戳
         // curl  -H "Content-type: application/json" -X POST -d '{"date":"2023-01-14","time":"2023-01-14 13:48:19"}' localhost:8347/say
         System.out.println(JSON.toJSONString(dto));
     }
