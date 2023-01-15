@@ -1,6 +1,7 @@
 package com.ndz.wheatmall.exception;
 
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
+import com.ndz.wheatmall.common.enums.StatusCode;
 
 import java.io.Serial;
 
@@ -17,7 +18,7 @@ public class ApiException extends RuntimeException {
 
 
 	// 手动设置异常
-	public ApiException(BizCodeEnum statusCode, String msg) {
+	public ApiException(StatusCode statusCode, String msg) {
 		// message 用于用户设置抛出错误详情，例如：当前价格-5，小于0
 		super(msg);
 		// 状态码

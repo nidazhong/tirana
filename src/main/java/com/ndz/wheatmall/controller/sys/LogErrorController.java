@@ -2,6 +2,8 @@ package com.ndz.wheatmall.controller.sys;
 
 import java.util.Map;
 
+import com.ndz.wheatmall.common.bean.ApiResult;
+import com.ndz.wheatmall.utils.ApiResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +37,8 @@ public class LogErrorController {
             @ApiImplicitParam(name = MybatisConstant.ORDER_FIELD, value = "排序字段", paramType = "query", dataType="String") ,
             @ApiImplicitParam(name = MybatisConstant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String")
     })
-    public PageData<LogErrorVO> page(@ApiIgnore @RequestParam Map<String, Object> params) {
-        return logErrorService.page(params);
+    public ApiResult<PageData<LogErrorVO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
+        return ApiResultUtils.makeSuccessMsg(logErrorService.page(params));
     }
 
 //    @GetMapping("export")

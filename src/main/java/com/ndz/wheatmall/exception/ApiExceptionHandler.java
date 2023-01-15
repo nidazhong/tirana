@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.alibaba.fastjson2.JSON;
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
-import com.ndz.wheatmall.utils.ApiResult;
+import com.ndz.wheatmall.common.bean.ApiResult;
+import com.ndz.wheatmall.utils.ApiResultUtils;
 import com.ndz.wheatmall.utils.ExceptionUtils;
 import com.ndz.wheatmall.utils.HttpContextUtils;
 import com.ndz.wheatmall.utils.IpUtils;
@@ -41,9 +42,7 @@ public class ApiExceptionHandler {
 	@ExceptionHandler(ApiException.class)
 	public ApiResult<String> handleRenException(ApiException ex){
 		log.error(ex.getMsg(), ex);
-		ApiResult<String> ApiResult = new ApiResult<>();
-		ApiResult.error(ex.getCode(), ex.getMsg(), ex.getMessage());
-		return ApiResult;
+		return ApiResultUtils.makeErrorMsg(ex.getCode(), ex.getMsg(), ex.getMessage());
 	}
 
 	/**
@@ -51,9 +50,7 @@ public class ApiExceptionHandler {
 	 */
 	@ExceptionHandler(DuplicateKeyException.class)
 	public ApiResult<String> handleDuplicateKeyException(DuplicateKeyException ex){
-		ApiResult<String> ApiResult = new ApiResult<>();
-		ApiResult.error(BizCodeEnum.DB_RECORD_EXISTS.getMsg());
-		return ApiResult;
+		return ApiResultUtils.makeErrorMsg(BizCodeEnum.DB_RECORD_EXISTS.getMsg());
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -62,7 +59,7 @@ public class ApiExceptionHandler {
 		// 保存异常日志
 		// TODO 配置中自定义开启/关闭落库
 		this.saveLog(ex);
-		return new ApiResult<String>().error();
+		return ApiResultUtils.makeErrorMsg();
 	}
 
 	/**
