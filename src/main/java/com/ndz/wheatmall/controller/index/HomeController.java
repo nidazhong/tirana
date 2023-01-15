@@ -72,6 +72,7 @@ public class HomeController {
     @GetMapping("/sayHi")
     public ResponseEntity<String> sayHi(@RequestParam(value = "name") String name) {
         String msg = "Hi: " + name;
+        ResponseEntity<String> ok = ResponseEntity.ok(msg);
         return ResponseEntity.ok(msg);
     }
 

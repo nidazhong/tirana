@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 只对自己项目的包做统一返回，如不加basePackages，swagger等其他访问将异常
  */
-@RestControllerAdvice(basePackages = {"com.ndz.wheatmall"})
+@RestControllerAdvice(basePackages = {"com.ndz.wheatmall"}, annotations = RestControllerAdvice.class)
 @Slf4j
 public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
 
@@ -41,7 +41,7 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
                                   Class<? extends HttpMessageConverter<?>> selectedConverterType,
                                   ServerHttpRequest request, ServerHttpResponse response) {
         // String类型不能直接包装
-        if (returnType.getGenericParameterType().equals(String.class)) {
+        if (body instanceof String) {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 // 将数据包装在ResultVo里后转换为json串进行返回
