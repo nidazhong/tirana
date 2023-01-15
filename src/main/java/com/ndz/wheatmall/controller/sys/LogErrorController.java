@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.controller.base;
+package com.ndz.wheatmall.controller.sys;
 
 import java.util.Map;
 
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ndz.wheatmall.common.constant.MybatisConstant;
 import com.ndz.wheatmall.common.page.PageData;
-import com.ndz.wheatmall.service.base.LogErrorService;
-import com.ndz.wheatmall.vo.base.LogErrorVO;
+import com.ndz.wheatmall.service.sys.LogErrorService;
+import com.ndz.wheatmall.vo.sys.LogErrorVO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

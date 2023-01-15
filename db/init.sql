@@ -29,7 +29,7 @@ VALUES ('Jack', 'Coder', 'devDept', NOW());
 
 
 -- 异常日志
-create table base_log_error
+create table sys_log_error
 (
     id             bigint NOT NULL auto_increment COMMENT 'id',
     request_uri    varchar(200) COMMENT '请求URI',

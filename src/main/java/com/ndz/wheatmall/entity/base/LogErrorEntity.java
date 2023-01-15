@@ -12,7 +12,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper=false)
-@TableName("base_log_error")
+@TableName("sys_log_error")
 public class LogErrorEntity {
 	private static final long serialVersionUID = 1L;
 

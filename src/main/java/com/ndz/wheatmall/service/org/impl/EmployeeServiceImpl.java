@@ -5,7 +5,7 @@ import com.ndz.wheatmall.dto.org.EmployeeDTO;
 import com.ndz.wheatmall.entity.org.EmployeeEntity;
 import com.ndz.wheatmall.service.base.impl.BaseServiceImpl;
 import com.ndz.wheatmall.service.org.EmployeeService;
-import com.ndz.wheatmall.service.base.UpdateAgent;
+import com.ndz.wheatmall.service.sys.UpdateAgent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,14 +1,15 @@
-package com.ndz.wheatmall.service.base.impl;
+package com.ndz.wheatmall.service.sys.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ndz.wheatmall.common.constant.MybatisConstant;
 import com.ndz.wheatmall.common.page.PageData;
-import com.ndz.wheatmall.dao.base.LogErrorDao;
+import com.ndz.wheatmall.dao.sys.LogErrorDao;
 import com.ndz.wheatmall.entity.base.LogErrorEntity;
-import com.ndz.wheatmall.service.base.LogErrorService;
-import com.ndz.wheatmall.vo.base.LogErrorVO;
+import com.ndz.wheatmall.service.base.impl.BaseServiceImpl;
+import com.ndz.wheatmall.service.sys.LogErrorService;
+import com.ndz.wheatmall.vo.sys.LogErrorVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

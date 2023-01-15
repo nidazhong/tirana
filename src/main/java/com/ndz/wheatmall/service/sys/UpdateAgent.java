@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.service.base;
+package com.ndz.wheatmall.service.sys;
 
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ndz.wheatmall.common.annotation.History;
 import com.ndz.wheatmall.common.annotation.HistoryRecord;
 import com.ndz.wheatmall.dao.base.BaseDao;
-import com.ndz.wheatmall.dao.base.UpdateHistoryDao;
+import com.ndz.wheatmall.dao.sys.UpdateHistoryDao;
 import com.ndz.wheatmall.entity.base.UpdateHistoryEntity;
 import com.ndz.wheatmall.service.base.impl.BaseServiceImpl;
 

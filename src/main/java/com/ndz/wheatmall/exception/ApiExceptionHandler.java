@@ -11,7 +11,7 @@ import com.ndz.wheatmall.utils.ExceptionUtils;
 import com.ndz.wheatmall.utils.HttpContextUtils;
 import com.ndz.wheatmall.utils.IpUtils;
 import com.ndz.wheatmall.entity.base.LogErrorEntity;
-import com.ndz.wheatmall.service.base.LogErrorService;
+import com.ndz.wheatmall.service.sys.LogErrorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;

@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.vo.base;
+package com.ndz.wheatmall.vo.sys;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
