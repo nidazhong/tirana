@@ -38,7 +38,7 @@ public class LogErrorController {
             @ApiImplicitParam(name = MybatisConstant.ORDER, value = "排序方式，可选值(asc、desc)", paramType = "query", dataType="String")
     })
     public ApiResult<PageData<LogErrorVO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
-        return ApiResultUtils.makeSuccessMsg(logErrorService.page(params));
+        return ApiResultUtils.ok(logErrorService.page(params));
     }
 
 //    @GetMapping("export")

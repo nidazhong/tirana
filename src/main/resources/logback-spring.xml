@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <property name="console-pattern"
-              value="%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(${PID:- }) --- [%15.15thread] %X{tl} %cyan(%-40.40logger{39})  %msg%n"/>
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) %magenta(${PID:- }) --- [%15.15thread] %X{tl} %cyan(%-40.40logger%line{39})  %msg%n"/>
     <property name="file-pattern"
               value="%date{yyyy-MM-dd HH:mm:ss.SSS} %-5level ${PID:- } --- [%15.15thread] %X{tl} %-40.40logger{39}  %msg%n"/>
 

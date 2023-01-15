@@ -42,7 +42,7 @@ public class ApiExceptionHandler {
 	@ExceptionHandler(ApiException.class)
 	public ApiResult<String> handleRenException(ApiException ex){
 		log.error(ex.getMsg(), ex);
-		return ApiResultUtils.makeErrorMsg(ex.getCode(), ex.getMsg(), ex.getMessage());
+		return ApiResultUtils.error(ex.getCode(), ex.getMsg(), ex.getMessage());
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class ApiExceptionHandler {
 	 */
 	@ExceptionHandler(DuplicateKeyException.class)
 	public ApiResult<String> handleDuplicateKeyException(DuplicateKeyException ex){
-		return ApiResultUtils.makeErrorMsg(BizCodeEnum.DB_RECORD_EXISTS.getMsg());
+		return ApiResultUtils.error(BizCodeEnum.DB_RECORD_EXISTS.getMsg());
 	}
 
 	@ExceptionHandler(Exception.class)
@@ -58,8 +58,9 @@ public class ApiExceptionHandler {
 		log.error(ex.getMessage(), ex);
 		// 保存异常日志
 		// TODO 配置中自定义开启/关闭落库
-		this.saveLog(ex);
-		return ApiResultUtils.makeErrorMsg();
+		saveLog(ex);
+		// TODO 根据不通环境看是否要展示给前端错误msg
+		return ApiResultUtils.error(ex.getMessage());
 	}
 
 	/**

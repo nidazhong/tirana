@@ -9,6 +9,7 @@ spring:
     url: jdbc:mysql://192.168.31.237:3308/wheatmall_mini?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml # 不写该配置默认也是这个位置
   global-config:
@@ -31,7 +32,7 @@ knife4j:
     url: https://www.wheatmall.com
     version: v1.0
     license: Apache 2.0
-    license-url: https://stackoverflow.com/
+    license-url: http://www.apache.org/licenses/LICENSE-2.0
     terms-of-service-url: https://www.wheatmall.com
     group:
       all:

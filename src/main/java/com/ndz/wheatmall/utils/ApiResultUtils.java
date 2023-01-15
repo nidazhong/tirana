@@ -16,15 +16,15 @@ public class ApiResultUtils {
         return rm;
     }
 
-    public static <T> ApiResult<T> makeSuccessMsg(String msg, T data) {
+    public static <T> ApiResult<T> ok(String msg, T data) {
         return new ApiResult<>(StateEnum.SUCCESS.getCode(), msg, data);
     }
 
-    public static <T> ApiResult<T> makeSuccessMsg(String message) {
+    public static <T> ApiResult<T> ok(String message) {
         return new ApiResult<>(StateEnum.SUCCESS.getCode(), message,null);
     }
 
-    public static <T> ApiResult<T> makeSuccessMsg(T data) {
+    public static <T> ApiResult<T> ok(T data) {
         ApiResult<T> rm = new ApiResult<>(StateEnum.SUCCESS);
         rm.setData(data);
         return rm;
@@ -33,19 +33,19 @@ public class ApiResultUtils {
     /**
      * 对未进行错误枚举定义的使用关闭
      */
-    public static <T> ApiResult<T> makeErrorMsg(StatusCode errorStatusCode, T data) {
+    public static <T> ApiResult<T> error(StatusCode errorStatusCode, T data) {
         return new ApiResult<>(errorStatusCode);
     }
 
-    public static <T> ApiResult<T> makeErrorMsg(Integer code, String msg, T data) {
+    public static <T> ApiResult<T> error(Integer code, String msg, T data) {
         return new ApiResult<>(code, msg, data);
     }
 
-    public static <T> ApiResult<T> makeErrorMsg(String message) {
+    public static <T> ApiResult<T> error(String message) {
         return new ApiResult<>(StateEnum.FAILED.getCode(), message, null);
     }
 
-    public static <T> ApiResult<T> makeErrorMsg() {
+    public static <T> ApiResult<T> error() {
         return new ApiResult<>(StateEnum.FAILED);
     }
 }

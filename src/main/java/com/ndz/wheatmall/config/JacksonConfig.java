@@ -6,16 +6,13 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.databind.*;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +23,13 @@ import lombok.extern.slf4j.Slf4j;
  * 此类为全局默认配置，如类还想自定义则用@JsonFormat注解
  *
  * 实现：
- *   1、无论前端传时间戳，yyyy-MM-dd 还是 yyyy-MM-dd HH:mm:ss都转换后端为LocalDateTime对象接受，并且后端格式化为yyyy-MM-dd HH:mm:ss
+ *   1、无论前端传字符串时间无论是时间戳，yyyy-MM-dd 还是 yyyy-MM-dd HH:mm:ss类型都转换后端为LocalDateTime对象接受，并且后端格式化为yyyy-MM-dd HH:mm:ss
  *   2、后端返回统一时间戳LocalDateTime对象给前端，并统一格式化为yyyy-MM-dd HH:mm:ss
  * </p>
  */
 @Slf4j
 @Configuration
-public class JacksonLocalDateTimeConfig {
+public class JacksonConfig {
     
     public static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
@@ -47,6 +44,8 @@ public class JacksonLocalDateTimeConfig {
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
             builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
             // 如有其他类型，以下还可添加
+            // 枚举
+            builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         };
     }
 

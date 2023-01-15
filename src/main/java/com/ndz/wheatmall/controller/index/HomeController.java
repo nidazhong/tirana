@@ -3,6 +3,7 @@ package com.ndz.wheatmall.controller.index;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.ndz.wheatmall.common.annotation.NoApiResponse;
 import com.ndz.wheatmall.exception.ApiException;
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
@@ -20,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Api(tags = "首页模块")
+@ApiSupport(author = "535704264@qq.com",order = 1)
 @RestController
 public class HomeController {
 

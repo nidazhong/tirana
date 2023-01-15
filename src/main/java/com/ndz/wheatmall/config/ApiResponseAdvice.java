@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 只对自己项目的包做统一返回，如不加basePackages，swagger等其他访问将异常
  */
-@RestControllerAdvice(basePackages = {"com.ndz.wheatmall"}, annotations = RestControllerAdvice.class)
+@RestControllerAdvice(basePackages = {"com.ndz.wheatmall"}, annotations = RestController.class)
 @Slf4j
 public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
 
@@ -46,12 +47,12 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
             ObjectMapper objectMapper = new ObjectMapper();
             try {
                 // 将数据包装在ResultVo里后转换为json串进行返回
-                return objectMapper.writeValueAsString(ApiResultUtils.makeSuccessMsg(body));
+                return objectMapper.writeValueAsString(ApiResultUtils.ok(body));
             } catch (JsonProcessingException e) {
                 throw new ApiException(StateEnum.RESPONSE_PACK_ERROR, e.getMessage());
             }
         }
 
-        return ApiResultUtils.makeSuccessMsg(body);
+        return ApiResultUtils.ok(body);
     }
 }
