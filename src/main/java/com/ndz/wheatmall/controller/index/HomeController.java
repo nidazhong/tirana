@@ -3,6 +3,7 @@ package com.ndz.wheatmall.controller.index;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.ndz.wheatmall.common.annotation.NoApiResponse;
 import com.ndz.wheatmall.exception.ApiException;
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
 import io.swagger.annotations.Api;
@@ -67,13 +68,6 @@ public class HomeController {
         System.out.println(JSON.toJSONString(dto));
     }
 
-    @ApiImplicitParam(name = "name", value = "姓名", required = true)
-    @ApiOperation(value = "向客人问好")
-    @GetMapping("/sayHi")
-    public ResponseEntity<String> sayHi(@RequestParam(value = "name") String name) {
-        String msg = "Hi: " + name;
-        ResponseEntity<String> ok = ResponseEntity.ok(msg);
-        return ResponseEntity.ok(msg);
-    }
+
 
 }
