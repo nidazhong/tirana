@@ -4,15 +4,8 @@ package com.ndz.wheatmall.common.constant;
  * 常量
  *
  */
-public interface MybatisPlusConstant {
-    /**
-     * 成功
-     */
-    int SUCCESS = 1;
-    /**
-     * 失败
-     */
-    int FAIL = 0;
+public interface MybatisConstant {
+
     /**
      *  升序
      */
@@ -42,6 +35,5 @@ public interface MybatisPlusConstant {
      * 排序方式
      */
     String ORDER = "order";
-
 
 }

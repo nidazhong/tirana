@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 只对自己项目的包做统一返回，如不加basePackages，swagger等其他访问将异常
  */
-@RestControllerAdvice(basePackages = {"com.ndz.wheatmall"}, annotations = {RestController.class})
+@RestControllerAdvice(basePackages = {"com.ndz.wheatmall"})
 @Slf4j
 public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
 
@@ -51,7 +51,7 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
         }
 
         ApiResult<Object> apiResponse = new ApiResult<>();
-        apiResponse.setData(body);
+        apiResponse.ok(body);
         return apiResponse;
     }
 }

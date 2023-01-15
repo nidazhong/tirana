@@ -9,7 +9,7 @@ import java.util.function.BiConsumer;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.ndz.wheatmall.common.page.PageData;
-import com.ndz.wheatmall.common.constant.MybatisPlusConstant;
+import com.ndz.wheatmall.common.constant.MybatisConstant;
 import com.ndz.wheatmall.service.base.BaseService;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.logging.Log;
@@ -47,26 +47,26 @@ public abstract class BaseServiceImpl<M extends BaseMapper<T>, T>  implements Ba
         long curPage = 1;
         long limit = 10;
 
-        if(params.get(MybatisPlusConstant.PAGE) != null){
-            curPage = Long.parseLong((String)params.get(MybatisPlusConstant.PAGE));
+        if(params.get(MybatisConstant.PAGE) != null){
+            curPage = Long.parseLong((String)params.get(MybatisConstant.PAGE));
         }
-        if(params.get(MybatisPlusConstant.LIMIT) != null){
-            limit = Long.parseLong((String)params.get(MybatisPlusConstant.LIMIT));
+        if(params.get(MybatisConstant.LIMIT) != null){
+            limit = Long.parseLong((String)params.get(MybatisConstant.LIMIT));
         }
 
         //分页对象
         Page<T> page = new Page<>(curPage, limit);
 
         //分页参数
-        params.put(MybatisPlusConstant.PAGE, page);
+        params.put(MybatisConstant.PAGE, page);
 
         //排序字段
-        String orderField = (String)params.get(MybatisPlusConstant.ORDER_FIELD);
-        String order = (String)params.get(MybatisPlusConstant.ORDER);
+        String orderField = (String)params.get(MybatisConstant.ORDER_FIELD);
+        String order = (String)params.get(MybatisConstant.ORDER);
 
         //前端字段排序
         if(StringUtils.isNotBlank(orderField) && StringUtils.isNotBlank(order)){
-            if(MybatisPlusConstant.ASC.equalsIgnoreCase(order)) {
+            if(MybatisConstant.ASC.equalsIgnoreCase(order)) {
                 return page.addOrder(OrderItem.asc(orderField));
             }else {
                 return page.addOrder(OrderItem.desc(orderField));

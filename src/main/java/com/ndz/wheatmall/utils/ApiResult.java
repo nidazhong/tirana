@@ -1,6 +1,7 @@
 package com.ndz.wheatmall.utils;
 
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serial;
@@ -13,9 +14,8 @@ import java.io.Serializable;
 public class ApiResult<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
-    /**
-     * 编码：0表示成功，其他值表示失败
-     */
+
+    @ApiModelProperty(value = "编码：0表示成功，其他值表示失败")
     private Integer code;
     /**
      * 消息内容

@@ -27,6 +27,7 @@
         <fastjson2.version>2.0.22</fastjson2.version>
         <redisson.version>3.19.1</redisson.version>
         <tlog.version>1.5.0</tlog.version>
+        <knife4j.version>4.0.0</knife4j.version>
     </properties>
 
     <dependencies>
@@ -83,10 +84,11 @@
             <artifactId>tlog-all-spring-boot-starter</artifactId>
             <version>${tlog.version}</version>
         </dependency>
+        <!--knife4j-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-            <version>4.0.0</version>
+            <version>${knife4j.version}</version>
         </dependency>
     </dependencies>
 
