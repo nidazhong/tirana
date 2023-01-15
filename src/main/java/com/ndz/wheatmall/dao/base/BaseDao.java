@@ -3,7 +3,7 @@ package com.ndz.wheatmall.dao.base;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * 基础Dao
+ * MybatisPlus基础Dao, 无需@Mapper注解
  */
 public interface BaseDao<T> extends BaseMapper<T> {
 
