@@ -1,6 +1,7 @@
 package com.ndz.wheatmall.common.bean;
 
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
+import com.ndz.wheatmall.common.enums.StatusCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,11 @@ public class ApiResult<T> implements Serializable {
     public ApiResult(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
+    }
+
+    public ApiResult(StatusCode statusCode) {
+        this.code = statusCode.getCode();
+        this.msg = statusCode.getMsg();
     }
 
 }

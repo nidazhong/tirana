@@ -71,7 +71,8 @@ public class HomeController {
     @ApiOperation(value = "向客人问好")
     @GetMapping("/sayHi")
     public ResponseEntity<String> sayHi(@RequestParam(value = "name") String name) {
-        return ResponseEntity.ok("Hi:" + name);
+        String msg = "Hi: " + name;
+        return ResponseEntity.ok(msg);
     }
 
 }
