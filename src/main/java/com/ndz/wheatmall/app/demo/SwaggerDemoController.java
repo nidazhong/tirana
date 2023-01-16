@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
-@Api(tags = "Swagger演示")
+@Api(tags = "Swagger示例")
 @ApiSupport(author = "Jack Lee",order = 7)
 @RequestMapping("/demo/swaggerDemo")
 @RestController
@@ -146,7 +146,9 @@ public class SwaggerDemoController {
         return ResponseEntity.ok("pid:"+parentId);
     }
 
-
+    /**
+     * params -> 向文档添加一个实际不存在的参数
+     */
     @ApiOperation(value = "测试功能-a", notes = "测试功能A(domain=aaa)")
     @PostMapping(value = "/rest", params = {"domain=aaa"})
     public Object rest_aaa(Integer goodsId, Integer goodsCount) {

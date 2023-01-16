@@ -17,21 +17,15 @@
 - 数据表变更实现代理记录
 - 序列化枚举 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 
-## 问题学习记录
+## TODO
+- 数据库定时清理异常日志
+- Knife4j文件下载有bug，待升级
+- Knife4j 和 ResponseBodyAdvice 返回包装的api完整显示问题
+- 返回前端默认值的问题
+- logback-spring.xml的配置
 
-### 日志记录重复
-
-### 升级springboot3注意
+## 升级springboot3注意
 * 1、knife4j 版本
 * 2、javax
 * 3、mybatis-plus
 
-```
-同一条日志既会通过 logger 记录，也会发送到 root 记录，因此应用 package 下的日志出现了重复记录
-```
-
-### 日志级别色彩丢失
-
-```
-
-```
