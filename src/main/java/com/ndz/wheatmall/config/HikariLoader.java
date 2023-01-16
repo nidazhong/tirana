@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
 
+/**
+ * 项目启动时进行Hikari初始化
+ */
 @Component
 public class HikariLoader implements ApplicationRunner {
     private final HikariDataSource hikariDataSource;

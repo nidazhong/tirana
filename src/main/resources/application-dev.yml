@@ -9,7 +9,7 @@ spring:
     url: jdbc:mysql://192.168.31.237:3308/wheatmall_mini?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+# mybatis-plus
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml # 不写该配置默认也是这个位置
   global-config:
@@ -23,7 +23,7 @@ logging:
 
 # knife4j 配置
 knife4j:
-  enable: true
+  enable: true # 是否开启knife4j
   openapi:
     title: 麦子商城API
     description: "麦子商城接口文档"
