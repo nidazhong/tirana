@@ -25,21 +25,21 @@ logging:
     com.ndz.wheatmall: debug # 开启项目包的debug模式即可打印sql执行详情
 
 # knife4j 配置
-knife4j:
-  enable: true # 是否开启knife4j
-  openapi:
-    title: 麦子商城API
-    description: "麦子商城接口文档"
-    email: 535704264@qq.com
-    concat: Jack Lee
-    url: https://www.wheatmall.com
-    version: v1.0
-    license: Apache 2.0
-    license-url: http://www.apache.org/licenses/LICENSE-2.0
-    terms-of-service-url: https://www.wheatmall.com
-    group:
-      all:
-        group-name: default
-        api-rule: package
-        api-rule-resources:
-          - com.ndz.wheatmall
+#knife4j:
+#  enable: true # 是否开启knife4j
+#  openapi:
+#    title: 麦子商城API
+#    description: "麦子商城接口文档"
+#    email: 535704264@qq.com
+#    concat: Jack Lee
+#    url: https://www.wheatmall.com
+#    version: v1.0
+#    license: Apache 2.0
+#    license-url: http://www.apache.org/licenses/LICENSE-2.0
+#    terms-of-service-url: https://www.wheatmall.com
+#    group:
+#      all:
+#        group-name: default
+#        api-rule: package
+#        api-rule-resources:
+#          - com.ndz.wheatmall
