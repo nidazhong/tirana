@@ -85,7 +85,9 @@ public class SwaggerDemoController {
                 response.setContentType("multipart/form-data");
                 //
                 response.addHeader("Content-Disposition","attachement;filename=aaa.xls");
+                // 写
                 OutputStream outputStream= response.getOutputStream();
+                // 读
                 FileInputStream fileInputStream=new FileInputStream(file);
                 int i=-1;
                 byte[] b=new byte[1024*1024];
