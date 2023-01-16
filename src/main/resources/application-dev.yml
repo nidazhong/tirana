@@ -25,8 +25,8 @@ logging:
     com.ndz.wheatmall: debug # 开启项目包的debug模式即可打印sql执行详情
 
 # knife4j 配置
-#knife4j:
-#  enable: true # 是否开启knife4j
+knife4j:
+  enable: true # 是否开启knife4j
 #  openapi:
 #    title: 麦子商城API
 #    description: "麦子商城接口文档"

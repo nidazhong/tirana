@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,19 +33,21 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @Slf4j
 @Api(tags = "Swagger示例")
-@ApiSupport(author = "Jack Lee",order = 7)
+@ApiSupport(author = "Jack Lee",order = 1)
 @RequestMapping("/demo/swaggerDemo")
 @RestController
 public class SwaggerDemoController {
 
 
     @ApiOperation(value = "新增用户",notes = "接口描述信息")
+    @ApiOperationSupport(author = "作者xxx", order = 1)
     @PostMapping("/sysUser/save")
     public ApiResult save(@RequestBody SysUserDemoDTO dto) {
         return ApiResultUtils.ok(dto);
     }
 
     @ApiOperation(value = "用户详情")
+    @ApiOperationSupport(order = 2)
     @ApiImplicitParam(name = "id",value = "用户Id",defaultValue = "1", required = true,
                       paramType = "path",dataType = "Long")
     @GetMapping("/sysUser/info/{id}")
@@ -53,6 +56,7 @@ public class SwaggerDemoController {
     }
 
     @ApiOperation(value = "删除用户")
+    @ApiOperationSupport(order = 3)
     @DeleteMapping(value = "/sysUser/del")
     public ApiResult del(@RequestBody DeleteDTO dto) {
         return ApiResultUtils.ok(dto.getIds().toString());
@@ -64,6 +68,7 @@ public class SwaggerDemoController {
             @ApiImplicitParam(name = "title",value = "标题",required = true),
     })
     @ApiOperation(value = "文件上传")
+    @ApiOperationSupport(order = 4)
     @PostMapping("/testupload")
     public ApiResult<String> testupload(@RequestParam(value = "file")MultipartFile multipartFile,@RequestParam(value = "title")String title){
         String data="fileName:"+multipartFile.getOriginalFilename()+",title:"+title;
@@ -120,13 +125,23 @@ public class SwaggerDemoController {
 
 
 
+    /**
+     * params -> 向文档添加一个实际不存在的参数
+     */
+    @ApiOperation(value = "测试功能-a", notes = "测试功能A(domain=aaa)")
+    @PostMapping(value = "/rest1", params = {"domain=aaa"})
+    public Object rest_aaa(Integer goodsId, Integer goodsCount) {
+        System.err.println("/test/rest_aaa ......" + goodsId + ", " + goodsCount);
+        return "AAA";
+    }
 
-    @ApiOperation(value = "测试功能-b", notes = "测试功能B(domain=bbb)",hidden = true)
-    @PostMapping(value = "/rest", params = {"domain=bbb"})
+    @ApiOperation(value = "测试功能-b", notes = "测试功能B(domain=bbb)")
+    @PostMapping(value = "/rest2", params = {"domain=bbb"})
     public Object restb_bbb(String username, @RequestParam("pwd") String password) {
         System.err.println("/test/rest_bbb ......" + username + ", " + password);
         return "BBB";
     }
+
 
     @PutMapping("projects/{name}")
     @ApiOperation(value = "修改一个项目的名称",hidden = true)
@@ -146,15 +161,7 @@ public class SwaggerDemoController {
         return ResponseEntity.ok("pid:"+parentId);
     }
 
-    /**
-     * params -> 向文档添加一个实际不存在的参数
-     */
-    @ApiOperation(value = "测试功能-a", notes = "测试功能A(domain=aaa)")
-    @PostMapping(value = "/rest", params = {"domain=aaa"})
-    public Object rest_aaa(Integer goodsId, Integer goodsCount) {
-        System.err.println("/test/rest_aaa ......" + goodsId + ", " + goodsCount);
-        return "AAA";
-    }
+
 
 
 
