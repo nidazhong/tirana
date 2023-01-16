@@ -46,13 +46,12 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
         if (body instanceof String) {
             ObjectMapper objectMapper = new ObjectMapper();
             try {
-                // 将数据包装在ResultVo里后转换为json串进行返回
-                return objectMapper.writeValueAsString(ApiResultUtils.ok(body));
-            } catch (JsonProcessingException e) {
-                throw new ApiException(StateEnum.RESPONSE_PACK_ERROR, e.getMessage());
+                return  objectMapper.writeValueAsString(ApiResultUtils.ok(body));
+            } catch (JsonProcessingException ex) {
+                throw new ApiException(StateEnum.RESPONSE_PACK_ERROR, ex.getMessage());
             }
         }
-
+        // 将数据包装在ApiResult里后转换为json串进行返回
         return ApiResultUtils.ok(body);
     }
 }

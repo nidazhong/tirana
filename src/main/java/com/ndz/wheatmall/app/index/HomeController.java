@@ -1,16 +1,12 @@
-package com.ndz.wheatmall.controller.index;
+package com.ndz.wheatmall.app.index;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
-import com.ndz.wheatmall.common.annotation.NoApiResponse;
 import com.ndz.wheatmall.exception.ApiException;
 import com.ndz.wheatmall.common.enums.BizCodeEnum;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson2.JSON;

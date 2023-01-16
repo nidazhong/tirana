@@ -1,7 +1,5 @@
-package com.ndz.wheatmall.controller.demo;
+package com.ndz.wheatmall.app.demo;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.controller.demo;
+package com.ndz.wheatmall.app.demo;
 
 import io.swagger.annotations.ApiModelProperty;
 

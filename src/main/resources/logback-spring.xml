@@ -23,7 +23,7 @@
         </encoder>
     </appender>
     <!---->
-    <logger name="com.ndz.wheatmall.controller.index" level="DEBUG">
+    <logger name="com.ndz.wheatmall.app.index" level="DEBUG">
         <!--additivity="false" 只将wheatmall包日志只输出到文件，不输出控制台-->
         <appender-ref ref="FILE"/>
     </logger>

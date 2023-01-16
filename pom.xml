@@ -28,6 +28,7 @@
         <redisson.version>3.19.1</redisson.version>
         <tlog.version>1.5.0</tlog.version>
         <knife4j.version>4.0.0</knife4j.version>
+        <spring-cloud-starter-bootstrap.version>3.1.5</spring-cloud-starter-bootstrap.version>
     </properties>
 
     <dependencies>
@@ -94,7 +95,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
-            <version>3.1.5</version>
+            <version>${spring-cloud-starter-bootstrap.version}</version>
+        </dependency>
+        <!--thymeleaf-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
     </dependencies>
 

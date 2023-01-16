@@ -1,4 +1,4 @@
-package com.ndz.wheatmall.controller.sys;
+package com.ndz.wheatmall.app.sys;
 
 import java.util.Map;
 
