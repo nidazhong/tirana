@@ -13,7 +13,10 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
- * Http
+ * http上下文
+ *
+ * @author nidazhong
+ * @date 2023/01/16
  */
 public class HttpContextUtils {
 

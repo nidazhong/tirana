@@ -5,7 +5,10 @@ import com.ndz.wheatmall.common.enums.StateEnum;
 import com.ndz.wheatmall.common.enums.StatusCode;
 
 /**
- * 统一返回工具类
+ * api统一返回工具类
+ *
+ * @author nidazhong
+ * @date 2023/01/16
  */
 public class ApiResultUtils {
     public ApiResultUtils() {}

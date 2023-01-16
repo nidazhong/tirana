@@ -11,8 +11,9 @@ public class ExceptionUtils {
 
     /**
      * 获取异常信息
-     * @param ex  异常
-     * @return    返回异常信息
+     *
+     * @param ex 异常
+     * @return 返回异常信息
      */
     public static String getErrorStackTrace(Exception ex){
         StringWriter sw = null;
