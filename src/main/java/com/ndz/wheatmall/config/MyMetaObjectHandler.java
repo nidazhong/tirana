@@ -14,12 +14,18 @@ import java.time.LocalDateTime;
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
 
+    /**
+     * 插入时的默认填充
+     */
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
         this.strictInsertFill(metaObject, "createTime", LocalDateTime.class, LocalDateTime.now()); // 起始版本 3.3.0(推荐使用)
     }
 
+    /**
+     * 更新时的默认填充
+     */
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");

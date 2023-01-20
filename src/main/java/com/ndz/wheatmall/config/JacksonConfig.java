@@ -6,7 +6,11 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
+import com.baomidou.mybatisplus.annotation.IEnum;
+import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.*;
+import com.ndz.wheatmall.common.enums.demo.PositionEnum;
+import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,10 +48,11 @@ public class JacksonConfig {
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
             builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
             // 如有其他类型，以下还可添加
-            // 枚举
+            // 枚举类
             builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
         };
     }
+
 
     /**
      * 序列化: LocalDateTime（后端） -> 时间戳（前端）

@@ -44,3 +44,18 @@ create table sys_log_error
     key idx_create_date (create_date)
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET utf8mb4 COMMENT ='异常日志';
+
+--
+CREATE TABLE `sys_user_demo`
+(
+    `user_id`     bigint      NOT NULL AUTO_INCREMENT COMMENT '员工ID',
+    `user_name`   varchar(30) NOT NULL COMMENT '姓名',
+    `dep_id`      varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '部门Id',
+    `position`    tinyint                                                       DEFAULT NULL COMMENT '职位枚举',
+    `create_time` datetime    NOT NULL COMMENT '创建时间',
+    `delete_flag` int                                                           DEFAULT '0',
+    PRIMARY KEY (`user_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_0900_ai_ci;
+
