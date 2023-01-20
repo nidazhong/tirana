@@ -17,7 +17,6 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml # 不写该配置默认也是这个位置
   global-config:
     db-config:
-      id-type: auto # id自增
       logic-delete-field: deleteFlag # 逻辑删除
       logic-delete-value: 1
       logic-not-delete-value: 0
