@@ -1,6 +1,7 @@
 package com.ndz.wheatmall.common.enums.demo;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.ndz.wheatmall.common.enums.BaseEnum;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 //@JsonFormat(shape = JsonFormat.Shape.OBJECT) // 前端使用type数字传入标志枚举， 无JsonFormat则用枚举的类型GM，COO....
 //@Getter
-public  enum PositionEnum implements BaseEnum<Integer, String> {
+public  enum PositionEnum implements BaseEnum {
 
     GM(1, "总经理"),
 
@@ -28,6 +29,8 @@ public  enum PositionEnum implements BaseEnum<Integer, String> {
     public Integer getCode() {
         return code;
     }
+
+
 
     @Override
     @JsonValue
