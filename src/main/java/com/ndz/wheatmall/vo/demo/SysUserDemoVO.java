@@ -25,24 +25,5 @@ public class SysUserDemoVO {
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
-    public SysUserDemoVO(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getDepId() {
-        return depId;
-    }
-
-    public void setDepId(Long depId) {
-        this.depId = depId;
-    }
 
 }

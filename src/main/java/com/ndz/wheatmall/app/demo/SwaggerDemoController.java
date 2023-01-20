@@ -58,7 +58,7 @@ public class SwaggerDemoController {
                       paramType = "path",dataType = "Long")
     @GetMapping("/sysUser/info/{id}")
     public ApiResult<SysUserDemoVO> info(@PathVariable Long id) {
-        return ApiResultUtils.ok(new SysUserDemoVO(id));
+        return ApiResultUtils.ok(sysUserDemoService.info(id));
     }
 
     @ApiOperation(value = "删除用户")

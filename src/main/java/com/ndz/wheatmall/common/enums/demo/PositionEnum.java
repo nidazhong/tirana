@@ -1,6 +1,7 @@
 package com.ndz.wheatmall.common.enums.demo;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,6 +16,7 @@ public enum PositionEnum {
     ;
 
     @EnumValue
+    @JsonValue //标记响应json值
     private final int type;
     private final String desc;
 
