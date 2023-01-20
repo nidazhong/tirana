@@ -65,7 +65,8 @@ public class SwaggerDemoController {
     @ApiOperationSupport(order = 3)
     @DeleteMapping(value = "/sysUser/del")
     public ApiResult del(@RequestBody DeleteDTO dto) {
-        return ApiResultUtils.ok(dto.getIds().toString());
+        sysUserDemoService.del(dto);
+        return ApiResultUtils.ok();
     }
 
 

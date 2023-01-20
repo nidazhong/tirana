@@ -23,4 +23,6 @@ public class SysUserDemoEntity {
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+
+    private Integer deleteFlag;
 }

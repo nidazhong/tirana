@@ -33,6 +33,10 @@ public class ApiResultUtils {
         return rm;
     }
 
+    public static <T> ApiResult<T> ok() {
+        return new ApiResult<>(StateEnum.SUCCESS.getCode(), StateEnum.SUCCESS.getMsg(),null);
+    }
+
     /**
      * 对未进行错误枚举定义的使用关闭
      */
