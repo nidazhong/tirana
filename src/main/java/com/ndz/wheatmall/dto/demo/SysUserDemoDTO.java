@@ -15,27 +15,10 @@ public class SysUserDemoDTO {
     private String userName;
 
     @ApiModelProperty(value = "部门id",required = true)
-    private Long depId;
+    private String depId;
 
     @ApiModelProperty(value = "职位", example = "COO")
     private  PositionEnum position;
 
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getDepId() {
-        return depId;
-    }
-
-    public void setDepId(Long depId) {
-        this.depId = depId;
-    }
 }

@@ -10,8 +10,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
+import com.ndz.wheatmall.service.demo.SysUserDemoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,11 +41,14 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 public class SwaggerDemoController {
 
+    @Autowired
+    SysUserDemoService sysUserDemoService;
 
     @ApiOperation(value = "新增用户",notes = "接口描述信息")
     @ApiOperationSupport(author = "作者xxx", order = 1)
     @PostMapping("/sysUser/save")
     public ApiResult save(@RequestBody SysUserDemoDTO dto) {
+        sysUserDemoService.save(dto);
         return ApiResultUtils.ok(dto);
     }
 
