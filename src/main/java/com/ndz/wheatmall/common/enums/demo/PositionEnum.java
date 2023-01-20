@@ -1,5 +1,6 @@
 package com.ndz.wheatmall.common.enums.demo;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,6 +14,7 @@ public enum PositionEnum {
     STAFF(3, "职员"),
     ;
 
+    @EnumValue
     private final int type;
     private final String desc;
 

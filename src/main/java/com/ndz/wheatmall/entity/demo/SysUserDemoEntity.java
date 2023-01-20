@@ -15,6 +15,10 @@ public class SysUserDemoEntity {
 
     private String depId;
 
+    /**
+     * 职位枚举
+     * 数据库字段：position
+     */
     private PositionEnum position;
 
     @TableField(fill = FieldFill.INSERT)
