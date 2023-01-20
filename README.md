@@ -15,7 +15,7 @@
 - 统一异常处理，自动异常数据落盘
 - 统一响应处理，使用@History，@HistoryRecord 灵活变通
 - 数据表变更实现代理记录
-- 序列化枚举 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+- 序列化枚举
 
 ## TODO
 - 数据库定时清理异常日志
@@ -23,8 +23,6 @@
 - Knife4j 和 ResponseBodyAdvice 返回包装的api完整显示问题
 - 返回前端默认值的问题
 - logback-spring.xml的配置
-- Knife4j枚举显示问题
-- mysql-plus枚举保存问题
 - json数据保存数据库问题
 
 ## 升级springboot3注意
@@ -32,3 +30,5 @@
 * 2、javax
 * 3、mybatis-plus
 
+## 帮助
+- json字段序列化 https://blog.csdn.net/qnxyj/article/details/123095384

@@ -25,8 +25,7 @@ public class SysUserDemoServiceImpl extends BaseServiceImpl<SysUserDemoDao, SysU
     @Override
     public SysUserDemoVO info(Long id) {
         SysUserDemoEntity entity = selectById(id);
-        SysUserDemoVO sysUserDemoVO = BeanUtil.copyProperties(entity, SysUserDemoVO.class);
-        return sysUserDemoVO;
+        return BeanUtil.copyProperties(entity, SysUserDemoVO.class);
     }
 
     @Override

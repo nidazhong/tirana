@@ -59,3 +59,13 @@ CREATE TABLE `sys_user_demo`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_0900_ai_ci;
 
+alter table sys_user_demo add column sex int;
+alter table sys_user_demo add column extra_json json;
+alter table sys_user_demo add column extra_object json;
+alter table sys_user_demo add column extra_list json;
+alter table sys_user_demo add column extra_array json;
+
+INSERT INTO `sys_user_demo` (user_name, extra_json, extra_object, extra_list, extra_array, create_time) VALUES ('Lee','{\"id\": 6, \"name\": \"7\"}', '{\"id\": 1, \"name\": \"2\"}', '[{\"id\": 1, \"name\": \"2\"}, {\"id\": 2, \"name\": \"3\"}]', '[{\"id\": 1, \"name\": \"2\"}, {\"id\": 4, \"name\": \"5\"}]', NOW());
+
+
+alter table sys_user_demo add column extra_json_arr_str varchar(2000);

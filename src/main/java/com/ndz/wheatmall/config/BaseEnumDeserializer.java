@@ -11,6 +11,9 @@ import java.io.IOException;
 
 /**
  * 枚举类的反序列化，非使用索引不从0开始的状态值枚举
+ *
+ * @author nidazhong
+ * @date 2023/01/20
  */
 public class BaseEnumDeserializer extends JsonDeserializer<BaseEnum> {
 

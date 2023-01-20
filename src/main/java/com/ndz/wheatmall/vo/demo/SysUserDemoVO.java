@@ -1,11 +1,15 @@
 package com.ndz.wheatmall.vo.demo;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.alibaba.fastjson2.JSONObject;
 import com.ndz.wheatmall.common.enums.demo.PositionEnum;
+import com.ndz.wheatmall.entity.demo.SysUserDemoEntity;
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -25,5 +29,16 @@ public class SysUserDemoVO {
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
+
+    @ApiModelProperty(value = "extraObject[Jackson]")
+    private SysUserDemoEntity.ExtraNode extraObject;
+    @ApiModelProperty(value = "extraJson[Fastjson]")
+    private JSONObject extraJson;
+    @ApiModelProperty(value = "extraList[ObjectAndJsonHandler自定义]")
+    private List<SysUserDemoEntity.ExtraNode> extraList;
+    @ApiModelProperty(value = "extraArray[Jackson]")
+    private List<SysUserDemoEntity.ExtraNode> extraArray;
+
+    private List<SysUserDemoEntity.ExtraNode> extraJsonArrStr;
 
 }
