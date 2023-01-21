@@ -21,7 +21,7 @@ public class IndexController {
     @ApiOperation("登陆")
     @PostMapping("/login")
     public ApiResult<Map<String,Object>> login() {
-        Map<String, Object> map = MapUtil.of("token", "admin");
+        Map<String, Object> map = MapUtil.of("token", "admin Wheatmall");
         return ApiResultUtils.ok(map);
     }
 
@@ -32,7 +32,7 @@ public class IndexController {
     public ApiResult<Map<String,Object>> info() {
         Map<String, Object> map = new HashMap<>();
         map.put("roles","[admin]");
-        map.put("name","admin");
+        map.put("name","admin Wheatmall");
         map.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
         return ApiResultUtils.ok(map);
     }
