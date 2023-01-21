@@ -33,3 +33,4 @@
 
 ## 帮助
 - json字段序列化 https://blog.csdn.net/qnxyj/article/details/123095384
+- jackson null返回默认值 https://www.cnblogs.com/top-sky-hua/p/15144358.html

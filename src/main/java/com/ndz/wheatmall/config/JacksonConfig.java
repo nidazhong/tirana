@@ -50,6 +50,7 @@ public class JacksonConfig {
             // 如有其他类型，以下还可添加
             // 枚举类
             builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
+
         };
     }
 
