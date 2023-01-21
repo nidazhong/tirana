@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @date 2023/01/16
  */
 @Controller
-public class IndexController {
+public class WebIndexController {
 
     /**
      *  欢迎页
