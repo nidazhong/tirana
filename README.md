@@ -17,6 +17,7 @@
 - 数据表变更实现代理记录
 - 序列化枚举
 - json数据字段支持
+- JWT
 
 ## TODO
 - 数据库定时清理异常日志
@@ -30,6 +31,9 @@
 * 1、knife4j 版本
 * 2、javax
 * 3、mybatis-plus
+
+## 前端
+- 权限系统 https://github.com/535704264/wheat-auth-ui.git
 
 ## 帮助
 - auth_node 为权限系统的笔记

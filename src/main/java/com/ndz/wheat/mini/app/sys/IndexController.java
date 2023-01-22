@@ -2,9 +2,13 @@ package com.ndz.wheat.mini.app.sys;
 
 import cn.hutool.core.map.MapUtil;
 import com.ndz.wheat.mini.common.bean.ApiResult;
+import com.ndz.wheat.mini.dto.sys.LoginDTO;
+import com.ndz.wheat.mini.service.sys.IndexService;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +22,13 @@ import java.util.Map;
 @RequestMapping("/admin/system/index")
 public class IndexController {
 
+    @Autowired
+    IndexService indexService;
+
     @ApiOperation("登陆")
     @PostMapping("/login")
-    public ApiResult<Map<String,Object>> login() {
-        Map<String, Object> map = MapUtil.of("token", "admin Wheatmall");
-        return ApiResultUtils.ok(map);
+    public ApiResult<Map<String,Object>> login(LoginDTO dto) {
+        return ApiResultUtils.ok(indexService.login(dto));
     }
 
 

@@ -1,5 +1,6 @@
 package com.ndz.wheat.mini;
 
+import com.ndz.wheat.mini.common.helper.JwtHelper;
 import com.ndz.wheat.mini.dto.org.EmployeeDTO;
 import com.ndz.wheat.mini.service.org.EmployeeService;
 import com.ndz.wheat.mini.service.sys.UpdateAgent;
@@ -48,7 +49,14 @@ public class WheatMiniApplicationTests {
         newDTO.setEntryDateTime(LocalDateTime.now());
 
         employeeService.update(newDTO);
+    }
 
+    @Test
+    public void testJWT() {
+        String token = JwtHelper.createToken(1L, "admin");//"eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSCjAK0A0Ndg1S0lFKrShQsjI0MzY2sDQ3MTbQUSotTi3yTFGyMjKEsP0Sc1OBWp6unfB0f7NSLQDxzD8_QwAAAA.2eCJdsJXOYaWFmPTJc8gl1YHTRl9DAeEJprKZn4IgJP9Fzo5fLddOQn1Iv2C25qMpwHQkPIGukTQtskWsNrnhQ";//JwtHelper.createToken(7L, "admin");
+        System.out.println(token);
+        System.out.println(JwtHelper.getUserId(token));
+        System.out.println(JwtHelper.getUsername(token));
     }
 
 

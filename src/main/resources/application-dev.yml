@@ -2,11 +2,11 @@ server:
   port: 8347
 spring:
   application:
-    name: wheatmall-mini
+    name: wheat-mini
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.31.237:3308/wheatmall_mini?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.31.237:3308/wheat_mini?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   thymeleaf:
     cache: false # ture开启缓存，提高性能， false 关闭thymeleaf缓存，配合dev-tool可实时看到前端效果

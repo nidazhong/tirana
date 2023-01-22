@@ -1,5 +1,8 @@
 package com.ndz.wheat.mini.service.sys.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ndz.wheat.mini.utils.AssertUtil;
+import com.ndz.wheat.mini.utils.MD5Utils;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -23,6 +26,8 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
     @Override
     public void save(SysUserDTO user) {
         SysUserEntity sysUserEntity = BeanUtil.copyProperties(user, SysUserEntity.class);
+        String encryptPwd = MD5Utils.encrypt(user.getPassword());
+        sysUserEntity.setPassword(encryptPwd);
         insert(sysUserEntity);
     }
 
@@ -56,5 +61,11 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
         SysUserEntity sysUser = selectById(id);
         sysUser.setStatus(status);
         updateById(sysUser);
+    }
+
+    @Override
+    public SysUserEntity getByUsername(String userName) {
+        AssertUtil.notNull(userName, "账号名称不能为空");
+        return this.baseDao.selectOne(new LambdaQueryWrapper<SysUserEntity>().eq(SysUserEntity::getUsername,userName));
     }
 }
