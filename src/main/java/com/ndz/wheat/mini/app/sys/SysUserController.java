@@ -1,6 +1,7 @@
 package com.ndz.wheat.mini.app.sys;
 
 
+import com.ndz.wheat.mini.common.page.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class SysUserController {
 
     @ApiOperation(value = "获取分页列表")
     @GetMapping("/{page}/{limit}")
-    public ApiResult page(
+    public ApiResult<PageData<SysUserVO>> page(
             @ApiParam(name = "page", value = "当前页码", required = true, example = "1")
             @PathVariable Long page,
             @ApiParam(name = "limit", value = "每页记录数", required = true, example = "10")
@@ -38,35 +39,35 @@ public class SysUserController {
 
     @ApiOperation(value = "获取用户")
     @GetMapping("/get/{id}")
-    public ApiResult get(@PathVariable Long id) {
+    public ApiResult<SysUserVO> get(@PathVariable Long id) {
         SysUserVO user = sysUserService.getById(id);
         return ApiResultUtils.ok(user);
     }
 
     @ApiOperation(value = "保存用户")
     @PostMapping("/save")
-    public ApiResult save(@RequestBody SysUserDTO user) {
+    public ApiResult<Object> save(@RequestBody SysUserDTO user) {
         sysUserService.save(user);
         return ApiResultUtils.ok();
     }
 
     @ApiOperation(value = "更新用户")
     @PutMapping("/update")
-    public ApiResult updateById(@RequestBody SysUserDTO user) {
+    public ApiResult<Object> updateById(@RequestBody SysUserDTO user) {
         sysUserService.updateById(user);
         return ApiResultUtils.ok();
     }
 
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/remove/{id}")
-    public ApiResult remove(@PathVariable Long id) {
+    public ApiResult<Object> remove(@PathVariable Long id) {
         sysUserService.removeById(id);
         return ApiResultUtils.ok();
     }
 
     @ApiOperation(value = "更新状态")
     @GetMapping("updateStatus/{id}/{status}")
-    public ApiResult updateStatus(@PathVariable Long id, @PathVariable Integer status) {
+    public ApiResult<Object> updateStatus(@PathVariable Long id, @PathVariable Integer status) {
         sysUserService.updateStatus(id, status);
         return ApiResultUtils.ok();
     }

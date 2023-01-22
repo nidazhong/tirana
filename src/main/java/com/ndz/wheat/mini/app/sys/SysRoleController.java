@@ -68,14 +68,14 @@ public class SysRoleController {
 
     @ApiOperation(value = "根据用户获取角色数据")
     @GetMapping("/toAssign/{userId}")
-    public ApiResult toAssign(@PathVariable Long userId) {
+    public ApiResult<Object> toAssign(@PathVariable Long userId) {
         Map<String, Object> roleMap = sysUserRoleService.getRolesByUserId(userId);
         return ApiResultUtils.ok(roleMap);
     }
 
     @ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
-    public ApiResult doAssign(@RequestBody AssginRoleDTO dto) {
+    public ApiResult<Object> doAssign(@RequestBody AssginRoleDTO dto) {
         sysUserRoleService.doAssign(dto);
         return ApiResultUtils.ok();
     }

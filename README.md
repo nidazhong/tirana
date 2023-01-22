@@ -25,7 +25,6 @@
 - 返回前端默认值的问题
 - logback-spring.xml的配置
 - json数据保存数据库问题
-- GET请求传时间查询问题
 
 ## 升级springboot3注意
 * 1、knife4j 版本
@@ -33,5 +32,6 @@
 * 3、mybatis-plus
 
 ## 帮助
+- auth_node 为权限系统的笔记
 - json字段序列化 https://blog.csdn.net/qnxyj/article/details/123095384
 - jackson null返回默认值 https://www.cnblogs.com/top-sky-hua/p/15144358.html
