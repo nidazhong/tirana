@@ -3,12 +3,14 @@ package com.ndz.wheat.mini.service.sys.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.hutool.core.util.NumberUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ndz.wheat.mini.common.enums.BizCodeEnum;
 import com.ndz.wheat.mini.dao.sys.SysRoleMenuDao;
 import com.ndz.wheat.mini.dto.sys.AssginMenuDTO;
 import com.ndz.wheat.mini.entity.sys.SysRoleMenuEntity;
 import com.ndz.wheat.mini.exception.WheatException;
+import com.ndz.wheat.mini.utils.AssertUtil;
 import com.ndz.wheat.mini.vo.sys.SysMenuVO;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ import com.ndz.wheat.mini.service.sys.SysMenuService;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import org.thymeleaf.util.NumberUtils;
 
 import javax.annotation.Resource;
 
@@ -60,6 +63,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
     @Override
     public void removeById(Long id) {
         Long count = this.baseDao.selectCount(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getParentId, id));
+//        AssertUtil.isTrue(count < 0,"菜单不存在");
         if (count < 0) {
             throw new WheatException(BizCodeEnum.NODE_ERROR);
         }
