@@ -2,13 +2,17 @@ package com.ndz.wheatmall.config;
 
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IEnum;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.ndz.wheatmall.common.enums.demo.PositionEnum;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -47,6 +51,7 @@ public class JacksonConfig {
             // LocalDateTime
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
             builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
+            builder.serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DATETIME_PATTERN)));
             // 如有其他类型，以下还可添加
             // 枚举类
             builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);

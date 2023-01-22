@@ -19,6 +19,8 @@ public interface MybatisConstant {
      */
     String CREATE_DATE = "create_date";
 
+    String CREATE_TIME = "create_time";
+
     /**
      * 当前页码
      */
