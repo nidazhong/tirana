@@ -2,6 +2,8 @@ package com.ndz.wheat.mini.app.sys;
 
 import java.util.Map;
 
+import com.ndz.wheat.mini.dto.sys.AssginRoleDTO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -63,6 +65,21 @@ public class SysRoleController {
         return ApiResultUtils.ok();
     }
 
+
+    @ApiOperation(value = "根据用户获取角色数据")
+    @GetMapping("/toAssign/{userId}")
+    public ApiResult toAssign(@PathVariable Long userId) {
+//        Map<String, Object> roleMap = sysRoleService.getRolesByUserId(userId);
+        Map<String, Object> roleMap = null;
+        return ApiResultUtils.ok(roleMap);
+    }
+
+    @ApiOperation(value = "根据用户分配角色")
+    @PostMapping("/doAssign")
+    public ApiResult doAssign(@RequestBody AssginRoleDTO dto) {
+//        sysRoleService.doAssign(assginRoleVo);
+        return ApiResultUtils.ok();
+    }
 
 
 

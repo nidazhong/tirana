@@ -25,6 +25,7 @@
 - 返回前端默认值的问题
 - logback-spring.xml的配置
 - json数据保存数据库问题
+- GET请求传时间查询问题
 
 ## 升级springboot3注意
 * 1、knife4j 版本

@@ -2,8 +2,10 @@ package com.ndz.wheat.mini.service.sys;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ndz.wheat.mini.common.page.PageData;
 import com.ndz.wheat.mini.dto.sys.QuerySysUserDTO;
 import com.ndz.wheat.mini.dto.sys.SysUserDTO;
+import com.ndz.wheat.mini.vo.sys.SysRoleVO;
 import com.ndz.wheat.mini.vo.sys.SysUserVO;
 
 public interface SysUserService {
@@ -16,5 +18,7 @@ public interface SysUserService {
 
     SysUserVO getById(Long id);
 
-    IPage<SysUserVO> page(Page<SysUserVO> pageParam, QuerySysUserDTO query);
+    PageData<SysUserVO> page(Long page, Long limit, QuerySysUserDTO query);
+
+    void updateStatus(Long id, Integer status);
 }

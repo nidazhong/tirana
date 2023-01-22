@@ -8,6 +8,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
@@ -35,7 +36,6 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class JacksonConfig {
     
-    public static final String DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
 
     /**
      * 适配自定义序列化和反序列化策略
@@ -48,8 +48,8 @@ public class JacksonConfig {
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
             builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
             // Date
-            builder.serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DATETIME_PATTERN)));
-            builder.deserializerByType(Date.class, new DateDeserializers.DateDeserializer(DateDeserializers.DateDeserializer.instance, new SimpleDateFormat(DATETIME_PATTERN), DATETIME_PATTERN));
+            builder.serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DatePattern.NORM_DATETIME_PATTERN)));
+            builder.deserializerByType(Date.class, new DateDeserializers.DateDeserializer(DateDeserializers.DateDeserializer.instance, new SimpleDateFormat(DatePattern.NORM_DATETIME_PATTERN), DatePattern.NORM_DATETIME_PATTERN));
             // 如有其他类型，以下还可添加
             // 枚举类
             builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
@@ -67,7 +67,7 @@ public class JacksonConfig {
         public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializers)
                 throws IOException {
             if (localDateTime != null) {
-                String dateTime = localDateTime.format(DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+                String dateTime = localDateTime.format(DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN));
                 jsonGenerator.writeString(dateTime);
                 // 时间戳格式输出
 //              jsonGenerator.writeNumber(localDateTime.toInstant(ZoneOffset.ofHours(8)).toEpochMilli());
@@ -90,10 +90,10 @@ public class JacksonConfig {
                 return LocalDateTime.ofEpochSecond(Long.parseLong(valueStr) / 1000, 0, ZoneOffset.ofHours(8));
             } else if (valueStr.matches("^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}")){
                 // 标准年月日 时分秒 YYYY-MM-dd HH:mm:ss
-                return LocalDateTime.parse(valueStr, DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+                return LocalDateTime.parse(valueStr, DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN));
             } else if(valueStr.matches("^\\d{4}-\\d{2}-\\d{2}")){
                 // 只有年月日 YYYY-MM-dd
-                return LocalDateTime.parse(valueStr +" 00:00:00", DateTimeFormatter.ofPattern(DATETIME_PATTERN));
+                return LocalDateTime.parse(valueStr +" 00:00:00", DateTimeFormatter.ofPattern(DatePattern.NORM_DATETIME_PATTERN));
             } else  {
                 return null;
             }
