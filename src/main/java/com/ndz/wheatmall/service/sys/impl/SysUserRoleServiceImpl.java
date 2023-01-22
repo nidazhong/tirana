@@ -1,21 +1,20 @@
 package com.ndz.wheatmall.service.sys.impl;
 
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.StrUtil;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ndz.wheatmall.common.constant.MybatisConstant;
 import com.ndz.wheatmall.common.page.PageData;
-import com.ndz.wheatmall.vo.sys.SysRoleVO;
-import org.springframework.stereotype.Service;
-
 import com.ndz.wheatmall.dao.sys.SysUserRoleDao;
 import com.ndz.wheatmall.entity.sys.SysRoleEntity;
 import com.ndz.wheatmall.service.base.impl.BaseServiceImpl;
 import com.ndz.wheatmall.service.sys.SysUserRoleService;
+import com.ndz.wheatmall.vo.sys.SysRoleVO;
 
-import java.util.Map;
+import cn.hutool.core.util.StrUtil;
 
 @Service
 public class SysUserRoleServiceImpl extends BaseServiceImpl<SysUserRoleDao, SysRoleEntity> implements SysUserRoleService {
