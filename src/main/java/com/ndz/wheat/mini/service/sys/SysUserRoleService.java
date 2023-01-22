@@ -1,6 +1,7 @@
 package com.ndz.wheat.mini.service.sys;
 
 import com.ndz.wheat.mini.common.page.PageData;
+import com.ndz.wheat.mini.dto.sys.AssginRoleDTO;
 import com.ndz.wheat.mini.dto.sys.SaveSysRoleDTO;
 import com.ndz.wheat.mini.vo.sys.SysRoleVO;
 
@@ -20,4 +21,8 @@ public interface SysUserRoleService {
     void update(SaveSysRoleDTO dto);
 
     void batchRemove(Long[] idList);
+
+    Map<String, Object> getRolesByUserId(Long userId);
+
+    void doAssign(AssginRoleDTO dto);
 }

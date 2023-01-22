@@ -9,19 +9,18 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.ndz.wheat.mini.utils.ApiResultUtils;
-import com.ndz.wheat.mini.service.demo.SysUserDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.ndz.wheat.mini.common.bean.ApiResult;
-import com.ndz.wheat.mini.dao.base.DeleteDTO;
 import com.ndz.wheat.mini.dto.demo.SysUserDemoDTO;
+import com.ndz.wheat.mini.service.demo.SysUserDemoService;
+import com.ndz.wheat.mini.utils.ApiResultUtils;
 import com.ndz.wheat.mini.vo.demo.SysUserDemoVO;
 
 import cn.hutool.core.io.IoUtil;
@@ -63,8 +62,8 @@ public class SwaggerDemoController {
     @ApiOperation(value = "删除用户")
     @ApiOperationSupport(order = 3)
     @DeleteMapping(value = "/sysUser/del")
-    public ApiResult del(@RequestBody DeleteDTO dto) {
-        sysUserDemoService.del(dto);
+    public ApiResult del(@RequestBody Long[] ids) {
+        sysUserDemoService.del(ids);
         return ApiResultUtils.ok();
     }
 
