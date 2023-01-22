@@ -5,5 +5,5 @@ import com.ndz.wheat.mini.entity.sys.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface SysUserRoleDao extends BaseDao<SysRoleEntity> {
+public interface SysRoleDao extends BaseDao<SysRoleEntity> {
 }

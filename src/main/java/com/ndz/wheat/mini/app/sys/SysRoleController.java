@@ -1,27 +1,27 @@
 package com.ndz.wheat.mini.app.sys;
 
-import com.alibaba.fastjson2.JSON;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.ndz.wheat.mini.common.bean.ApiResult;
-import com.ndz.wheat.mini.common.page.PageData;
-import com.ndz.wheat.mini.dao.base.DeleteDTO;
-import com.ndz.wheat.mini.dto.sys.SaveSysRoleDTO;
-import com.ndz.wheat.mini.service.sys.SysUserRoleService;
-import com.ndz.wheat.mini.vo.sys.SysRoleVO;
-import com.ndz.wheat.mini.utils.ApiResultUtils;
-import io.swagger.annotations.ApiOperation;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
-
-import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.alibaba.fastjson2.JSON;
+import com.ndz.wheat.mini.common.bean.ApiResult;
+import com.ndz.wheat.mini.common.page.PageData;
+import com.ndz.wheat.mini.dto.sys.SaveSysRoleDTO;
+import com.ndz.wheat.mini.service.sys.SysUserRoleService;
+import com.ndz.wheat.mini.utils.ApiResultUtils;
+import com.ndz.wheat.mini.vo.sys.SysRoleVO;
+
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
+import springfox.documentation.annotations.ApiIgnore;
+
+@Api(tags = "系统角色")
 @Slf4j
 @RestController
 @RequestMapping("admin/system/sysRole")
-public class SysUserRoleController {
+public class SysRoleController {
 
     @Autowired
     SysUserRoleService sysUserRoleService;
