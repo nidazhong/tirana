@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +47,9 @@ public class JacksonConfig {
             // LocalDateTime
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer());
             builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer());
+            // Date
             builder.serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DATETIME_PATTERN)));
+            builder.deserializerByType(Date.class, new DateDeserializers.DateDeserializer(DateDeserializers.DateDeserializer.instance, new SimpleDateFormat(DATETIME_PATTERN), DATETIME_PATTERN));
             // 如有其他类型，以下还可添加
             // 枚举类
             builder.featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
