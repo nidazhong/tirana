@@ -82,9 +82,9 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
         for (SysMenuVO sysMenu : sysMenuVOS) {
             if(roleMenuIds.contains(sysMenu.getId())){
                 //设置该菜单已被分配
-                sysMenu.setIsSelect(true);
+                sysMenu.setSelect(true);
             }else {
-                sysMenu.setIsSelect(false);
+                sysMenu.setSelect(false);
             }
         }
         //将权限列表转换为权限树

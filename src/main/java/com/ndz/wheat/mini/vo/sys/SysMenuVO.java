@@ -73,7 +73,7 @@ public class SysMenuVO {
     private Integer isDeleted;
 
 
-    private Boolean isSelect = false;
+    private Boolean select = false;
 
     private List<SysMenuVO> children;
 }
