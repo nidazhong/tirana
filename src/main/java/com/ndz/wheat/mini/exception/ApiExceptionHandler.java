@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.alibaba.fastjson2.JSON;
 import com.ndz.wheat.mini.common.enums.BizCodeEnum;
 import com.ndz.wheat.mini.common.bean.ApiResult;
+import com.ndz.wheat.mini.common.enums.StateEnum;
+import com.ndz.wheat.mini.common.enums.StatusCode;
 import com.ndz.wheat.mini.entity.base.LogErrorEntity;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
 import com.ndz.wheat.mini.utils.ExceptionUtils;
@@ -44,6 +46,16 @@ public class ApiExceptionHandler {
 		log.error(ex.getMsg(), ex);
 		return ApiResultUtils.error(ex.getCode(), ex.getMsg(), ex.getMessage());
 	}
+
+	/**
+	 * 专处理麦子业务异常
+	 */
+	@ExceptionHandler(WheatException.class)
+	public ApiResult<String> handleRenException(WheatException ex){
+		log.error(ex.getMessage(), ex);
+		return ApiResultUtils.error(StateEnum.FAILED, ex.getMessage());
+	}
+
 
 	/**
 	 * 数据库记录已存在冲突

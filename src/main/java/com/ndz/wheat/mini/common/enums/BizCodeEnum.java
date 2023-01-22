@@ -15,7 +15,10 @@ public enum BizCodeEnum implements StatusCode{
     APP_ERROR(10001, "业务异常"),
     PRICE_ERROR(10002, "价格异常"),
     DB_RECORD_EXISTS(10003, "数据库记录已存在"),
-    JSON_STR_ILLEGAL(10004, "非JSON字符串");
+
+    JSON_STR_ILLEGAL(10004, "非JSON字符串"),
+
+    NODE_ERROR(10005,"树形菜单错误");
 
 
     private int code;
