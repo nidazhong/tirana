@@ -60,7 +60,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
     @Override
     public void removeById(Long id) {
         Long count = this.baseDao.selectCount(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getParentId, id));
-        if (count > 0) {
+        if (count < 0) {
             throw new WheatException(BizCodeEnum.NODE_ERROR);
         }
         deleteById(id);

@@ -18,7 +18,7 @@ public enum BizCodeEnum implements StatusCode{
 
     JSON_STR_ILLEGAL(10004, "非JSON字符串"),
 
-    NODE_ERROR(10005,"树形菜单错误");
+    NODE_ERROR(10005,"树形菜单不存在");
 
 
     private int code;

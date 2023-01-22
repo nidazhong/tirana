@@ -53,7 +53,7 @@ public class ApiExceptionHandler {
 	@ExceptionHandler(WheatException.class)
 	public ApiResult<String> handleRenException(WheatException ex){
 		log.error(ex.getMessage(), ex);
-		return ApiResultUtils.error(StateEnum.FAILED, ex.getMessage());
+		return ApiResultUtils.error(ex.getMessage());
 	}
 
 
