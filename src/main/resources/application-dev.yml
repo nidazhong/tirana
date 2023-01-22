@@ -24,7 +24,7 @@ mybatis-plus:
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler # 枚举值配置
 logging:
   level:
-    com.ndz.wheatmall: debug # 开启项目包的debug模式即可打印sql执行详情
+    com.ndz.wheat: debug # 开启项目包的debug模式即可打印sql执行详情
 
 # knife4j 配置
 knife4j:
@@ -44,4 +44,4 @@ knife4j:
 #        group-name: default
 #        api-rule: package
 #        api-rule-resources:
-#          - com.ndz.wheatmall
+#          - com.ndz.wheat.mini

@@ -10,8 +10,8 @@
         <version>2.7.7</version>
     </parent>
 
-    <groupId>com.ndz.wheatmall</groupId>
-    <artifactId>wheatmall-mini</artifactId>
+    <groupId>com.ndz.wheat</groupId>
+    <artifactId>wheat-mini</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>麦子商城Mini版</description>
