@@ -1,4 +1,4 @@
-# 麦子商城Mini版
+# 麦子Mini版-SpringBoot项目
 
 ## 依赖版本
 
