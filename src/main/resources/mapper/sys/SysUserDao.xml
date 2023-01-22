@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ndz.wheat.mini.dao.sys.SysUserDao">
+  <resultMap id="BaseResultMap" type="com.ndz.wheat.mini.entity.sys.SysUserEntity">
+    <!--@mbg.generated-->
+    <!--@Table sys_user-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="head_url" jdbcType="VARCHAR" property="headUrl" />
+    <result column="dept_id" jdbcType="BIGINT" property="deptId" />
+    <result column="post_id" jdbcType="BIGINT" property="postId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, username, `password`, `name`, phone, head_url, dept_id, post_id, description, 
+    `status`, create_time, update_time, is_deleted
+  </sql>
+
+  <resultMap id="SysUserMap" type="com.ndz.wheat.mini.vo.sys.SysUserVO" autoMapping="true">
+  </resultMap>
+
+  <!-- 用于select查询公用抽取的列 -->
+  <sql id="columns">
+    id,username,password,name,phone,head_url,post_id,dept_id,description,status,create_time,update_time,is_deleted
+  </sql>
+
+  <select id="page" resultMap="SysUserMap">
+    select <include refid="columns" />
+    from sys_user
+    <where>
+      <if test="query.keyword != null and query.keyword != ''">
+        and (username like CONCAT('%',#{query.keyword},'%') or  name like CONCAT('%',#{query.keyword},'%') or phone like CONCAT('%',#{query.keyword},'%'))
+      </if>
+      <if test="query.createTimeBegin != null">
+        and create_time >= #{query.createTimeBegin}
+      </if>
+      <if test="query.createTimeEnd != null">
+        and create_time &lt;= #{query.createTimeEnd}
+      </if>
+      and is_deleted = 0
+    </where>
+    order by id desc
+  </select>
+</mapper>
