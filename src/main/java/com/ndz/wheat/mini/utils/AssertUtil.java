@@ -1,10 +1,8 @@
 package com.ndz.wheat.mini.utils;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Assert;
 import com.ndz.wheat.mini.exception.WheatException;
 
-import java.util.ArrayList;
+import cn.hutool.core.collection.CollUtil;
 
 
 /**
@@ -36,6 +34,25 @@ public class AssertUtil {
      */
     public static void isEmpty(Iterable<?> iterable, String msg) {
         if (CollUtil.isNotEmpty(iterable)) {
+            throw new WheatException(msg);
+        }
+    }
+
+    /**
+     * 断言obj不是null
+     */
+    public static  void notNull(Object obj, String msg){
+        if(obj==null) {
+            throw new WheatException(msg);
+        }
+    }
+
+
+    /**
+     * 断言obj是null
+     */
+    public static  void isNull(Object obj, String msg){
+        if(obj!=null) {
             throw new WheatException(msg);
         }
     }
