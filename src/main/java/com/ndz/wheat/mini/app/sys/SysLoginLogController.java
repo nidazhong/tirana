@@ -30,7 +30,7 @@ public class SysLoginLogController {
 
     @ApiOperation(value = "获取分页列表")
     @GetMapping("{page}/{limit}")
-    public ApiResult<PageData<SysLoginLogVO>> index(
+    public ApiResult<PageData<SysLoginLogVO>> page(
             @ApiParam(name = "page", value = "当前页码", required = true, example = "1")
             @PathVariable Long page,
             @ApiParam(name = "limit", value = "每页记录数", required = true, example = "10")

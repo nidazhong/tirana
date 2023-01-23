@@ -94,8 +94,8 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         // Redis保存权限数据
         redisTemplate.opsForValue().set(WheatConstant.REDIS_PREFIX+customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
 
-        // 记录登陆日志
-        asyncLoginLogService.recordLoginLog(customUser.getUsername(), 1, IpUtils.getIpAddr(request), "登录成功");
+        // 记录登陆成功日志
+        asyncLoginLogService.recordLoginLog(customUser.getUsername(), 0, IpUtils.getIpAddr(request), "登录成功");
 
 
         Map<String, String> map = new HashMap<>();
@@ -115,7 +115,6 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                               AuthenticationException e) throws IOException, ServletException {
-
         if(e.getCause() instanceof RuntimeException) {
             ApiResultUtils.out(response, new ApiResult<>(204, e.getMessage()));
         } else {

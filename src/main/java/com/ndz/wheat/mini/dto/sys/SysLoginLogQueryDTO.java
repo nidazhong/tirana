@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 @Data
 public class SysLoginLogQueryDTO {
 
+    private String keyword;
+
     private String username;
 
     @DateTimeFormat(pattern = DatePattern.NORM_DATETIME_PATTERN)

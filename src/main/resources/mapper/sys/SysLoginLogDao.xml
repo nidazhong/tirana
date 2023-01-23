@@ -31,6 +31,9 @@
 
   <sql id="findPageWhere">
     <where>
+      <if test="query.keyword != null and query.keyword != ''">
+        and (ipaddr like CONCAT('%',#{query.keyword},'%') or  status like CONCAT('%',#{query.keyword},'%') or username like CONCAT('%',#{query.keyword},'%'))
+      </if>
       <if test="query.username != null and query.username != ''">
         and username = #{query.username}
       </if>

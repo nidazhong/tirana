@@ -17,6 +17,8 @@ import com.ndz.wheat.mini.vo.sys.SysLoginLogVO;
 
 import cn.hutool.core.bean.BeanUtil;
 
+import java.time.LocalDateTime;
+
 @Service
 public class AsyncLoginLogServiceImpl extends BaseServiceImpl<SysLoginLogDao, SysLoginLogEntity> implements AsyncLoginLogService {
     @Resource
@@ -36,6 +38,7 @@ public class AsyncLoginLogServiceImpl extends BaseServiceImpl<SysLoginLogDao, Sy
         sysLoginLog.setUsername(username);
         sysLoginLog.setIpaddr(ipaddr);
         sysLoginLog.setMsg(message);
+        sysLoginLog.setAccessTime(LocalDateTime.now());
         // 日志状态
         sysLoginLog.setStatus(status);
         sysLoginLogDao.insert(sysLoginLog);
