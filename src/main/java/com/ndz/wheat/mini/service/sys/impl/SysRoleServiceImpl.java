@@ -25,6 +25,7 @@ import com.ndz.wheat.mini.service.sys.SysUserRoleService;
 import com.ndz.wheat.mini.vo.sys.SysRoleVO;
 
 import cn.hutool.core.util.StrUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -46,6 +47,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
         return getPageData(page, SysRoleVO.class);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void save( SaveSysRoleDTO dto) {
         SysRoleEntity entity =  BeanUtil.copyProperties(dto, SysRoleEntity.class);
@@ -64,6 +66,7 @@ public class SysRoleServiceImpl extends BaseServiceImpl<SysRoleDao, SysRoleEntit
     }
 
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void update(SaveSysRoleDTO dto) {
         SysRoleEntity entity = selectById(dto.getId());

@@ -2,6 +2,7 @@ package com.ndz.wheat.mini.service.sys.impl;
 
 import javax.annotation.Resource;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -16,6 +17,7 @@ import com.ndz.wheat.mini.utils.AssertUtil;
 import com.ndz.wheat.mini.vo.sys.SysLoginLogVO;
 
 import cn.hutool.core.bean.BeanUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -33,6 +35,8 @@ public class AsyncLoginLogServiceImpl extends BaseServiceImpl<SysLoginLogDao, Sy
      * @param message 消息内容
      * @return
      */
+    @Async
+    @Transactional(rollbackFor = Exception.class)
     public void recordLoginLog(String username, Integer status, String ipaddr, String message) {
         SysLoginLogEntity sysLoginLog = new SysLoginLogEntity();
         sysLoginLog.setUsername(username);

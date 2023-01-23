@@ -1,7 +1,9 @@
 package com.ndz.wheat.mini.app.sys;
+import com.ndz.wheat.mini.common.annotation.Log;
 
 import java.util.Map;
 
+import com.ndz.wheat.mini.common.enums.BusinessType;
 import com.ndz.wheat.mini.dto.sys.AssginRoleDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class SysRoleController {
         return ApiResultUtils.ok(sysUserRoleService.page(params));
     }
 
-
+    @Log(title = "角色管理", businessType = BusinessType.INSERT)
     @PreAuthorize("hasAuthority('role:add')")
     @PostMapping("/save")
     public ApiResult<Object> save(@RequestBody SaveSysRoleDTO dto) {
@@ -45,6 +47,7 @@ public class SysRoleController {
         return ApiResultUtils.ok();
     }
 
+    @Log(title = "角色管理", businessType = BusinessType.DELETE)
     @PreAuthorize("hasAuthority('role:remove')")
     @DeleteMapping(value = "/remove/{id}")
     public ApiResult<Object> remove(@PathVariable String id) {
@@ -63,6 +66,7 @@ public class SysRoleController {
         return ApiResultUtils.ok(sysUserRoleService.info(id));
     }
 
+    @Log(title = "角色管理", businessType = BusinessType.UPDATE)
     @PreAuthorize("hasAuthority('role:update')")
     @PutMapping("/update")
     public ApiResult<Object> update(@RequestBody SaveSysRoleDTO dto) {

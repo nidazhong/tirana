@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ndz.wheat.mini.dao.sys.SysOperLogDao">
+  <resultMap id="BaseResultMap" type="com.ndz.wheat.mini.entity.sys.SysOperLogEntity">
+    <!--@mbg.generated-->
+    <!--@Table sys_oper_log-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="business_type" jdbcType="VARCHAR" property="businessType" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="request_method" jdbcType="VARCHAR" property="requestMethod" />
+    <result column="operator_type" jdbcType="VARCHAR" property="operatorType" />
+    <result column="oper_name" jdbcType="VARCHAR" property="operName" />
+    <result column="dept_name" jdbcType="VARCHAR" property="deptName" />
+    <result column="oper_url" jdbcType="VARCHAR" property="operUrl" />
+    <result column="oper_ip" jdbcType="VARCHAR" property="operIp" />
+    <result column="oper_param" jdbcType="VARCHAR" property="operParam" />
+    <result column="json_result" jdbcType="VARCHAR" property="jsonResult" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="error_msg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="oper_time" jdbcType="TIMESTAMP" property="operTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, title, business_type, `method`, request_method, operator_type, oper_name, dept_name, 
+    oper_url, oper_ip, oper_param, json_result, `status`, error_msg, oper_time, create_time, 
+    update_time, is_deleted
+  </sql>
+
+
+  <!-- 用于select查询公用抽取的列 -->
+  <sql id="columns">
+    id, title, business_type, `method`, request_method, operator_type, oper_name, dept_name,
+    oper_url, oper_ip, `status`, error_msg, oper_time, create_time,
+    update_time, is_deleted
+  </sql>
+
+  <sql id="findPageWhere">
+    <where>
+      <if test="query.keyword != null and query.keyword != ''">
+        and (oper_name like CONCAT('%',#{query.keyword},'%') or  title like CONCAT('%',#{query.keyword},'%') )
+      </if>
+      <if test="query.title != null and query.title != ''">
+        and title like CONCAT('%',#{query.title},'%')
+      </if>
+      <if test="query.operUrl != null and query.operUrl != ''">
+        and oper_url like CONCAT('%',#{query.operUrl},'%')
+      </if>
+      <if test="query.operName != null and query.operName != ''">
+        and oper_name like CONCAT('%',#{query.operName},'%')
+      </if>
+      <if test="query.createTimeBegin != null">
+        and create_time >= #{query.createTimeBegin}
+      </if>
+      <if test="query.createTimeEnd != null">
+        and create_time &lt;= #{query.createTimeEnd}
+      </if>
+      and is_deleted = 0
+    </where>
+  </sql>
+
+
+
+  <select id="page" resultType="com.ndz.wheat.mini.vo.sys.SysOperLogVO">
+    select <include refid="columns"/>
+    from sys_oper_log
+    <include refid="findPageWhere"/>
+    order by id desc
+  </select>
+</mapper>

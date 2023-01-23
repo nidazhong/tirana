@@ -26,6 +26,7 @@ import com.ndz.wheat.mini.vo.sys.SysMenuVO;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntity> implements SysMenuService {
@@ -46,12 +47,14 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
         return result;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void save(SaveSysMenuDTO permission) {
         SysMenuEntity sysMenuEntity = BeanUtil.copyProperties(permission, SysMenuEntity.class);
         insert(sysMenuEntity);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateById(SaveSysMenuDTO permission) {
         SysMenuEntity sysMenuEntity = selectById(permission.getId());
@@ -59,6 +62,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
         updateById(sysMenuEntity);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void removeById(Long id) {
         Long count = this.baseDao.selectCount(new LambdaQueryWrapper<SysMenuEntity>().eq(SysMenuEntity::getParentId, id));
@@ -95,6 +99,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
         return sysMenus;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void doAssign(AssginMenuDTO dto) {
         //删除已分配的权限

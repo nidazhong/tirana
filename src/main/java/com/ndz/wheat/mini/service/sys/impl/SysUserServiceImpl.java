@@ -30,6 +30,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.map.MapUtil;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
@@ -39,6 +40,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
     @Autowired
     SysUserRoleService sysUserRoleService;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void save(SysUserDTO user) {
         SysUserEntity sysUserEntity = BeanUtil.copyProperties(user, SysUserEntity.class);
@@ -47,6 +49,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
         insert(sysUserEntity);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void updateById(SysUserDTO user) {
         SysUserEntity sysUserEntity = selectById(user.getId());
@@ -54,6 +57,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
         updateById(sysUserEntity);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void removeById(Long id) {
         deleteById(id);
