@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.ndz.wheat.mini.common.helper.RouterHelper;
+import com.ndz.wheat.mini.vo.sys.RouterVO;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -108,5 +110,56 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
                 sysRoleMenuDao.insert(sysRoleMenu);
             }
         }
+    }
+
+    /*
+     * 获取用户菜单
+     */
+    @Override
+    public List<RouterVO> findUserMenuList(Long userId) {
+        //超级管理员admin账号id为：1
+        List<SysMenuEntity> sysMenuList = null;
+        if (userId == 1) {
+            sysMenuList = this.baseDao.selectList(new LambdaQueryWrapper<SysMenuEntity>()
+                    .eq(SysMenuEntity::getStatus, 1)
+                    .orderByAsc(SysMenuEntity::getSortValue));
+        } else {
+            sysMenuList = this.baseDao.listByUserId(userId);
+        }
+        List<SysMenuVO> sysMenuVOS = BeanUtil.copyToList(sysMenuList, SysMenuVO.class);
+        //构建树形数据
+        List<SysMenuVO> sysMenuTreeList = MenuHelper.buildTree(sysMenuVOS);
+        //构建路由
+        List<RouterVO> routerVoList = RouterHelper.buildRouters(sysMenuTreeList);
+        return routerVoList;
+    }
+
+
+    /**
+     * 根据用户Id获取用户按钮的操作权限
+     *
+     * @param userId 用户id
+     * @return {@link List}<{@link String}>
+     */
+    @Override
+    public List<String> findUserPermsList(Long userId) {
+        //超级管理员admin账号id为：1
+        List<SysMenuEntity> sysMenuList = null;
+        if (userId == 1) {
+            // 管理员取所有
+            sysMenuList = this.baseDao.selectList(new LambdaQueryWrapper<SysMenuEntity>()
+                    .eq(SysMenuEntity::getStatus, 1));
+        } else {
+            sysMenuList = this.baseDao.listByUserId(userId);
+        }
+        //创建返回的集合
+        List<String> permissionList = new ArrayList<>();
+        for (SysMenuEntity sysMenu : sysMenuList) {
+            // 按钮权限
+            if(sysMenu.getType() == 2){
+                permissionList.add(sysMenu.getPerms());
+            }
+        }
+        return permissionList;
     }
 }

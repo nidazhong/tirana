@@ -6,6 +6,8 @@ import com.ndz.wheat.mini.dto.sys.SysUserDTO;
 import com.ndz.wheat.mini.entity.sys.SysUserEntity;
 import com.ndz.wheat.mini.vo.sys.SysUserVO;
 
+import java.util.Map;
+
 public interface SysUserService {
     void save(SysUserDTO user);
 
@@ -21,5 +23,7 @@ public interface SysUserService {
     void updateStatus(Long id, Integer status);
 
     SysUserEntity getByUsername(String userName);
+
+    Map<String, Object> userInfo(String username);
 
 }

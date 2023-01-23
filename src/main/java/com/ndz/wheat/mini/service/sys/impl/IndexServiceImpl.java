@@ -1,5 +1,11 @@
 package com.ndz.wheat.mini.service.sys.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.ndz.wheat.mini.common.enums.BizCodeEnum;
 import com.ndz.wheat.mini.common.helper.JwtHelper;
 import com.ndz.wheat.mini.dto.sys.LoginDTO;
@@ -8,11 +14,6 @@ import com.ndz.wheat.mini.exception.WheatException;
 import com.ndz.wheat.mini.service.sys.IndexService;
 import com.ndz.wheat.mini.service.sys.SysUserService;
 import com.ndz.wheat.mini.utils.MD5Utils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class IndexServiceImpl implements IndexService {
@@ -40,4 +41,5 @@ public class IndexServiceImpl implements IndexService {
         map.put("token", JwtHelper.createToken(sysUser.getId(), sysUser.getUsername()));
         return map;
     }
+
 }

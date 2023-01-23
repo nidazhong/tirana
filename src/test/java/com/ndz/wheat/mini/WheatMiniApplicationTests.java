@@ -4,6 +4,7 @@ import com.ndz.wheat.mini.common.helper.JwtHelper;
 import com.ndz.wheat.mini.dto.org.EmployeeDTO;
 import com.ndz.wheat.mini.service.org.EmployeeService;
 import com.ndz.wheat.mini.service.sys.UpdateAgent;
+import com.ndz.wheat.mini.utils.MD5Utils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,6 +54,8 @@ public class WheatMiniApplicationTests {
 
     @Test
     public void testJWT() {
+        System.out.println(MD5Utils.encrypt("123456"));
+
         String token = JwtHelper.createToken(1L, "admin");//"eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSCjAK0A0Ndg1S0lFKrShQsjI0MzY2sDQ3MTbQUSotTi3yTFGyMjKEsP0Sc1OBWp6unfB0f7NSLQDxzD8_QwAAAA.2eCJdsJXOYaWFmPTJc8gl1YHTRl9DAeEJprKZn4IgJP9Fzo5fLddOQn1Iv2C25qMpwHQkPIGukTQtskWsNrnhQ";//JwtHelper.createToken(7L, "admin");
         System.out.println(token);
         System.out.println(JwtHelper.getUserId(token));

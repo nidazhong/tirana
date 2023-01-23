@@ -1,8 +1,17 @@
 package com.ndz.wheat.mini.service.sys.impl;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.TypeReference;
+import cn.hutool.core.map.MapUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ndz.wheat.mini.dao.sys.SysMenuDao;
+import com.ndz.wheat.mini.entity.sys.SysRoleEntity;
+import com.ndz.wheat.mini.service.sys.SysMenuService;
+import com.ndz.wheat.mini.service.sys.SysUserRoleService;
 import com.ndz.wheat.mini.utils.AssertUtil;
 import com.ndz.wheat.mini.utils.MD5Utils;
+import com.ndz.wheat.mini.vo.sys.RouterVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -18,10 +27,20 @@ import com.ndz.wheat.mini.vo.sys.SysUserVO;
 
 import cn.hutool.core.bean.BeanUtil;
 
+import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
 
-
+    @Autowired
+    SysMenuService sysMenuService;
+    @Autowired
+    SysUserRoleService sysUserRoleService;
 
     @Override
     public void save(SysUserDTO user) {
@@ -67,5 +86,38 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
     public SysUserEntity getByUsername(String userName) {
         AssertUtil.notNull(userName, "账号名称不能为空");
         return this.baseDao.selectOne(new LambdaQueryWrapper<SysUserEntity>().eq(SysUserEntity::getUsername,userName));
+    }
+
+    /**
+     * 根据用户名称获取用户信息（基本信息、菜单权限、按钮权限数据）
+     * @param username
+     * @return
+     */
+    @Override
+    public Map<String, Object> userInfo(String username) {
+        Map<String, Object> result = new HashMap<>();
+        SysUserEntity sysUser = this.getByUsername(username);
+
+        // 获取用户角色数据
+        Map<String, Object> roles = sysUserRoleService.getRolesByUserId(sysUser.getId());
+        List<SysRoleEntity> uoleList = MapUtil.get(roles, "allRoles", new TypeReference<List<SysRoleEntity>>() {});
+        List<String> roleCodes = null;
+        if (CollUtil.isNotEmpty(uoleList)) {
+             roleCodes = uoleList.stream().map(SysRoleEntity::getRoleCode).collect(Collectors.toList());
+        }
+
+        //根据用户id获取菜单权限值
+        List<RouterVO> routerVoList = sysMenuService.findUserMenuList(sysUser.getId());
+        //根据用户id获取用户按钮权限
+        List<String> permsList = sysMenuService.findUserPermsList(sysUser.getId());
+
+        result.put("name", sysUser.getName());
+        result.put("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        //当前权限控制使用不到，我们暂时忽略
+//        result.put("roles",  "['admin']");
+        result.put("roles",  roleCodes);
+        result.put("buttons", permsList);
+        result.put("routers", routerVoList);
+        return result;
     }
 }

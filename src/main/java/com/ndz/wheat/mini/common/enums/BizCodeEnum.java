@@ -20,7 +20,8 @@ public enum BizCodeEnum implements StatusCode{
 
     NODE_ERROR(10005,"树形菜单不存在"),
     ACCOUNT_ERROR(10006, "账号名称错误"),
-    PASSWORD_ERROR(10007, "账号密码错误"), ACCOUNT_STOP(10008, "账号不可用");
+    PASSWORD_ERROR(10007, "账号密码错误"), ACCOUNT_STOP(10008, "账号不可用"),
+    TOKEN_NULL(10008, "header中未获取到token");
 
 
     private int code;
