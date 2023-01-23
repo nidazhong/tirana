@@ -19,7 +19,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import cn.hutool.core.map.MapUtil;
@@ -58,13 +60,30 @@ public class ApiExceptionHandler {
 
 
 	/**
-	 * 数据库记录已存在冲突
+	 * 数据库记录已存在冲突异常
 	 */
 	@ExceptionHandler(DuplicateKeyException.class)
 	public ApiResult<String> handleDuplicateKeyException(DuplicateKeyException ex){
 		return ApiResultUtils.error(BizCodeEnum.DB_RECORD_EXISTS.getMsg());
 	}
 
+	/**
+	 * spring security异常
+	 * @param ex
+	 * @return
+	 */
+	@ExceptionHandler(AccessDeniedException.class)
+	@ResponseBody
+	public ApiResult<String> error(AccessDeniedException ex) throws AccessDeniedException {
+		return ApiResultUtils.error(StateEnum.PERMISSION,null);
+	}
+
+	/**
+	 * 处理其他未知异常
+	 *
+	 * @param ex
+	 * @return {@link ApiResult}<{@link String}>
+	 */
 	@ExceptionHandler(Exception.class)
 	public ApiResult<String> handleException(Exception ex){
 		log.error(ex.getMessage(), ex);
@@ -76,7 +95,7 @@ public class ApiExceptionHandler {
 	}
 
 	/**
-	 * 保存异常日志
+	 * 保存其他未知异常日志
 	 */
 	private void saveLog(Exception ex){
 		LogErrorEntity errorLog = new LogErrorEntity();

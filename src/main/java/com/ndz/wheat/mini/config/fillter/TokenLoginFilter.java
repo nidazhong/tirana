@@ -1,13 +1,16 @@
 package com.ndz.wheat.mini.config.fillter;
 
+import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ndz.wheat.mini.common.bean.ApiResult;
+import com.ndz.wheat.mini.common.constant.WheatConstant;
 import com.ndz.wheat.mini.common.enums.BizCodeEnum;
 import com.ndz.wheat.mini.common.enums.StateEnum;
 import com.ndz.wheat.mini.common.helper.JwtHelper;
 import com.ndz.wheat.mini.config.security.CustomUser;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
 import com.ndz.wheat.mini.vo.sys.LoginVO;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,15 +36,16 @@ import java.util.Map;
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
-    /**
-     *
-     */
-    public TokenLoginFilter(AuthenticationManager authenticationManager) {
+    private RedisTemplate<String, String> redisTemplate;
+
+    public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate<String, String> redisTemplate) {
         this.setAuthenticationManager(authenticationManager);
         this.setPostOnly(false);
         //指定登录接口及提交方式，可以指定任意路径
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/system/index/login","POST"));
+        this.redisTemplate = redisTemplate;
     }
+
 
     /**
      * 尝试认证
@@ -81,8 +85,10 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
                                             Authentication auth) throws IOException, ServletException {
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         String token = JwtHelper.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
+        //Redis保存权限数据
+        redisTemplate.opsForValue().set(WheatConstant.REDIS_PREFIX+customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
 
-        Map<String, Object> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("token", token);
         ApiResultUtils.out(response, new ApiResult<>(StateEnum.SUCCESS, map));
     }

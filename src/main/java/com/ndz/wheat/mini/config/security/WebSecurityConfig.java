@@ -2,11 +2,14 @@ package com.ndz.wheat.mini.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,7 +20,9 @@ import com.ndz.wheat.mini.config.fillter.TokenAuthenticationFilter;
 import com.ndz.wheat.mini.config.fillter.TokenLoginFilter;
 import com.ndz.wheat.mini.service.sys.CustomerUserDetailsService;
 
+@Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)//开启安全认证注解功能，默认禁用注解
 public class WebSecurityConfig {
 
     @Autowired
@@ -25,6 +30,9 @@ public class WebSecurityConfig {
 
     @Autowired
     private CustomMd5PasswordEncoder customMd5PasswordEncoder;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
 
     @Bean
@@ -56,8 +64,8 @@ public class WebSecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 //TokenAuthenticationFilter放到UsernamePasswordAuthenticationFilter的前面，这样做就是为了除了登录的时候去查询数据库外，其他时候都用token进行认证。
-                .addFilterBefore(new TokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new TokenLoginFilter(authenticationManager()));
+                .addFilterBefore(new TokenAuthenticationFilter(redisTemplate), UsernamePasswordAuthenticationFilter.class)
+                .addFilter(new TokenLoginFilter(authenticationManager(), redisTemplate));
 
         //禁用session
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

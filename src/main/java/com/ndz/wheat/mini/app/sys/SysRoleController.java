@@ -5,6 +5,7 @@ import java.util.Map;
 import com.ndz.wheat.mini.dto.sys.AssginRoleDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.alibaba.fastjson2.JSON;
@@ -28,19 +29,23 @@ public class SysRoleController {
     @Autowired
     SysUserRoleService sysUserRoleService;
 
+
+    @PreAuthorize("hasAuthority('role:list')")
     @GetMapping("/page")
     public ApiResult<PageData<SysRoleVO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
         log.info("角色分页请求Req: {}", JSON.toJSONString(params));
         return ApiResultUtils.ok(sysUserRoleService.page(params));
     }
 
+
+    @PreAuthorize("hasAuthority('role:add')")
     @PostMapping("/save")
     public ApiResult<Object> save(@RequestBody SaveSysRoleDTO dto) {
         sysUserRoleService.save(dto);
         return ApiResultUtils.ok();
     }
 
-
+    @PreAuthorize("hasAuthority('role:remove')")
     @DeleteMapping(value = "/remove/{id}")
     public ApiResult<Object> remove(@PathVariable String id) {
         sysUserRoleService.remove(id);
@@ -58,7 +63,7 @@ public class SysRoleController {
         return ApiResultUtils.ok(sysUserRoleService.info(id));
     }
 
-
+    @PreAuthorize("hasAuthority('role:update')")
     @PutMapping("/update")
     public ApiResult<Object> update(@RequestBody SaveSysRoleDTO dto) {
         sysUserRoleService.update(dto);
