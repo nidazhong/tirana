@@ -8,7 +8,9 @@ import com.ndz.wheat.mini.common.enums.BizCodeEnum;
 import com.ndz.wheat.mini.common.enums.StateEnum;
 import com.ndz.wheat.mini.common.helper.JwtHelper;
 import com.ndz.wheat.mini.config.security.CustomUser;
+import com.ndz.wheat.mini.service.sys.AsyncLoginLogService;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
+import com.ndz.wheat.mini.utils.IpUtils;
 import com.ndz.wheat.mini.vo.sys.LoginVO;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -37,13 +39,16 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
     private RedisTemplate<String, String> redisTemplate;
+    private AsyncLoginLogService asyncLoginLogService;
 
-    public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate<String, String> redisTemplate) {
+    public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate<String, String> redisTemplate,
+                            AsyncLoginLogService asyncLoginLogService) {
         this.setAuthenticationManager(authenticationManager);
         this.setPostOnly(false);
         //指定登录接口及提交方式，可以指定任意路径
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/system/index/login","POST"));
         this.redisTemplate = redisTemplate;
+        this.asyncLoginLogService = asyncLoginLogService;
     }
 
 
@@ -85,8 +90,13 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
                                             Authentication auth) throws IOException, ServletException {
         CustomUser customUser = (CustomUser) auth.getPrincipal();
         String token = JwtHelper.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
-        //Redis保存权限数据
+
+        // Redis保存权限数据
         redisTemplate.opsForValue().set(WheatConstant.REDIS_PREFIX+customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
+
+        // 记录登陆日志
+        asyncLoginLogService.recordLoginLog(customUser.getUsername(), 1, IpUtils.getIpAddr(request), "登录成功");
+
 
         Map<String, String> map = new HashMap<>();
         map.put("token", token);

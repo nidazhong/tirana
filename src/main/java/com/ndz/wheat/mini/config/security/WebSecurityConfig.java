@@ -1,5 +1,6 @@
 package com.ndz.wheat.mini.config.security;
 
+import com.ndz.wheat.mini.service.sys.AsyncLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +34,8 @@ public class WebSecurityConfig {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private AsyncLoginLogService asyncLoginLogService;
 
 
     @Bean
@@ -65,7 +68,7 @@ public class WebSecurityConfig {
                 .and()
                 //TokenAuthenticationFilter放到UsernamePasswordAuthenticationFilter的前面，这样做就是为了除了登录的时候去查询数据库外，其他时候都用token进行认证。
                 .addFilterBefore(new TokenAuthenticationFilter(redisTemplate), UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new TokenLoginFilter(authenticationManager(), redisTemplate));
+                .addFilter(new TokenLoginFilter(authenticationManager(), redisTemplate, asyncLoginLogService));
 
         //禁用session
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
