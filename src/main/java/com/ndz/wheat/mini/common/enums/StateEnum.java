@@ -8,8 +8,9 @@ public enum StateEnum implements StatusCode{
     FAILED(1, "请求失败"),
     INTERNAL_SERVER_ERROR(500, "服务内部错误"),
     VALIDATE_ERROR(500, "参数校验失败"),
-    RESPONSE_PACK_ERROR(500, "response返回包装失败");
-
+    RESPONSE_PACK_ERROR(500, "response返回包装失败"),
+    LOGIN_AUTH(208, "未登陆"),
+    PERMISSION(209, "没有权限"),;
 
     private int code;
     private String msg;

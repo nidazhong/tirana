@@ -1,38 +1,35 @@
 package com.ndz.wheat.mini.service.sys.impl;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.TypeReference;
-import cn.hutool.core.map.MapUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.ndz.wheat.mini.dao.sys.SysMenuDao;
-import com.ndz.wheat.mini.entity.sys.SysRoleEntity;
-import com.ndz.wheat.mini.service.sys.SysMenuService;
-import com.ndz.wheat.mini.service.sys.SysUserRoleService;
-import com.ndz.wheat.mini.utils.AssertUtil;
-import com.ndz.wheat.mini.utils.MD5Utils;
-import com.ndz.wheat.mini.vo.sys.RouterVO;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ndz.wheat.mini.common.page.PageData;
 import com.ndz.wheat.mini.dao.sys.SysUserDao;
 import com.ndz.wheat.mini.dto.sys.QuerySysUserDTO;
 import com.ndz.wheat.mini.dto.sys.SysUserDTO;
+import com.ndz.wheat.mini.entity.sys.SysRoleEntity;
 import com.ndz.wheat.mini.entity.sys.SysUserEntity;
 import com.ndz.wheat.mini.service.base.impl.BaseServiceImpl;
+import com.ndz.wheat.mini.service.sys.SysMenuService;
+import com.ndz.wheat.mini.service.sys.SysUserRoleService;
 import com.ndz.wheat.mini.service.sys.SysUserService;
+import com.ndz.wheat.mini.utils.AssertUtil;
+import com.ndz.wheat.mini.utils.MD5Utils;
+import com.ndz.wheat.mini.vo.sys.RouterVO;
 import com.ndz.wheat.mini.vo.sys.SysUserVO;
 
 import cn.hutool.core.bean.BeanUtil;
-
-import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.TypeReference;
+import cn.hutool.core.map.MapUtil;
 
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntity> implements SysUserService {
@@ -100,14 +97,14 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 
         // 获取用户角色数据
         Map<String, Object> roles = sysUserRoleService.getRolesByUserId(sysUser.getId());
-        List<SysRoleEntity> uoleList = MapUtil.get(roles, "allRoles", new TypeReference<List<SysRoleEntity>>() {});
+        List<SysRoleEntity> uoleList = MapUtil.get(roles, "allRoles", new TypeReference<>() {});
         List<String> roleCodes = null;
         if (CollUtil.isNotEmpty(uoleList)) {
              roleCodes = uoleList.stream().map(SysRoleEntity::getRoleCode).collect(Collectors.toList());
         }
 
         //根据用户id获取菜单权限值
-        List<RouterVO> routerVoList = sysMenuService.findUserMenuList(sysUser.getId());
+        List<RouterVO> routerVOList = sysMenuService.findUserMenuList(sysUser.getId());
         //根据用户id获取用户按钮权限
         List<String> permsList = sysMenuService.findUserPermsList(sysUser.getId());
 
@@ -117,7 +114,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
 //        result.put("roles",  "['admin']");
         result.put("roles",  roleCodes);
         result.put("buttons", permsList);
-        result.put("routers", routerVoList);
+        result.put("routers", routerVOList);
         return result;
     }
 }
