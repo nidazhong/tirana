@@ -8,6 +8,7 @@
 | Maven       | 3.6.3   |
 | Spring Boot | 2.7.7   |
 | Mysql       | 8       |
+| Redis       | 6       |
 | knife4j     | 4.0.0   |
 
 ## 特点
@@ -25,7 +26,7 @@
 - Knife4j 和 ResponseBodyAdvice 返回包装的api完整显示问题
 - 返回前端默认值的问题
 - logback-spring.xml的配置
-- json数据保存数据库问题
+- json数据保存数据库问题, jsonArr
 
 ## 升级springboot3注意
 * 1、knife4j 版本

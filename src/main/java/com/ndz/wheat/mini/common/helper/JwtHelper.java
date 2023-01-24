@@ -1,12 +1,16 @@
 package com.ndz.wheat.mini.common.helper;
 
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson2.JSONObject;
 import io.jsonwebtoken.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 生成JSON Web令牌的工具类
@@ -76,6 +80,24 @@ public class JwtHelper {
             return null;
         }
     }
+
+    public static JSONObject getUser(String token) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            if (StrUtil.isEmpty(token)) return null;
+            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(generateSecretKey()).build().parseClaimsJws(token);
+            Claims claims = claimsJws.getBody();
+            String username = (String) claims.get("username");
+            Double userId = (Double) claims.get("userId");
+            jsonObject.put("username", username);
+            jsonObject.put("id", userId.longValue());
+            return jsonObject;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     private static SecretKey generateSecretKey() {
         byte[] encodedKey = Base64.decodeBase64(tokenSignKey);

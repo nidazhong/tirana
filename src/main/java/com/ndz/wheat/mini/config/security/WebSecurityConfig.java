@@ -1,5 +1,7 @@
 package com.ndz.wheat.mini.config.security;
 
+import com.ndz.wheat.mini.common.constant.WheatConstant;
+import com.ndz.wheat.mini.config.interceptor.LoginInterceptor;
 import com.ndz.wheat.mini.service.sys.AsyncLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.ndz.wheat.mini.config.fillter.TokenAuthenticationFilter;
 import com.ndz.wheat.mini.config.fillter.TokenLoginFilter;
 import com.ndz.wheat.mini.service.sys.CustomerUserDetailsService;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -45,6 +48,18 @@ public class WebSecurityConfig {
         a.setPasswordEncoder(customMd5PasswordEncoder);
         return a;
     }
+
+//    /**
+//     * 注册自定义拦截器
+//     *
+//     * @param registry
+//     */
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoginInterceptor())
+//                .addPathPatterns("/**")
+//                .excludePathPatterns("/user/wx/login");//开放登录路径
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager() {
@@ -85,9 +100,8 @@ public class WebSecurityConfig {
         http
                 .requestMatchers((matchers) -> matchers.antMatchers(
                         "/static/**","/templates/**",
-                        "/favicon.ico",
-                        "/swagger-resources/**",
-                        "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/doc.html"))
+                        "/favicon.ico")
+                        .antMatchers(WheatConstant.SWAGGER_PATH))
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
                 .requestCache().disable()
                 .securityContext().disable()
