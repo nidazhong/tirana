@@ -40,12 +40,12 @@ public class LoginInterceptor  implements HandlerInterceptor {
         String token= request.getHeader("token");
 
 
-        log.info("=================request start===========================");
-        String requestURI = request.getRequestURI();
-        log.info("request uri:{}",requestURI);
-        log.info("request method:{}",request.getMethod());
-        log.info("token:{}", token);
-        log.info("=================request end===========================");
+//        log.info("=================request start===========================");
+//        String requestURI = request.getRequestURI();
+//        log.info("request uri:{}",requestURI);
+//        log.info("request method:{}",request.getMethod());
+//        log.info("token:{}", token);
+//        log.info("=================request end===========================");
 
         if(StringUtils.isBlank(token)){
             ApiResult<String> result = ApiResultUtils.error(StateEnum.NO_LOGIN,"未登录");
