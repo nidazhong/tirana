@@ -1,5 +1,6 @@
 package com.ndz.wheat.mini.exception;
 
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,13 +9,14 @@ import com.alibaba.fastjson2.JSON;
 import com.ndz.wheat.mini.common.enums.BizCodeEnum;
 import com.ndz.wheat.mini.common.bean.ApiResult;
 import com.ndz.wheat.mini.common.enums.StateEnum;
-import com.ndz.wheat.mini.common.enums.StatusCode;
-import com.ndz.wheat.mini.entity.base.LogErrorEntity;
+import com.ndz.wheat.mini.config.security.UserSessionContext;
+import com.ndz.wheat.mini.entity.base.SysErrorLogEntity;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
 import com.ndz.wheat.mini.utils.ExceptionUtils;
 import com.ndz.wheat.mini.utils.HttpContextUtils;
 import com.ndz.wheat.mini.utils.IpUtils;
-import com.ndz.wheat.mini.service.sys.LogErrorService;
+import com.ndz.wheat.mini.service.sys.SysErrorLogService;
+import com.ndz.wheat.mini.vo.sys.SysUserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -38,7 +40,7 @@ import cn.hutool.core.map.MapUtil;
 public class ApiExceptionHandler {
 
 	@Autowired
-	private LogErrorService logErrorService;
+	private SysErrorLogService logErrorService;
 
 	/**
 	 * 处理自定义异常
@@ -98,7 +100,7 @@ public class ApiExceptionHandler {
 	 * 保存其他未知异常日志
 	 */
 	private void saveLog(Exception ex){
-		LogErrorEntity errorLog = new LogErrorEntity();
+		SysErrorLogEntity errorLog = new SysErrorLogEntity();
 
 		//请求相关信息
 		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
@@ -106,9 +108,14 @@ public class ApiExceptionHandler {
 		errorLog.setUserAgent(request.getHeader(HttpHeaders.USER_AGENT));
 		errorLog.setRequestUri(request.getRequestURI());
 		errorLog.setRequestMethod(request.getMethod());
+		errorLog.setCreateDate(new Date());
 		Map<String, String> params = HttpContextUtils.getParameterMap(request);
 		if(MapUtil.isNotEmpty(params)){
 			errorLog.setRequestParams(JSON.toJSONString(params));
+		}
+		SysUserVO sysUserVO = UserSessionContext.get();
+		if (sysUserVO!=null && sysUserVO.getName() != null) {
+			errorLog.setCreator(sysUserVO.getName());
 		}
 
 		//异常信息

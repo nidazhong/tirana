@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @TableName("sys_log_error")
-public class LogErrorEntity {
+public class SysErrorLogEntity {
 	private static final long serialVersionUID = 1L;
 
 	@TableId(type = IdType.AUTO)
@@ -48,8 +48,7 @@ public class LogErrorEntity {
 	/**
 	 * 创建者
 	 */
-	@TableField(fill = FieldFill.INSERT)
-	private Long  creator;
+	private String  creator;
 	/**
 	 * 创建时间
 	 */

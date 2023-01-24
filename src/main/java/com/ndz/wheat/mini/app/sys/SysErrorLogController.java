@@ -5,14 +5,12 @@ import java.util.Map;
 import com.ndz.wheat.mini.common.bean.ApiResult;
 import com.ndz.wheat.mini.common.constant.MybatisConstant;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
+import com.ndz.wheat.mini.vo.sys.SysOperLogVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ndz.wheat.mini.common.page.PageData;
-import com.ndz.wheat.mini.service.sys.LogErrorService;
+import com.ndz.wheat.mini.service.sys.SysErrorLogService;
 import com.ndz.wheat.mini.vo.sys.LogErrorVO;
 
 import io.swagger.annotations.Api;
@@ -22,12 +20,12 @@ import io.swagger.annotations.ApiOperation;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping("/base/logError")
+@RequestMapping("/admin/system/sysErrorLog")
 @Api(tags="异常日志模块")
-public class LogErrorController {
+public class SysErrorLogController {
 
     @Autowired
-    LogErrorService logErrorService;
+    SysErrorLogService logErrorService;
 
     @GetMapping("page")
     @ApiOperation("分页")
@@ -40,6 +38,15 @@ public class LogErrorController {
     public ApiResult<PageData<LogErrorVO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
         return ApiResultUtils.ok(logErrorService.page(params));
     }
+
+    @ApiOperation(value = "详情")
+    @GetMapping("info/{id}")
+    public ApiResult<LogErrorVO> get(@PathVariable Long id) {
+        LogErrorVO errorLog = logErrorService.getById(id);
+        return ApiResultUtils.ok(errorLog);
+    }
+
+
 
 //    @GetMapping("export")
 //    @ApiOperation("导出")

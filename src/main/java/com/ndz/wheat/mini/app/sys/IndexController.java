@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = "权限系统登陆管理")
+@Api(tags = "登陆管理")
 @Slf4j
 @RestController
 @RequestMapping("/admin/system/index")

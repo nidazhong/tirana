@@ -23,6 +23,9 @@ public class LogErrorVO {
     private String ip;
     @ApiModelProperty(value = "异常信息")
     private String errorInfo;
+
+    @ApiModelProperty(value = "创建人")
+    private String creator;
     @ApiModelProperty(value = "创建时间")
     private Date createDate;
 }
