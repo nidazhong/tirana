@@ -1,0 +1,59 @@
+server:
+  port: 8347
+spring:
+  application:
+    name: wheat-mini
+  datasource:
+    username: root
+    password: MysqlPwd@1234
+    url: jdbc:mysql://172.16.208.31:3306/wheat_mini?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: 192.168.31.237
+    port: 6379
+    database: 0
+    timeout: 1800000
+    password:
+    jedis:
+      pool:
+        max-active: 20  #最大连接数
+        max-wait: -1    #最大阻塞等待时间(负数表示没限制)
+        max-idle: 5     #最大空闲
+        min-idle: 0     #最小空闲
+  thymeleaf:
+    cache: false # ture开启缓存，提高性能， false 关闭thymeleaf缓存，配合dev-tool可实时看到前端效果
+
+
+# mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml # 不写该配置默认也是这个位置
+  global-config:
+    db-config:
+      logic-delete-field: deleteFlag # 逻辑删除字段
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler # 枚举值配置
+logging:
+  level:
+    com.ndz.wheat: debug # 开启项目包的debug模式即可打印sql执行详情
+
+# knife4j 配置
+knife4j:
+  enable: true # 是否开启knife4j
+#  openapi:
+#    title: 麦子商城API
+#    description: "麦子商城接口文档"
+#    email: 535704264@qq.com
+#    concat: Jack Lee
+#    url: https://www.wheatmall.com
+#    version: v1.0
+#    license: Apache 2.0
+#    license-url: http://www.apache.org/licenses/LICENSE-2.0
+#    terms-of-service-url: https://www.wheatmall.com
+#    group:
+#      all:
+#        group-name: default
+#        api-rule: package
+#        api-rule-resources:
+#          - com.ndz.wheat.mini

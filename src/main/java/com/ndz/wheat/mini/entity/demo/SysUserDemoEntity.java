@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
-import com.ndz.wheat.mini.config.ObjectAndJsonHandler;
+import com.ndz.wheat.mini.config.mybatis.ObjectAndJsonHandler;
 import lombok.Data;
 
 import java.time.LocalDateTime;

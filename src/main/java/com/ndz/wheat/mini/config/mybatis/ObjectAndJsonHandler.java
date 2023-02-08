@@ -1,5 +1,6 @@
-package com.ndz.wheat.mini.config;
+package com.ndz.wheat.mini.config.mybatis;
 
+import com.ndz.wheat.mini.config.GenericAndJson;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
@@ -10,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
- * object和json字符串 互相转化
+ * object 和json 字符串 互相转化
  * 使用的是Jackson
  */
 @MappedJdbcTypes({JdbcType.VARCHAR})
