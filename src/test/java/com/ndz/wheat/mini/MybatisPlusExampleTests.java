@@ -1,21 +1,20 @@
 package com.ndz.wheat.mini;
 
-import cn.hutool.core.lang.UUID;
-import cn.hutool.json.JSONUtil;
-import com.alibaba.fastjson2.JSON;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ndz.wheat.mini.common.enums.demo.CadreRankEnum;
-import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
-import com.ndz.wheat.mini.dao.org.EmployeeDao;
-import com.ndz.wheat.mini.entity.org.EmployeeEntity;
+import java.time.LocalDateTime;
+
+import javax.annotation.Resource;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import javax.annotation.Resource;
-import java.time.LocalDateTime;
-import java.util.Arrays;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ndz.wheat.mini.common.enums.demo.CadreRankEnum;
+import com.ndz.wheat.mini.dao.org.EmployeeDao;
+import com.ndz.wheat.mini.entity.org.EmployeeEntity;
+
+import cn.hutool.json.JSONUtil;
 
 @SpringBootTest
 @ActiveProfiles("test")
