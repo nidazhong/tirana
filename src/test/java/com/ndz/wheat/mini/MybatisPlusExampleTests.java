@@ -43,7 +43,7 @@ public class MybatisPlusExampleTests {
         LambdaQueryWrapper<EmployeeEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.select(EmployeeEntity::getEmpId, EmployeeEntity::getName, EmployeeEntity::getCadreRank).eq(EmployeeEntity::getEmpId, "1");
         EmployeeEntity employeeEntity = employeeDao.selectOne(queryWrapper);
-        System.out.println(JSON.toJSONString(employeeEntity));
+        System.out.println(JSONUtil.toJsonStr(employeeEntity));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.ndz.wheat.mini.entity.org;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.ndz.wheat.mini.common.enums.demo.CadreRankEnum;
 import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
 import com.ndz.wheat.mini.config.mybatis.ListEnumTypeHandler;
@@ -39,4 +40,7 @@ public class EmployeeEntity {
     private List<PositionEnum> position;
 
     private LocalDateTime entryDateTime;
+
+    @TableField(typeHandler = JacksonTypeHandler.class, updateStrategy= FieldStrategy.IGNORED)
+    private List<String> empTag;
 }

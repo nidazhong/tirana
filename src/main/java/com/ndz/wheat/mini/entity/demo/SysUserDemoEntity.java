@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
 import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
-import com.ndz.wheat.mini.config.mybatis.ObjectAndJsonHandler;
+import com.ndz.wheat.mini.config.mybatis.ObjAndJsonHandler;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -44,7 +44,7 @@ public class SysUserDemoEntity {
     private JSONObject extraJson;
 
       // ObjectAndJsonHandler 为自定义
-    @TableField(typeHandler = ObjectAndJsonHandler.class)
+    @TableField(typeHandler = ObjAndJsonHandler.class)
     private List<ExtraNode> extraList;
 
     @TableField(typeHandler = JacksonTypeHandler.class)
@@ -52,7 +52,7 @@ public class SysUserDemoEntity {
     // private ExtraNode[] extraArray;
 
 
-    @TableField(typeHandler = ObjectAndJsonHandler.class)
+    @TableField(typeHandler = ObjAndJsonHandler.class)
     private List<ExtraNode> extraJsonArrStr;
 
 

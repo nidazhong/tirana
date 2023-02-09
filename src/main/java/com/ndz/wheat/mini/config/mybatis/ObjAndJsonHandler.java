@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * 使用的是Jackson
  */
 @MappedJdbcTypes({JdbcType.VARCHAR})
-public class ObjectAndJsonHandler extends BaseTypeHandler<Object> {
+public class ObjAndJsonHandler extends BaseTypeHandler<Object> {
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Object parameter, JdbcType jdbcType) throws SQLException {
         String json = GenericAndJson.objectToJson(parameter);
