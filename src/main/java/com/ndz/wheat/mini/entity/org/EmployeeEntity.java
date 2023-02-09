@@ -5,8 +5,6 @@ import com.ndz.wheat.mini.common.enums.demo.CadreRankEnum;
 import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
 import com.ndz.wheat.mini.config.mybatis.ListEnumTypeHandler;
 import lombok.Data;
-import org.apache.ibatis.type.ArrayTypeHandler;
-import org.apache.ibatis.type.EnumTypeHandler;
 
 import java.time.LocalDateTime;
 import java.util.List;

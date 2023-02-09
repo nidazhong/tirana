@@ -6,8 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import cn.hutool.core.util.EnumUtil;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
@@ -48,14 +51,9 @@ public  class ListEnumTypeHandler extends BaseTypeHandler<List<PositionEnum>> {
         String columnStr = resultSet.getString(s);
         if (JSONUtil.isTypeJSONArray(columnStr)) {
             List<Integer> enumValList = JSON.parseArray(columnStr, Integer.class);
-            enumValList.forEach(val->{
-                PositionEnum byVal = PositionEnum.getByVal(val);
-                if (byVal!=null){
-                    enumList.add(byVal);
-                }
-            });
+            enumValList.forEach(val-> Arrays.stream(PositionEnum.values()).filter(t -> t.getCode().equals(val)).findFirst().ifPresent(enumList::add));
         }
-        return enumList.size()==0?null: enumList;
+        return enumList.size()==0 ? null: enumList;
     }
 
     @Override

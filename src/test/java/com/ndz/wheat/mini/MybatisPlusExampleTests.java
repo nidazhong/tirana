@@ -1,6 +1,7 @@
 package com.ndz.wheat.mini;
 
 import cn.hutool.core.lang.UUID;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -49,13 +50,13 @@ public class MybatisPlusExampleTests {
     public void test02() {
         // 默认查询所有字段
         EmployeeEntity employeeEntity = employeeDao.selectById("1");
-        System.out.println(JSON.toJSONString(employeeEntity));
+        System.out.println(JSONUtil.toJsonStr(employeeEntity));
     }
 
     @Test
     public void test03() {
         // 分页（单表）
         Page<EmployeeEntity> page = employeeDao.selectPage(new Page<>(1, 10), new LambdaQueryWrapper<>());
-        System.out.println(JSON.toJSONString(page));
+        System.out.println(JSONUtil.toJsonStr(page));
     }
 }

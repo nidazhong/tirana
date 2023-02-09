@@ -38,15 +38,6 @@ public enum CadreRankEnum implements BaseEnum<Integer, String> {
         this.desc = desc;
     }
 
-    public static CadreRankEnum getByVal(String val) {
-        return Arrays.stream(CadreRankEnum.values()).filter(t->t.getCode().equals(val)).findFirst().orElse(null);
-    }
-
-    public static CadreRankEnum getByDesc(String desc) {
-        return Arrays.stream(CadreRankEnum.values()).filter(t->t.getDesc().equals(desc)).findFirst().orElse(null);
-    }
-
-
 
     @Override
     public Integer getCode() {
