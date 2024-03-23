@@ -12,6 +12,7 @@ import java.net.UnknownHostException;
 @Slf4j
 @SpringBootApplication
 public class WheatMiniApplication {
+
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext application = SpringApplication.run(WheatMiniApplication.class, args);
         Environment env = application.getEnvironment();
