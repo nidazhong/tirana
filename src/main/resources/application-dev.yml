@@ -6,10 +6,10 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.31.237:3308/wheat_mini?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/wheat?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
-    host: 192.168.31.237
+    host: localhost
     port: 6379
     database: 0
     timeout: 1800000

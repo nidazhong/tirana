@@ -18,13 +18,13 @@ public class WheatMiniApplication {
         log.info("\n----------------------------------------------------------\n\t" +
                         "Application '{}' is running! Access URLs:\n\t" +
                         "Local: \t\thttp://localhost:{}\n\t" +
-                        "Doc: \thttp://{}:{}/doc.html\n"+
+                        "Doc: \thttp://{}:{}/doc.html\n\t"+
+                        "SuperUser: \t\tadmin, 123456\n"+
                         "----------------------------------------------------------",
-                env.getProperty("spring.application.name"),
-                env.getProperty("server.port"),
-                InetAddress.getLocalHost().getHostAddress(),
-                env.getProperty("server.port"));
-
+        env.getProperty("spring.application.name"),
+        env.getProperty("server.port"),
+        InetAddress.getLocalHost().getHostAddress(),
+        env.getProperty("server.port"));
 
     }
 

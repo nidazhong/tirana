@@ -102,7 +102,7 @@ public class SwaggerDemoController {
                 IoUtil.close(fileInputStream);
                 IoUtil.close(outputStream);
             }
-        }catch (Exception e){
+        } catch (Exception e){
 
         }
 

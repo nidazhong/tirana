@@ -13,4 +13,10 @@ public class NormalTests {
         String s = JSON.toJSONString(Arrays.asList(PositionEnum.COO, PositionEnum.STAFF));
         System.out.println(s);
     }
+
+    @Test
+    public void test02() {
+        System.out.println("Hello IRAN");
+        System.out.println("Hello Egypt");
+    }
 }
