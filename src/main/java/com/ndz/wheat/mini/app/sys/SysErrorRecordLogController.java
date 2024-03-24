@@ -5,7 +5,6 @@ import java.util.Map;
 import com.ndz.wheat.mini.common.bean.ApiResult;
 import com.ndz.wheat.mini.common.constant.MybatisConstant;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
-import com.ndz.wheat.mini.vo.sys.SysOperLogVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +21,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @RestController
 @RequestMapping("/admin/system/sysErrorLog")
 @Api(tags="异常日志模块")
-public class SysErrorLogController {
+public class SysErrorRecordLogController {
 
     @Autowired
     SysErrorLogService logErrorService;

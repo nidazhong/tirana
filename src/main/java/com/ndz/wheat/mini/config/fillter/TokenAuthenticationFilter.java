@@ -69,7 +69,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             AssertUtil.notNull(useruame, "token解析username失败");
             logger.info("useruame:"+useruame);
             if (StrUtil.isNotEmpty(useruame)) {
-                // Redis 取出用户数据
+                // Redis 取出用户数据 (when it finished login-filter will put on the Redis)
                 String authoritiesString = redisTemplate.opsForValue().get(WheatConstant.REDIS_PREFIX+useruame);
                 List<Map<String, String>> mapList = JSON.parseArray(authoritiesString, (Type) Map.class);
                 List<SimpleGrantedAuthority> authorities = new ArrayList<>();

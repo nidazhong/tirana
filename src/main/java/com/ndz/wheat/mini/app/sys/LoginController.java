@@ -1,35 +1,27 @@
 package com.ndz.wheat.mini.app.sys;
 
-import cn.hutool.core.map.MapUtil;
 import com.alibaba.fastjson2.JSON;
 import com.ndz.wheat.mini.common.bean.ApiResult;
-import com.ndz.wheat.mini.common.enums.BizCodeEnum;
-import com.ndz.wheat.mini.common.helper.JwtHelper;
 import com.ndz.wheat.mini.config.security.UserSessionContext;
 import com.ndz.wheat.mini.dto.sys.LoginDTO;
-import com.ndz.wheat.mini.exception.WheatException;
 import com.ndz.wheat.mini.service.sys.IndexService;
 import com.ndz.wheat.mini.service.sys.SysUserService;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
-import com.ndz.wheat.mini.utils.AssertUtil;
 import com.ndz.wheat.mini.vo.sys.SysUserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 
 @Api(tags = "登陆管理")
 @Slf4j
 @RestController
 @RequestMapping("/admin/system/index")
-public class IndexController {
+public class LoginController {
 
     @Autowired
     IndexService indexService;
@@ -39,6 +31,7 @@ public class IndexController {
     @ApiOperation("登陆")
     @PostMapping("/login")
     public ApiResult<Map<String,Object>> login(@RequestBody LoginDTO dto) {
+        // 会经过token认证，TokenLoginFilter类处理
         return ApiResultUtils.ok(indexService.login(dto));
     }
 

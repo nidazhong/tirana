@@ -1,12 +1,9 @@
 package com.ndz.wheat.mini.app.sys;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ndz.wheat.mini.common.bean.ApiResult;
 import com.ndz.wheat.mini.common.page.PageData;
 import com.ndz.wheat.mini.dto.sys.SysLoginLogQueryDTO;
-import com.ndz.wheat.mini.entity.sys.SysLoginLogEntity;
 import com.ndz.wheat.mini.service.sys.AsyncLoginLogService;
-import com.ndz.wheat.mini.service.sys.impl.AsyncLoginLogServiceImpl;
 import com.ndz.wheat.mini.utils.ApiResultUtils;
 import com.ndz.wheat.mini.vo.sys.SysLoginLogVO;
 import io.swagger.annotations.Api;
@@ -18,13 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-
 
 @Api(value = "SysLoginLog管理", tags = "SysLoginLog管理")
 @RestController
 @RequestMapping(value="/admin/system/sysLoginLog")
-public class SysLoginLogController {
+public class SysLoginRecordLogController {
     @Autowired
     private AsyncLoginLogService sysLoginLogService;
 

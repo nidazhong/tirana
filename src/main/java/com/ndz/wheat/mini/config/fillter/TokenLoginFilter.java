@@ -41,6 +41,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     private RedisTemplate<String, String> redisTemplate;
     private AsyncLoginLogService asyncLoginLogService;
 
+    // 构造器
     public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate<String, String> redisTemplate,
                             AsyncLoginLogService asyncLoginLogService) {
         this.setAuthenticationManager(authenticationManager);
@@ -92,7 +93,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = JwtHelper.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
 
         // Redis保存权限数据
-        redisTemplate.opsForValue().set(WheatConstant.REDIS_PREFIX+customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
+        redisTemplate.opsForValue().set(WheatConstant.REDIS_PREFIX + customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
 
         // 记录登陆成功日志
         asyncLoginLogService.recordLoginLog(customUser.getUsername(), 0, IpUtils.getIpAddr(request), "登录成功");
