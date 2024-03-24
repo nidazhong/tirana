@@ -75,26 +75,22 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
 
     @Override
     public List<SysMenuVO> findSysMenuByRoleId(Long roleId) {
-        //获取所有status为1的菜单列表
+        // 获取所有status为1的菜单列表
         List<SysMenuEntity> menuList = this.baseDao.selectList(new QueryWrapper<SysMenuEntity>().eq("status", 1));
         List<SysMenuVO> sysMenuVOS = BeanUtil.copyToList(menuList, SysMenuVO.class);
-        //根据角色id获取角色权限
+        // 根据角色id获取角色权限
         List<SysRoleMenuEntity> roleMenus = sysRoleMenuDao.selectList(new QueryWrapper<SysRoleMenuEntity>().eq("role_id",roleId));
-        //获取该角色已分配的所有菜单id
+        // 获取该角色已分配的所有菜单id
         List<Long> roleMenuIds = new ArrayList<>();
         for (SysRoleMenuEntity roleMenu : roleMenus) {
             roleMenuIds.add(roleMenu.getMenuId());
         }
-        //遍历所有菜单列表
+        // 遍历所有菜单列表
         for (SysMenuVO sysMenu : sysMenuVOS) {
-            if(roleMenuIds.contains(sysMenu.getId())){
-                //设置该菜单已被分配
-                sysMenu.setSelect(true);
-            }else {
-                sysMenu.setSelect(false);
-            }
+            // if it is true then the menu will be selected
+            sysMenu.setSelect(roleMenuIds.contains(sysMenu.getId()));
         }
-        //将权限列表转换为权限树
+        // 将权限列表转换为权限树
         List<SysMenuVO> sysMenus = MenuHelper.buildTree(sysMenuVOS);
         return sysMenus;
     }
@@ -102,16 +98,16 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void doAssign(AssginMenuDTO dto) {
-        //删除已分配的权限
+        // 删除已分配的权限
         sysRoleMenuDao.delete(new QueryWrapper<SysRoleMenuEntity>().eq("role_id",dto.getRoleId()));
-        //遍历所有已选择的权限id
+        // 遍历所有已选择的权限id
         for (Long menuId : dto.getMenuIdList()) {
             if(menuId != null){
-                //创建SysRoleMenu对象
+                // 创建SysRoleMenu对象
                 SysRoleMenuEntity sysRoleMenu = new SysRoleMenuEntity();
                 sysRoleMenu.setMenuId(menuId);
                 sysRoleMenu.setRoleId(dto.getRoleId());
-                //添加新权限
+                // 添加新权限
                 sysRoleMenuDao.insert(sysRoleMenu);
             }
         }
@@ -122,7 +118,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
      */
     @Override
     public List<RouterVO> findUserMenuList(Long userId) {
-        //超级管理员admin账号id为：1
+        // 超级管理员admin账号id为：1
         List<SysMenuEntity> sysMenuList = null;
         if (userId == 1) {
             sysMenuList = this.baseDao.selectList(new LambdaQueryWrapper<SysMenuEntity>()
@@ -132,9 +128,9 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
             sysMenuList = this.baseDao.listByUserId(userId);
         }
         List<SysMenuVO> sysMenuVOS = BeanUtil.copyToList(sysMenuList, SysMenuVO.class);
-        //构建树形数据
+        // 构建树形数据
         List<SysMenuVO> sysMenuTreeList = MenuHelper.buildTree(sysMenuVOS);
-        //构建路由
+        // 构建路由
         List<RouterVO> routerVoList = RouterHelper.buildRouters(sysMenuTreeList);
         return routerVoList;
     }
@@ -148,7 +144,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
      */
     @Override
     public List<String> findUserPermsList(Long userId) {
-        //超级管理员admin账号id为：1
+        // 超级管理员admin账号id为：1
         List<SysMenuEntity> sysMenuList = null;
         if (userId == 1) {
             // 管理员取所有
@@ -157,7 +153,7 @@ public class SysMenuServiceImpl extends BaseServiceImpl<SysMenuDao, SysMenuEntit
         } else {
             sysMenuList = this.baseDao.listByUserId(userId);
         }
-        //创建返回的集合
+        // 创建返回的集合
         List<String> permissionList = new ArrayList<>();
         for (SysMenuEntity sysMenu : sysMenuList) {
             // 按钮权限
