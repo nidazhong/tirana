@@ -33,6 +33,7 @@
 - 返回前端默认值的问题
 - logback-spring.xml的配置
 - json数据保存数据库问题, jsonArr
+- 改名词后数据库名词sql名也要改
 
 ## 升级springboot3注意
 * 1、knife4j 版本
