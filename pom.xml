@@ -11,10 +11,10 @@
     </parent>
 
     <groupId>com.ndz.wheat</groupId>
-    <artifactId>wheat-mini</artifactId>
+    <artifactId>tirana</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <description>麦子商城Mini版</description>
+    <description>地拉那SpringBoot项目</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

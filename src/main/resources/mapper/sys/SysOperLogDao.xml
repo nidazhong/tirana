@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ndz.wheat.mini.dao.sys.SysOperLogDao">
-  <resultMap id="BaseResultMap" type="com.ndz.wheat.mini.entity.sys.SysOperLogEntity">
+<mapper namespace="com.ndz.tirana.dao.sys.SysOperLogDao">
+  <resultMap id="BaseResultMap" type="com.ndz.tirana.entity.sys.SysOperLogEntity">
     <!--@mbg.generated-->
     <!--@Table sys_oper_log-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -64,7 +64,7 @@
 
 
 
-  <select id="page" resultType="com.ndz.wheat.mini.vo.sys.SysOperLogVO">
+  <select id="page" resultType="com.ndz.tirana.vo.sys.SysOperLogVO">
     select <include refid="columns"/>
     from sys_oper_log
     <include refid="findPageWhere"/>

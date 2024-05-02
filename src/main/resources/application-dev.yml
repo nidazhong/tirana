@@ -2,7 +2,7 @@ server:
   port: 8347
 spring:
   application:
-    name: wheat-mini
+    name: tirana
   datasource:
     username: root
     password: 123456
