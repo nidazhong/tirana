@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.ndz.wheat.mini.common.enums.demo.CadreRankEnum;
 import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
 import com.ndz.wheat.mini.config.mybatis.ListEnumTypeHandler;
+import com.ndz.wheat.mini.config.mybatis.ObjAndJsonHandler;
 import lombok.Data;
+import org.apache.ibatis.type.ObjectTypeHandler;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,6 +46,11 @@ public class EmployeeEntity {
     @TableField(typeHandler = JacksonTypeHandler.class, updateStrategy= FieldStrategy.IGNORED)
     private List<String> empTag;
 
+    // todo
+    @TableField(typeHandler = JacksonTypeHandler.class, updateStrategy= FieldStrategy.IGNORED)
+    private List<RoleExtra> roleExtra;
 
+    @TableField(typeHandler = JacksonTypeHandler.class, updateStrategy= FieldStrategy.IGNORED)
+    private LivePlace livePlace;
 
 }

@@ -25,8 +25,7 @@ public class ObjAndJsonHandler extends BaseTypeHandler<Object> {
     @Override
     public Object getNullableResult(ResultSet rs, String columnName) throws SQLException {
         String string = rs.getString(columnName);
-        return GenericAndJson.jsonToObject(string, new TypeReference<Object>() {
-        });
+        return GenericAndJson.jsonToObject(string, new TypeReference<Object>() {});
     }
 
     @Override
