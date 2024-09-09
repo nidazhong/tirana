@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ndz.wheat.mini.dao.sys.SysLoginLogDao">
-  <resultMap id="BaseResultMap" type="com.ndz.wheat.mini.entity.sys.SysLoginLogEntity">
+<mapper namespace="com.ndz.tirana.dao.sys.SysLoginLogDao">
+  <resultMap id="BaseResultMap" type="com.ndz.tirana.entity.sys.SysLoginLogEntity">
     <!--@mbg.generated-->
     <!--@Table sys_login_log-->
     <id column="id" jdbcType="BIGINT" property="id" />
@@ -19,7 +19,7 @@
     id, username, ipaddr, `status`, msg, access_time, create_time, update_time, is_deleted
   </sql>
 
-  <resultMap id="sysLoginLogMap" type="com.ndz.wheat.mini.vo.sys.SysLoginLogVO" autoMapping="true">
+  <resultMap id="sysLoginLogMap" type="com.ndz.tirana.vo.sys.SysLoginLogVO" autoMapping="true">
   </resultMap>
 
 
