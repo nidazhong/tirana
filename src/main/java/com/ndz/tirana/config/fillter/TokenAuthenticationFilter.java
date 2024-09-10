@@ -2,12 +2,13 @@ package com.ndz.tirana.config.fillter;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
-import com.ndz.tirana.common.constant.WheatConstant;
+import com.ndz.tirana.common.constant.TiranaConstant;
 import com.ndz.tirana.common.helper.JwtHelper;
 import com.ndz.tirana.common.bean.ApiResult;
 import com.ndz.tirana.common.enums.StateEnum;
 import com.ndz.tirana.utils.ApiResultUtils;
 import com.ndz.tirana.utils.AssertUtil;
+import com.ndz.tirana.utils.HttpContextUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -59,15 +60,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         // token置于header里
-        String token = request.getHeader("token");
-        logger.info("token:"+token);
+//        String token = request.getHeader("token");
+        String token = HttpContextUtils.getToken(request);
         if (StrUtil.isNotEmpty(token)) {
             String useruame = JwtHelper.getUsername(token);
             AssertUtil.notNull(useruame, "token解析username失败");
             logger.info("useruame:"+useruame);
             if (StrUtil.isNotEmpty(useruame)) {
                 // Redis 取出用户数据 (when it finished login-filter will put on the Redis)
-                String authoritiesString = redisTemplate.opsForValue().get(WheatConstant.REDIS_PREFIX+useruame);
+                String authoritiesString = redisTemplate.opsForValue().get(TiranaConstant.REDIS_PREFIX+useruame);
                 List<Map<String, String>> mapList = JSON.parseArray(authoritiesString, (Type) Map.class);
                 List<SimpleGrantedAuthority> authorities = new ArrayList<>();
                 for (Map<String, String> map : mapList) {

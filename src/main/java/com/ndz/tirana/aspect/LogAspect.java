@@ -10,6 +10,7 @@ import com.ndz.tirana.common.annotation.Log;
 import com.ndz.tirana.common.helper.JwtHelper;
 import com.ndz.tirana.entity.sys.SysOperLogEntity;
 import com.ndz.tirana.service.sys.AsyncOperLogService;
+import com.ndz.tirana.utils.HttpContextUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -77,7 +78,8 @@ public class LogAspect {
             operLog.setOperIp(ip);
             operLog.setOperUrl(request.getRequestURI());
 
-            String token = request.getHeader("token");
+//            String token = request.getHeader("token");
+            String token = HttpContextUtils.getToken(request);
             String userName = JwtHelper.getUsername(token);
             operLog.setOperName(userName);
 

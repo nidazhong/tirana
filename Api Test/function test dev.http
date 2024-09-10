@@ -17,4 +17,4 @@ Content-Type: application/json
 
 ### Get User List
 GET http://{{hostUrl}}/admin/system/sysUser/1/10
-token: {{auth_token}}
+Authorization: Bearer {{auth_token}}

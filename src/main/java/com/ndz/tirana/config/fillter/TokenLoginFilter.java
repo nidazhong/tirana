@@ -2,7 +2,7 @@ package com.ndz.tirana.config.fillter;
 
 import com.alibaba.fastjson2.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ndz.tirana.common.constant.WheatConstant;
+import com.ndz.tirana.common.constant.TiranaConstant;
 import com.ndz.tirana.common.helper.JwtHelper;
 import com.ndz.tirana.common.bean.ApiResult;
 import com.ndz.tirana.common.enums.BizCodeEnum;
@@ -93,7 +93,7 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = JwtHelper.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
 
         // Redis保存权限数据
-        redisTemplate.opsForValue().set(WheatConstant.REDIS_PREFIX + customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
+        redisTemplate.opsForValue().set(TiranaConstant.REDIS_PREFIX + customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
 
         // 记录登陆成功日志
         asyncLoginLogService.recordLoginLog(customUser.getUsername(), 0, IpUtils.getIpAddr(request), "登录成功");

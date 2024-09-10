@@ -7,6 +7,7 @@ import com.ndz.tirana.config.security.UserSessionContext;
 import com.ndz.tirana.common.bean.ApiResult;
 import com.ndz.tirana.common.enums.StateEnum;
 import com.ndz.tirana.utils.ApiResultUtils;
+import com.ndz.tirana.utils.HttpContextUtils;
 import com.ndz.tirana.vo.sys.SysUserVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -20,9 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class LoginInterceptor  implements HandlerInterceptor {
 
+    /**
+     * 在执行controller方法（handler之前进行执行
+     * 验证token
+     */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //在执行controller方法（handler之前进行执行
 
         /**
          * 需要判断请求的接口路径是否为handlermethod（controller方法
@@ -35,7 +39,8 @@ public class LoginInterceptor  implements HandlerInterceptor {
 
             return true;
         }
-        String token= request.getHeader("token");
+//        String token= request.getHeader("token");
+        String token = HttpContextUtils.getToken(request);
 
 
 //        log.info("=================request start===========================");

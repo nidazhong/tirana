@@ -1,6 +1,6 @@
 package com.ndz.tirana.config.security;
 
-import com.ndz.tirana.common.constant.WheatConstant;
+import com.ndz.tirana.common.constant.TiranaConstant;
 import com.ndz.tirana.config.fillter.TokenAuthenticationFilter;
 import com.ndz.tirana.config.fillter.TokenLoginFilter;
 import com.ndz.tirana.service.sys.AsyncLoginLogService;
@@ -99,7 +99,7 @@ public class WebSecurityConfig {
                 .requestMatchers((matchers) -> matchers.antMatchers(
                         "/static/**","/templates/**",
                         "/favicon.ico")
-                        .antMatchers(WheatConstant.SWAGGER_PATH))
+                        .antMatchers(TiranaConstant.SWAGGER_PATH))
                 .authorizeHttpRequests((authorize) -> authorize.anyRequest().permitAll())
                 .requestCache().disable()
                 .securityContext().disable()

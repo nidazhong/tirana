@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ndz.tirana.common.constant.TiranaConstant;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.context.request.RequestAttributes;
@@ -53,5 +54,15 @@ public class HttpContextUtils {
 	public static String getOrigin(){
 		HttpServletRequest request = getHttpServletRequest();
 		return request.getHeader(HttpHeaders.ORIGIN);
+	}
+
+	public static String getToken(HttpServletRequest request){
+		if (request == null) return null;
+		String token = null;
+        String bearerToken = request.getHeader(TiranaConstant.AUTH_HEADER);
+        if (bearerToken != null && bearerToken.startsWith(TiranaConstant.TOKEN_HEADER)) {
+            token =  bearerToken.substring(7);
+        }
+		return token;
 	}
 }
