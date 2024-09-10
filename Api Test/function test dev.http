@@ -1,5 +1,5 @@
 
-## Get Token
+### Get Token
 POST http://{{hostUrl}}/admin/system/index/login
 Content-Type: application/json
 
@@ -8,3 +8,13 @@ Content-Type: application/json
   "password": "{{password}}"
 }
 
+> {%
+        client.test("Request executed successfully", function() {
+          client.assert(response.status === 200, "Response status is not 200");
+        })
+        client.global.set("auth_token", response.body.data.token)
+ %}
+
+### Get User List
+GET http://{{hostUrl}}/admin/system/sysUser/1/10
+token: {{auth_token}}
