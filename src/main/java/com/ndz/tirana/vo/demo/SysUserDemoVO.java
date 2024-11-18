@@ -7,7 +7,7 @@ import com.alibaba.fastjson2.JSONObject;
 import com.ndz.tirana.common.enums.demo.PositionEnum;
 import com.ndz.tirana.entity.demo.SysUserDemoEntity;
 
-import io.swagger.annotations.ApiModelProperty;
+//import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,28 +15,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SysUserDemoVO {
 
-    @ApiModelProperty(value = "用户id")
+    //@ApiModelProperty(value = "用户id")
     private Long userId;
-    @ApiModelProperty(value = "用户姓名", required = true)
+    //@ApiModelProperty(value = "用户姓名", required = true)
     private String userName;
 
-    @ApiModelProperty(value = "部门id",required = true)
+    //@ApiModelProperty(value = "部门id",required = true)
     private Long depId;
 
-    @ApiModelProperty(value = "职位", example = "COO")
+    //@ApiModelProperty(value = "职位", example = "COO")
     private PositionEnum position;
 
-    @ApiModelProperty(value = "创建时间")
+    //@ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
 
-    @ApiModelProperty(value = "extraObject[Jackson]")
+    //@ApiModelProperty(value = "extraObject[Jackson]")
     private SysUserDemoEntity.ExtraNode extraObject;
-    @ApiModelProperty(value = "extraJson[Fastjson]")
+    //@ApiModelProperty(value = "extraJson[Fastjson]")
     private JSONObject extraJson;
-    @ApiModelProperty(value = "extraList[ObjectAndJsonHandler自定义]")
+    //@ApiModelProperty(value = "extraList[ObjectAndJsonHandler自定义]")
     private List<SysUserDemoEntity.ExtraNode> extraList;
-    @ApiModelProperty(value = "extraArray[Jackson]")
+    //@ApiModelProperty(value = "extraArray[Jackson]")
     private List<SysUserDemoEntity.ExtraNode> extraArray;
 
     private List<SysUserDemoEntity.ExtraNode> extraJsonArrStr;

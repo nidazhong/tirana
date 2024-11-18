@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ComponentScan(basePackages = "com.ndz.wheat.mini")
+@ComponentScan(basePackages = "com.ndz.tirana")
 public class WebMVCConfig  implements WebMvcConfigurer {
     /**
      * 注册自定义拦截器

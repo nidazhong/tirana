@@ -6,7 +6,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3307/tirana?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3308/tirana?useUnicode=true&characterEncoding=UTF-8&useTimezone=true&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   redis:
     host: localhost
@@ -40,7 +40,7 @@ logging:
 
 # knife4j 配置
 knife4j:
-  enable: true # 是否开启knife4j
+  enable: false # 是否开启knife4j
 #  openapi:
 #    title: 麦子商城API
 #    description: "麦子商城接口文档"
@@ -57,3 +57,58 @@ knife4j:
 #        api-rule: package
 #        api-rule-resources:
 #          - com.ndz.wheat.mini
+
+# 开放健康检查接口
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+  metrics:
+    export:
+      influx:
+        enabled: true
+        #配置类InfluxProperties
+        #数据库名称，如果不填默认为mydb
+        db: mydb
+        #数据库地址
+        uri: http://192.168.127.10:8086
+        #数据库用户名
+        userName: faris
+        #密码
+        password: password
+        #是否自动建表,默认值：true
+        auto-create-db: true
+        #ANY,  ONE,  QUORUM, ALL; 集群使用
+        # ANY 写入任何一个节点，就返回成功（即使数据的所属文件和节点不一致，也算保存成功）
+        # ONE 可以写入任何一个节点，就返回成功（必须数据所属文件和节点一致才算保存成功）
+        # QUORUM 大多数节点返回成功即成功（例如 三个节点，两个节点保存成功，即可按成功返回）
+        # ALL 所有节点返回成功才算成功 （例如有三个节点，所有节点保存成功，才算是成功）
+        consistency: one
+        #是否启用压缩
+        compressed: true
+        #数据保留策略
+        retentionPolicy: autogen
+        #Time period for which Influx should retain data in the current database. For instance 7d
+        # 数据保留的时间，例如保留七天
+        #retentionDuration:
+        #How many copies of the data are stored in the cluster. Must be 1 for a single node instance.
+        #节点的备份数据，单节点的必须为1
+        #retentionReplicationFactor:
+        #每一组文件，保存的时间范围
+        #retentionShardDuration:
+        # 配置类InfluxProperties的父类StepRegistryProperties属性
+        #多长时间保存一次 默认1分钟
+        step: 1m
+        #连接超时时间(如果不填默认为1S)
+        connect-timeout: 1s
+        #读取超时时间（如果不填默认10S）
+        read-timeout: 10s
+        #线程数量（如果不填默认为2）
+#        numThreads: 2
+        #The number of parameters or columns that can be queued within each call to Exec. Defaults to 10000
+        #多少条数据存到数据库
+        batchSize: 5000

@@ -8,8 +8,8 @@ import com.ndz.tirana.dto.sys.LoginDTO;
 import com.ndz.tirana.service.sys.IndexService;
 import com.ndz.tirana.service.sys.SysUserService;
 import com.ndz.tirana.utils.ApiResultUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Api(tags = "登陆管理")
+//@Api(tags = "登陆管理")
 @Slf4j
 @RestController
 @RequestMapping("/admin/system/index")
@@ -28,7 +28,7 @@ public class LoginController {
     @Autowired
     SysUserService sysUserService;
 
-    @ApiOperation("登陆")
+    ////@ApiOperation("登陆")
     @PostMapping("/login")
     public ApiResult<Map<String,Object>> login(@RequestBody LoginDTO dto) {
         // 会经过token认证，TokenLoginFilter类处理
@@ -37,7 +37,7 @@ public class LoginController {
 
 
 
-    @ApiOperation("用户信息")
+    ////@ApiOperation("用户信息")
     @GetMapping("/info")
     public ApiResult<Map<String,Object>> info(HttpServletRequest request) {
         SysUserVO sysUserVO = UserSessionContext.get();
@@ -52,7 +52,7 @@ public class LoginController {
         return ApiResultUtils.ok(map);
     }
 
-    @ApiOperation("登出")
+    ////@ApiOperation("登出")
     @PostMapping("/logout")
     public ApiResult<Map<String,Object>> logout(){
         return ApiResultUtils.ok();

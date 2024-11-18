@@ -1,8 +1,8 @@
-//package com.ndz.wheat.mini.config.security;
+//package com.ndz.tirana.config.security;
 //
-//import com.ndz.wheat.mini.config.fillter.TokenAuthenticationFilter;
-//import com.ndz.wheat.mini.config.fillter.TokenLoginFilter;
-//import com.ndz.wheat.mini.service.sys.CustomerUserDetailsService;
+//import com.ndz.tirana.config.fillter.TokenAuthenticationFilter;
+//import com.ndz.tirana.config.fillter.TokenLoginFilter;
+//import com.ndz.tirana.service.sys.CustomerUserDetailsService;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.security.authentication.AuthenticationManager;

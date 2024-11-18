@@ -12,11 +12,11 @@ import com.ndz.tirana.dto.sys.SysUserDTO;
 import com.ndz.tirana.service.sys.SysUserService;
 import com.ndz.tirana.utils.ApiResultUtils;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiParam;
 
-@Api(tags = "用户管理")
+//@Api(tags = "用户管理")
 @RestController
 @RequestMapping("/admin/system/sysUser")
 public class SysUserController {
@@ -24,48 +24,48 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-    @ApiOperation(value = "获取分页列表")
+    ////@ApiOperation(value = "获取分页列表")
     @GetMapping("/{page}/{limit}")
     public ApiResult<PageData<SysUserVO>> page(
-            @ApiParam(name = "page", value = "当前页码", required = true, example = "1")
+            //@ApiParam(name = "page", value = "当前页码", required = true, example = "1")
             @PathVariable Long page,
-            @ApiParam(name = "limit", value = "每页记录数", required = true, example = "10")
+            //@ApiParam(name = "limit", value = "每页记录数", required = true, example = "10")
             @PathVariable Long limit,
-            @ApiParam(name = "query", value = "查询对象", required = false)
+            //@ApiParam(name = "query", value = "查询对象", required = false)
             QuerySysUserDTO query) {
 
         return ApiResultUtils.ok(sysUserService.page(page, limit, query));
     }
 
-    @ApiOperation(value = "获取用户")
+    ////@ApiOperation(value = "获取用户")
     @GetMapping("/get/{id}")
     public ApiResult<SysUserVO> get(@PathVariable Long id) {
         SysUserVO user = sysUserService.getById(id);
         return ApiResultUtils.ok(user);
     }
 
-    @ApiOperation(value = "保存用户")
+    ////@ApiOperation(value = "保存用户")
     @PostMapping("/save")
     public ApiResult<Object> save(@RequestBody SysUserDTO user) {
         sysUserService.save(user);
         return ApiResultUtils.ok();
     }
 
-    @ApiOperation(value = "更新用户")
+    ////@ApiOperation(value = "更新用户")
     @PutMapping("/update")
     public ApiResult<Object> updateById(@RequestBody SysUserDTO user) {
         sysUserService.updateById(user);
         return ApiResultUtils.ok();
     }
 
-    @ApiOperation(value = "删除用户")
+    ////@ApiOperation(value = "删除用户")
     @DeleteMapping("/remove/{id}")
     public ApiResult<Object> remove(@PathVariable Long id) {
         sysUserService.removeById(id);
         return ApiResultUtils.ok();
     }
 
-    @ApiOperation(value = "更新状态")
+    ////@ApiOperation(value = "更新状态")
     @GetMapping("updateStatus/{id}/{status}")
     public ApiResult<Object> updateStatus(@PathVariable Long id, @PathVariable Integer status) {
         sysUserService.updateStatus(id, status);

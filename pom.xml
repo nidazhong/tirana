@@ -10,7 +10,7 @@
         <version>2.7.7</version>
     </parent>
 
-    <groupId>com.ndz.wheat</groupId>
+    <groupId>com.ndz.tirana</groupId>
     <artifactId>tirana</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -27,7 +27,7 @@
         <fastjson2.version>2.0.22</fastjson2.version>
         <redisson.version>3.19.1</redisson.version>
         <tlog.version>1.5.0</tlog.version>
-        <knife4j.version>4.0.0</knife4j.version>
+        <knife4j.version>4.5.0</knife4j.version>
         <spring-cloud-starter-bootstrap.version>3.1.5</spring-cloud-starter-bootstrap.version>
         <jjwt.version>0.11.5</jjwt.version>
         <netty-resolver-dns-native-macos.version>4.1.72.Final</netty-resolver-dns-native-macos.version>
@@ -101,9 +101,10 @@
         <!--knife4j-->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+            <artifactId>knife4j-openapi3-spring-boot-starter</artifactId>
             <version>${knife4j.version}</version>
         </dependency>
+
         <!--thymeleaf-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -143,19 +144,24 @@
             <classifier>osx-aarch_64</classifier>
             <version>${netty-resolver-dns-native-macos.version}</version>
         </dependency>
-
+        <!--Monitor-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.12.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-influx</artifactId>
+            <version>1.12.7</version>
+        </dependency>
     </dependencies>
 
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
+    <!--项目maven仓库，优先级最高-->
     <repositories>
         <repository>
             <id>aliyun</id>
@@ -169,15 +175,25 @@
         </repository>
     </repositories>
     <pluginRepositories>
-        <pluginRepository>
-            <id>aliyun-plugin</id>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+    <pluginRepository>
+        <id>aliyun-plugin</id>
+        <url>https://maven.aliyun.com/repository/public</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </pluginRepository>
+</pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
   </project>
