@@ -23,7 +23,7 @@
         <maven.test.skip>true</maven.test.skip>
         <lombok.version>1.18.24</lombok.version>
         <hutool.version>5.8.11</hutool.version>
-        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <fastjson2.version>2.0.22</fastjson2.version>
         <redisson.version>3.19.1</redisson.version>
         <tlog.version>1.5.0</tlog.version>
@@ -37,6 +37,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--Spring Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!--mybatis-plus-->
         <dependency>
@@ -73,6 +78,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--junit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
         <!--aop-->
@@ -125,23 +136,28 @@
             <artifactId>jjwt-gson</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
-        <!--Spring Security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
         <!--redis-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--mac netty 警告-->
+        <!--&lt;!&ndash;MongoDB&ndash;&gt;-->
+        <!--<dependency>-->
+        <!--    <groupId>org.springframework.boot</groupId>-->
+        <!--    <artifactId>spring-boot-starter-data-mongodb</artifactId>-->
+        <!--</dependency>-->
+        <!--mac netty 警告 ,解决Apple M1 芯片兼容问题-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-resolver-dns-native-macos</artifactId>
             <scope>runtime</scope>
             <classifier>osx-aarch_64</classifier>
             <version>${netty-resolver-dns-native-macos.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.11</version>
         </dependency>
 
     </dependencies>

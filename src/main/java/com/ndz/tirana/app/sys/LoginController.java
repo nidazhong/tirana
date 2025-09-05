@@ -31,8 +31,8 @@ public class LoginController {
     @ApiOperation("登陆")
     @PostMapping("/login")
     public ApiResult<Map<String,Object>> login(@RequestBody LoginDTO dto) {
-        // 会经过token认证，TokenLoginFilter类处理
-        return ApiResultUtils.ok(indexService.login(dto));
+        // 会经过token认证，自动拦截到LoginFilter登录过滤器去类处理
+        return ApiResultUtils.ok();
     }
 
 

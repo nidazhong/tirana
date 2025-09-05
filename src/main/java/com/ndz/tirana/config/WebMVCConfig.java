@@ -12,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMVCConfig  implements WebMvcConfigurer {
     /**
      * 注册自定义拦截器
+     * 通过拦截器方式进行接口认证
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

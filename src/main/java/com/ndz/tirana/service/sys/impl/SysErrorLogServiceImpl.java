@@ -4,6 +4,7 @@ package com.ndz.tirana.service.sys.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.ndz.tirana.common.constant.MybatisConstant;
 import com.ndz.tirana.dao.sys.LogErrorDao;
@@ -40,6 +41,7 @@ public class SysErrorLogServiceImpl extends BaseServiceImpl<LogErrorDao, SysErro
         IPage<SysErrorLogEntity> page = baseDao.selectPage(
                 getPage(params, MybatisConstant.CREATE_DATE, false), queryWrapper
         );
+
         return getPageData(page, LogErrorVO.class);
     }
 

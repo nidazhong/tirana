@@ -18,6 +18,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ */
 @Slf4j
 public class LoginInterceptor  implements HandlerInterceptor {
 
@@ -52,7 +55,7 @@ public class LoginInterceptor  implements HandlerInterceptor {
 
         if(StringUtils.isBlank(token)){
             ApiResult<String> result = ApiResultUtils.error(StateEnum.NO_LOGIN,"未登录");
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().print(JSON.toJSONString(result));
             return false;
         }
@@ -60,13 +63,13 @@ public class LoginInterceptor  implements HandlerInterceptor {
         JSONObject userJSON = JwtHelper.getUser(token);
         if(userJSON==null){
             ApiResult<String> result = ApiResultUtils.error(StateEnum.NO_LOGIN,"未登录");
-            response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
             response.getWriter().print(JSON.toJSONString(result));
             return false;
         }
         SysUserVO sysUser = userJSON.to(SysUserVO.class);
         //登录验证成功，放行
-        //controller中 直接获取用户的信息
+        //将用户信息放入ThreadLocal,controller中直接获取用户的信息
         UserSessionContext.put(sysUser);
         return true;
     }

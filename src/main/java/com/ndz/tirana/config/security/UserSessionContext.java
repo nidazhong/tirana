@@ -2,6 +2,10 @@ package com.ndz.tirana.config.security;
 
 import com.ndz.tirana.vo.sys.SysUserVO;
 
+/**
+ * 拦截器方式进行用户验证
+ * 使用ThreadLocal去存储当前线程的用户信息，给Controller等去使用
+ */
 public class UserSessionContext {
 
     //线程变量隔离

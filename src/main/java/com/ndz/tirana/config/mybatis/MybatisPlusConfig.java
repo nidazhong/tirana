@@ -1,6 +1,7 @@
 package com.ndz.tirana.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.autoconfigure.MybatisPlusProperties;
 import com.baomidou.mybatisplus.autoconfigure.MybatisPlusPropertiesCustomizer;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.core.config.GlobalConfig;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MybatisPlusConfig {
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
@@ -36,9 +38,10 @@ public class MybatisPlusConfig {
         return properties -> {
             GlobalConfig globalConfig = properties.getGlobalConfig();
             globalConfig.setBanner(false);
-            MybatisConfiguration configuration = new MybatisConfiguration();
+            MybatisPlusProperties.CoreConfiguration configuration = new MybatisPlusProperties.CoreConfiguration();
             configuration.setDefaultEnumTypeHandler(MybatisEnumTypeHandler.class);
             properties.setConfiguration(configuration);
+
         };
     }
 }

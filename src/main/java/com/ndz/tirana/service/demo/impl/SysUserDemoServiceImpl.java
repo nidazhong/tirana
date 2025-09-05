@@ -13,7 +13,8 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.ListUtil;
 
 @Service
-public class SysUserDemoServiceImpl extends BaseServiceImpl<SysUserDemoDao, SysUserDemoEntity> implements SysUserDemoService {
+public class SysUserDemoServiceImpl
+        extends BaseServiceImpl<SysUserDemoDao, SysUserDemoEntity> implements SysUserDemoService {
 
 
     @Override

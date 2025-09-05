@@ -28,6 +28,8 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 
+import javax.annotation.Resource;
+
 /**
  * 基础服务类，所有Service都要继承
  */

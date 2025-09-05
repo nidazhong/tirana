@@ -7,11 +7,12 @@ import com.ndz.tirana.common.helper.JwtHelper;
 import com.ndz.tirana.common.bean.ApiResult;
 import com.ndz.tirana.common.enums.BizCodeEnum;
 import com.ndz.tirana.common.enums.StateEnum;
-import com.ndz.tirana.config.security.CustomUser;
+import com.ndz.tirana.config.security.MyUserDetails;
 import com.ndz.tirana.service.sys.AsyncLoginLogService;
 import com.ndz.tirana.utils.ApiResultUtils;
 import com.ndz.tirana.utils.IpUtils;
 import com.ndz.tirana.vo.sys.LoginVO;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,22 +32,25 @@ import java.util.Map;
 
 /**
  * <p>
- * 登录过滤器，继承UsernamePasswordAuthenticationFilter，对用户名密码进行登录校验
+ * 登录过滤器，继承UsernamePasswordAuthenticationFilter
+ * 1、负责登录认证
+ * 2、生成一个包含账号密码的认证信息
  * </p>
  *
  */
-public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
+@Log4j2
+public class MyUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
     private RedisTemplate<String, String> redisTemplate;
     private AsyncLoginLogService asyncLoginLogService;
 
     // 构造器
-    public TokenLoginFilter(AuthenticationManager authenticationManager, RedisTemplate<String, String> redisTemplate,
-                            AsyncLoginLogService asyncLoginLogService) {
+    public MyUsernamePasswordAuthenticationFilter(AuthenticationManager authenticationManager, RedisTemplate<String, String> redisTemplate,
+                                                  AsyncLoginLogService asyncLoginLogService) {
         this.setAuthenticationManager(authenticationManager);
         this.setPostOnly(false);
-        //指定登录接口及提交方式，可以指定任意路径
+        // 指定登录接口及提交方式，可以指定任意路径
         this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/admin/system/index/login","POST"));
         this.redisTemplate = redisTemplate;
         this.asyncLoginLogService = asyncLoginLogService;
@@ -55,7 +59,6 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     /**
      * 尝试认证
-     *
      * @param req req
      * @param res res
      * @return {@link Authentication}
@@ -66,8 +69,13 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
             throws AuthenticationException {
         try {
             LoginVO loginVo = new ObjectMapper().readValue(req.getInputStream(), LoginVO.class);
-
             Authentication authenticationToken = new UsernamePasswordAuthenticationToken(loginVo.getUsername(), loginVo.getPassword());
+            // 调用AuthenticationManager进行身份验证
+            // 校验这个认证信息，返回一个已认证的Authentication
+            // AuthenticationManager就会根据他管理的provider的supports方法来判断是否支持该UsernamePasswordAuthenticationToken
+            // MyUserDetailsService.loadUserByUsername(name) -- 委托认证
+
+            log.info("[{}]登录委托UserDetailsService认证, AuthenticationManager.authenticate()",loginVo.getUsername());
             return this.getAuthenticationManager().authenticate(authenticationToken);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -89,23 +97,23 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        CustomUser customUser = (CustomUser) auth.getPrincipal();
+        MyUserDetails customUser = (MyUserDetails) auth.getPrincipal();
         String token = JwtHelper.createToken(customUser.getSysUser().getId(), customUser.getSysUser().getUsername());
 
-        // Redis保存权限数据
+        // Redis保存权限数据 -->
         redisTemplate.opsForValue().set(TiranaConstant.REDIS_PREFIX + customUser.getUsername(), JSON.toJSONString(customUser.getAuthorities()));
-
         // 记录登陆成功日志
         asyncLoginLogService.recordLoginLog(customUser.getUsername(), 0, IpUtils.getIpAddr(request), "登录成功");
 
-
+        //
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
+        log.info("[{}]登录认证成功，返回token:{}", customUser.getUsername(),token);
         ApiResultUtils.out(response, new ApiResult<>(StateEnum.SUCCESS, map));
     }
 
     /**
-     * 登录失败
+     * 登录失败 | 认证失败
      *
      * @param request  请求
      * @param response 响应

@@ -7,6 +7,7 @@ import com.ndz.tirana.common.helper.JwtHelper;
 import com.ndz.tirana.entity.sys.SysUserEntity;
 import com.ndz.tirana.service.sys.IndexService;
 import com.ndz.tirana.service.sys.SysUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import com.ndz.tirana.exception.WheatException;
 import com.ndz.tirana.utils.MD5Utils;
 
 @Service
+@Slf4j
 public class IndexServiceImpl implements IndexService {
 
     @Autowired
@@ -38,7 +40,9 @@ public class IndexServiceImpl implements IndexService {
         }
         // 根据userId和userName生成token字符串， 通过map返回
         Map<String, Object> map = new HashMap<>();
-        map.put("token", JwtHelper.createToken(sysUser.getId(), sysUser.getUsername()));
+        String token = JwtHelper.createToken(sysUser.getId(), sysUser.getUsername());
+        map.put("token", token);
+        log.info("IndexServiceImpl 生成token："+ token);
         return map;
     }
 
