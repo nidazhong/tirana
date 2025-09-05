@@ -1,7 +1,7 @@
 package com.ndz.tirana.common.bean;
 
 import com.ndz.tirana.common.enums.StatusCode;
-import io.swagger.annotations.ApiModelProperty;
+//import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +19,11 @@ public class ApiResult<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "编码：0表示成功，其他值表示失败")
+    //@ApiModelProperty(value = "编码：0表示成功，其他值表示失败")
     private Integer code;
-    @ApiModelProperty(value = "消息内容")
+    //@ApiModelProperty(value = "消息内容")
     private String msg;
-    @ApiModelProperty(value = "响应数据")
+    //@ApiModelProperty(value = "响应数据")
     private T data;
 
 

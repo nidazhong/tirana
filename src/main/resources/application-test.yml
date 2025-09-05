@@ -22,6 +22,9 @@ spring:
         min-idle: 0     #最小空闲
   thymeleaf:
     cache: false # ture开启缓存，提高性能， false 关闭thymeleaf缓存，配合dev-tool可实时看到前端效果
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant-path-matcher
 
 
 # mybatis-plus

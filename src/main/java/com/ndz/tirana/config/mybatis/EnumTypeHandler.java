@@ -1,4 +1,4 @@
-//package com.ndz.wheat.mini.config.mybatis;
+//package com.ndz.tirana.mini.config.mybatis;
 //
 //
 //import java.sql.CallableStatement;
@@ -9,14 +9,14 @@
 //import java.util.Arrays;
 //import java.util.List;
 //
-//import com.ndz.wheat.mini.common.enums.demo.CadreRankEnum;
+//import com.ndz.tirana.common.enums.demo.CadreRankEnum;
 //import org.apache.ibatis.type.BaseTypeHandler;
 //import org.apache.ibatis.type.JdbcType;
 //import org.apache.ibatis.type.MappedJdbcTypes;
 //import org.apache.ibatis.type.MappedTypes;
 //
 //import com.alibaba.fastjson2.JSON;
-//import com.ndz.wheat.mini.common.enums.demo.PositionEnum;
+//import com.ndz.tirana.common.enums.demo.PositionEnum;
 //
 //import cn.hutool.core.collection.CollUtil;
 //import cn.hutool.json.JSONArray;

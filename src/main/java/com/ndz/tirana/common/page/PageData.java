@@ -5,23 +5,23 @@ import java.io.Serializable;
 import java.util.List;
 
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+//import io.swagger.annotations.ApiModel;
+//import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
  * 分页工具类
  */
 @Data
-@ApiModel(value = "分页数据")
+//@ApiModel(value = "分页数据")
 public class PageData<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "总记录数")
+    //@ApiModelProperty(value = "总记录数")
     private int total;
 
-    @ApiModelProperty(value = "列表数据")
+    //@ApiModelProperty(value = "列表数据")
     private List<T> list;
 
     /**

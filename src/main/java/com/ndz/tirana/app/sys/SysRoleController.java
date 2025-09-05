@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.ndz.tirana.common.enums.BusinessType;
 import com.ndz.tirana.dto.sys.AssginRoleDTO;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +18,11 @@ import com.ndz.tirana.dto.sys.SaveSysRoleDTO;
 import com.ndz.tirana.service.sys.SysUserRoleService;
 import com.ndz.tirana.utils.ApiResultUtils;
 
-import io.swagger.annotations.Api;
+//import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import springfox.documentation.annotations.ApiIgnore;
+//import springfox.documentation.annotations.ApiIgnore;
 
-@Api(tags = "系统角色")
+//@Api(tags = "系统角色")
 @Slf4j
 @RestController
 @RequestMapping("admin/system/sysRole")
@@ -34,7 +34,8 @@ public class SysRoleController {
 
     @PreAuthorize("hasAuthority('role:list')")
     @GetMapping("/page")
-    public ApiResult<PageData<SysRoleVO>> page(@ApiIgnore @RequestParam Map<String, Object> params) {
+    public ApiResult<PageData<SysRoleVO>> page(//@ApiIgnore
+                                                @RequestParam Map<String, Object> params) {
         log.info("角色分页请求Req: {}", JSON.toJSONString(params));
         return ApiResultUtils.ok(sysUserRoleService.page(params));
     }
@@ -75,14 +76,14 @@ public class SysRoleController {
     }
 
 
-    @ApiOperation(value = "根据用户获取角色数据")
+    ////@ApiOperation(value = "根据用户获取角色数据")
     @GetMapping("/toAssign/{userId}")
     public ApiResult<Object> toAssign(@PathVariable Long userId) {
         Map<String, Object> roleMap = sysUserRoleService.getRolesByUserId(userId);
         return ApiResultUtils.ok(roleMap);
     }
 
-    @ApiOperation(value = "根据用户分配角色")
+    ////@ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
     public ApiResult<Object> doAssign(@RequestBody AssginRoleDTO dto) {
         sysUserRoleService.doAssign(dto);

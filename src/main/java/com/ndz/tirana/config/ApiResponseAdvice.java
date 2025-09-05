@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 只对自己项目的包做统一返回，如不加basePackages，swagger等其他访问将异常
  */
-@RestControllerAdvice(basePackages = {"com.ndz.wheat.mini"}, annotations = RestController.class)
+@RestControllerAdvice(basePackages = {"com.ndz.tirana"}, annotations = RestController.class)
 @Slf4j
 public class ApiResponseAdvice implements ResponseBodyAdvice<Object>{
 
